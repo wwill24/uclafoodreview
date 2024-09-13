@@ -55,11 +55,11 @@ export default function AppAppBar() {
                     alt='Picture of UCLA logo'
                 />
             </Link>
-            <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+            <div className="flex flex-row gap-2">
               <Button variant="text" color="info" size="small">Dining Halls</Button>
               <Button variant="text" color="info" size="small">Food Trucks</Button>
               <Button variant="text" color="info" size="small">Restaurants</Button>
-            </Box>
+            </div>
           </Box>
           <Box
             sx={{
