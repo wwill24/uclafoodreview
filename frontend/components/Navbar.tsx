@@ -19,11 +19,14 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   alignItems: 'center',
   justifyContent: 'space-between',
   flexShrink: 0,
-  borderRadius: `calc(${theme.shape.borderRadius} + 8px)`,
+  position: 'sticky',
+  top: 0,
+  zIndex: 1100,
+  borderRadius: `8px`,
   backdropFilter: 'blur(24px)',
   border: '1px solid',
-  borderColor: theme.palette.divider,
-  padding: '8px 12px',
+  background: `hsl(220deg 50.21% 84.57% / 20%)`,
+  padding: '16px 24px',
 }));
 
 export default function AppAppBar() {
