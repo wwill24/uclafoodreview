@@ -56,9 +56,9 @@ export default function AppAppBar() {
                   alt='Picture of UCLA logo'
                 />
               </Link>
-              <Button variant="text" color="info" size="small" sx={{ height: "45px" }}>Dining Halls</Button>
-              <Button variant="text" color="info" size="small" sx={{ height: "45px" }}>Food Trucks</Button>
-              <Button variant="text" color="info" size="small" sx={{ height: "45px" }}>Restaurants</Button>
+              <Button variant="text" color="info" size="small" sx={{ borderRadius: "12px", height: "45px" }}>Dining Halls</Button>
+              <Button variant="text" color="info" size="small" sx={{ borderRadius: "12px", height: "45px" }}>Food Trucks</Button>
+              <Button variant="text" color="info" size="small" sx={{ borderRadius: "12px", height: "45px" }}>Restaurants</Button>
             </div>
           </Box>
           <Box
