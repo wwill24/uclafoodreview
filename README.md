@@ -1,5 +1,8 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+### UCLA Food Review
+UCLA's app for students to give real time reviews of food of on campus dining halls and food trucks
+
 ## Getting Started
 
 First, run the development server:
