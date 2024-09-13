@@ -14,6 +14,8 @@ import Drawer from '@mui/material/Drawer';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import Image from 'next/image'
+import Link from 'next/link';
+import uclalogo from "../img/uclalogo.png";
 
 const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   display: 'flex',
@@ -45,6 +47,14 @@ export default function AppAppBar() {
       <Container maxWidth="lg">
         <StyledToolbar variant="dense" disableGutters>
           <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center', px: 0 }}>
+            <Link href="/home">
+                <Image
+                    src={uclalogo}
+                    height={100}
+                    width={100}
+                    alt='Picture of UCLA logo'
+                />
+            </Link>
             <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
               <Button variant="text" color="info" size="small">Dining Halls</Button>
               <Button variant="text" color="info" size="small">Food Trucks</Button>
