@@ -93,12 +93,9 @@ export default function AppAppBar() {
                   </IconButton>
                 </Box>
                 <Divider sx={{ my: 3 }} />
-                <MenuItem>Features</MenuItem>
-                <MenuItem>Testimonials</MenuItem>
-                <MenuItem>Highlights</MenuItem>
-                <MenuItem>Pricing</MenuItem>
-                <MenuItem>FAQ</MenuItem>
-                <MenuItem>Blog</MenuItem>
+                <MenuItem>Dining Halls</MenuItem>
+                <MenuItem>Food Trucks</MenuItem>
+                <MenuItem>Restaurants</MenuItem>
                 <MenuItem>
                   <Button color="primary" variant="contained" fullWidth>
                     Sign up
