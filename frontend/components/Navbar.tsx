@@ -49,12 +49,12 @@ export default function AppAppBar() {
           <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center', px: 0 }}>
             <div className="flex flex-row gap-4">
               <Link href="/home">
-                    <Image
-                        src={uclalogo}
-                        height={100}
-                        width={100}
-                        alt='Picture of UCLA logo'
-                    />
+                <Image
+                  src={uclalogo}
+                  height={100}
+                  width={100}
+                  alt='Picture of UCLA logo'
+                />
               </Link>
               <Button variant="text" color="info" size="small">Dining Halls</Button>
               <Button variant="text" color="info" size="small">Food Trucks</Button>
