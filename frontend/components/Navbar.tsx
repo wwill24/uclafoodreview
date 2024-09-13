@@ -47,7 +47,7 @@ export default function AppAppBar() {
       <Container maxWidth="lg">
         <StyledToolbar variant="dense" disableGutters>
           <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center', px: 0 }}>
-            <div className="flex flex-row gap-4">
+            <div className="flex flex-row gap-4 justify-center items-center">
               <Link href="/home">
                 <Image
                   src={uclalogo}
@@ -56,9 +56,9 @@ export default function AppAppBar() {
                   alt='Picture of UCLA logo'
                 />
               </Link>
-              <Button variant="text" color="info" size="small">Dining Halls</Button>
-              <Button variant="text" color="info" size="small">Food Trucks</Button>
-              <Button variant="text" color="info" size="small">Restaurants</Button>
+              <Button variant="text" color="info" size="small" sx={{ height: "45px" }}>Dining Halls</Button>
+              <Button variant="text" color="info" size="small" sx={{ height: "45px" }}>Food Trucks</Button>
+              <Button variant="text" color="info" size="small" sx={{ height: "45px" }}>Restaurants</Button>
             </div>
           </Box>
           <Box
