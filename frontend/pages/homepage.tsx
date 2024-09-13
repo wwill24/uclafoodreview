@@ -1,8 +1,57 @@
+'use client';
+
 import * as React from 'react';
 import AppAppBar from '../components/Navbar';
 
+import { ReactSearchAutocomplete } from 'react-search-autocomplete';
+
+const formatResult = (item: any) => {
+  return (
+    <>
+      <span style={{ display: 'block', textAlign: 'left' }}>{item.name}</span>
+    </>
+  );
+};
+
+const items = [
+  {
+    id: 0,
+    name: 'Cobol',
+  },
+  {
+    id: 1,
+    name: 'JavaScript',
+  },
+  {
+    id: 2,
+    name: 'Basic',
+  },
+  {
+    id: 3,
+    name: 'PHP',
+  },
+  {
+    id: 4,
+    name: 'Java',
+  },
+];
+
 export default function HomePage() {
-    return (
-        <AppAppBar />
-    )
+  return (
+    <div className="flex flex-col">
+      <AppAppBar />
+      <div style={{ marginTop: '200px' }}>
+        <ReactSearchAutocomplete
+          className='w-[500px]'
+          items={items}
+          onSearch={() => {}}
+          onHover={() => {}}
+          onSelect={() => {}}
+          onFocus={() => {}}
+          formatResult={formatResult}
+          autoFocus
+        />
+      </div>
+    </div>
+  );
 }

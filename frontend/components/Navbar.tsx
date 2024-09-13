@@ -47,7 +47,7 @@ export default function AppAppBar() {
       <Container maxWidth="lg">
         <StyledToolbar variant="dense" disableGutters>
           <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center', px: 0 }}>
-            <div className="flex flex-row gap-4 justify-center items-center">
+            <div className="flex flex-row gap-4 justify-center items-center header-items">
               <Link href="/home">
                 <Image
                   src={uclalogo}
