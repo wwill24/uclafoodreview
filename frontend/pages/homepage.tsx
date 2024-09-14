@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import AppAppBar from '../components/Navbar';
+import Navbar from '../components/NavbarNew';
 
 import { ReactSearchAutocomplete } from 'react-search-autocomplete';
 
@@ -39,7 +39,7 @@ const items = [
 export default function HomePage() {
   return (
     <div className="flex flex-col">
-      <AppAppBar />
+      <Navbar />
       <div style={{ marginTop: '200px' }}>
         <ReactSearchAutocomplete
           className='w-[500px]'

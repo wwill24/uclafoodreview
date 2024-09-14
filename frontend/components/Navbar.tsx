@@ -29,7 +29,7 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   backdropFilter: 'blur(24px)',
   border: '1px solid',
   background: `hsl(220deg 50.21% 84.57% / 20%)`,
-  padding: '16px 24px',
+  padding: '16px 24px'
 }));
 
 export default function AppAppBar() {
