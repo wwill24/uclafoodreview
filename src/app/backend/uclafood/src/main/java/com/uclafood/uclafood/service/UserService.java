@@ -1,7 +1,7 @@
 package com.uclafood.uclafood.service;
 
-import com.example.demo.model.User;
-import com.example.demo.repository.UserRepository;
+import com.uclafood.uclafood.model.User;
+import com.uclafood.uclafood.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

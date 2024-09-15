@@ -1,7 +1,7 @@
 package com.uclafood.uclafood.controller;
 
-import com.example.demo.model.User;
-import com.example.demo.service.UserService;
+import com.uclafood.uclafood.model.User;
+import com.uclafood.uclafood.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
