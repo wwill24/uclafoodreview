@@ -8,7 +8,6 @@ import Navbar from '../frontend/components/Navbar'
 export default function SignUp() {
   return (
     <div>
-      <Navbar />
       <div className='flex flex-col items-center mt-[30vh]'>
         <h1>Welcome Back!</h1>
         <form className='flex flex-col items-center p-[2vh] gap-2'>
