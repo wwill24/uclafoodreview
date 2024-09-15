@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 
 // Form
 import { z } from "zod";
@@ -158,9 +159,9 @@ export default function SignUp() {
               <Button className='w-full h-1/2 bg-[#007ec4] hover:bg-[#00a6ff] text-[#fff] hover:text-[#fff]' variant="ghost" type="submit">Sign Up</Button>
             </form>
           </Form>
-          <span className="inline-flex">
+          <span className="inline-flex gap-1 mt-2">
             <p>Already have an account?</p>
-            <Button className="p-0 h-auto" variant="link">Login here.</Button>
+            <Link href="/signin">Login here.</Link>
           </span>
         </CardContent>
       </Card>
