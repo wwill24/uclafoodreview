@@ -38,9 +38,9 @@ const items = [
 
 export default function HomePage() {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col h-screen">
       <Navbar />
-      <div style={{ marginTop: '200px' }}>
+      <div className="flex flex-grow justify-center items-center mt-20">
         <ReactSearchAutocomplete
           className='w-[500px]'
           items={items}
