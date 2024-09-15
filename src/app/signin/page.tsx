@@ -32,8 +32,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
 const formSchema = z.object({
-  username: z.string(),
-  password: z.string()
+  username: z.string().min(1, "Please enter a username"),
+  password: z.string().min(1, "Please enter a password")
 })
 
 export default function SignIn() {
