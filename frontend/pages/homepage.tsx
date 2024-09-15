@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import Navbar from '../components/NavbarNew';
+import Navbar from '../components/Navbar';
 
 import { ReactSearchAutocomplete } from 'react-search-autocomplete';
 

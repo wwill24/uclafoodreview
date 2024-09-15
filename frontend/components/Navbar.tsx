@@ -1,116 +1,34 @@
-'use client';
-
-import * as React from 'react';
-import { styled } from '@mui/system';
-import Box from '@mui/material/Box';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import Container from '@mui/material/Container';
-import Divider from '@mui/material/Divider';
-import MenuItem from '@mui/material/MenuItem';
-import Drawer from '@mui/material/Drawer';
-import MenuIcon from '@mui/icons-material/Menu';
-import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
-import Image from 'next/image'
+import Image from 'next/image';
 import Link from 'next/link';
-import uclalogo from "../img/uclalogo.png";
+import { useRouter } from 'next/navigation';
 
-const StyledToolbar = styled(Toolbar)(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-  flexShrink: 0,
-  position: 'sticky',
-  top: 0,
-  zIndex: 1100,
-  borderRadius: `8px`,
-  backdropFilter: 'blur(24px)',
-  border: '1px solid',
-  background: `hsl(220deg 50.21% 84.57% / 20%)`,
-  padding: '16px 24px'
-}));
+// Shadcn Components
+import { Button } from "@/components/ui/button";
 
-export default function AppAppBar() {
-  const [open, setOpen] = React.useState(false);
+import uclalogo from '../img/uclalogo.png';
 
-  const toggleDrawer = (newOpen: boolean) => () => {
-    setOpen(newOpen);
-  };
-
+export default function Navbar() {
+  const router = useRouter();
   return (
-    <AppBar
-      position="fixed"
-      sx={{ boxShadow: 0, bgcolor: 'transparent', backgroundImage: 'none', mt: 10 }}
-    >
-      <Container maxWidth="lg">
-        <StyledToolbar variant="dense" disableGutters>
-          <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center', px: 0 }}>
-            <div className="flex flex-row gap-4 justify-center items-center header-items">
-              <Link href="/home">
-                <Image
-                  src={uclalogo}
-                  height={100}
-                  width={100}
-                  alt='Picture of UCLA logo'
-                />
-              </Link>
-              <Button variant="text" color="info" size="small" sx={{ borderRadius: "12px", height: "45px" }}>Dining Halls</Button>
-              <Button variant="text" color="info" size="small" sx={{ borderRadius: "12px", height: "45px" }}>Food Trucks</Button>
-              <Button variant="text" color="info" size="small" sx={{ borderRadius: "12px", height: "45px" }}>Restaurants</Button>
-            </div>
-          </Box>
-          <Box
-            sx={{
-              display: { xs: 'none', md: 'flex' },
-              gap: 1,
-              alignItems: 'center',
-            }}
-          >
-            <Button color="primary" variant="text" size="small">
-              Sign in
-            </Button>
-            <Button color="primary" variant="contained" size="small">
-              Sign up
-            </Button>
-          </Box>
-          <Box sx={{ display: { sm: 'flex', md: 'none' } }}>
-            <IconButton aria-label="Menu button" onClick={toggleDrawer(true)}>
-              <MenuIcon />
-            </IconButton>
-            <Drawer anchor="top" open={open} onClose={toggleDrawer(false)}>
-              <Box sx={{ p: 2, backgroundColor: 'background.default' }}>
-                <Box
-                  sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                  }}
-                >
-                  <IconButton onClick={toggleDrawer(false)}>
-                    <CloseRoundedIcon />
-                  </IconButton>
-                </Box>
-                <Divider sx={{ my: 3 }} />
-                <MenuItem>Dining Halls</MenuItem>
-                <MenuItem>Food Trucks</MenuItem>
-                <MenuItem>Restaurants</MenuItem>
-                <MenuItem>
-                  <Button color="primary" variant="contained" fullWidth>
-                    Sign up
-                  </Button>
-                </MenuItem>
-                <MenuItem>
-                  <Button color="primary" variant="outlined" fullWidth>
-                    Sign in
-                  </Button>
-                </MenuItem>
-              </Box>
-            </Drawer>
-          </Box>
-        </StyledToolbar>
-      </Container>
-    </AppBar>
+    <div className="flex flex-row items-center gap-4 bg-gray-50 px-6 py-4 shadow-md">
+      <Link href="/home">
+        <Image
+          src={uclalogo}
+          alt="UCLA Bruins Logo"
+          height={80}
+          width={80}
+          className="cursor-pointer"
+        />
+      </Link>
+      
+      <Button className="text-lg" variant="ghost">Dining Halls</Button>
+      <Button className="text-lg" variant="ghost">Food Trucks</Button>
+      <Button className="text-lg" variant="ghost">Restaurants</Button>
+
+      <div className="ml-auto">
+        <Button variant="secondary" className="rounded-r-none" onClick={() => {router.push("/signin")}}>Sign In</Button>
+        <Button variant="default" className="rounded-l-none" onClick={() => {router.push("/signup")}}>Sign Up</Button>
+      </div>
+    </div>
   );
 }
