@@ -64,7 +64,7 @@ export default function SignUp() {
 
   return (
     <div className='flex flex-col justify-center items-center h-screen'>
-      <Card className='p-4 w-[460px]'>
+      <Card className='p-4 w-[50vh]'>
         <CardHeader className='flex flex-col gap-2 text-center'>
           <CardTitle>Sign Up</CardTitle>
           <CardDescription>Sign Up to Give Food Reviews at UCLA!</CardDescription>
