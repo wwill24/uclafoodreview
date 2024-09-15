@@ -12,7 +12,7 @@ import uclalogo from '../img/uclalogo.png';
 export default function Navbar() {
   const router = useRouter();
   return (
-    <div className="flex flex-row items-center gap-4 bg-gray-50 px-6 py-4 shadow-md">
+    <div className="flex flex-row items-center gap-4 bg-gray-50 px-6 py-4 shadow-md h-[var(--navBarHeight)]">
       <Link href="/">
         <Image
           src={uclalogo}

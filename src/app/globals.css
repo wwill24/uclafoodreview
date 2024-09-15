@@ -5,6 +5,7 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --navBarHeight: 10vh;
 }
 
 /* @media (prefers-color-scheme: dark) {
@@ -14,6 +15,16 @@
   }
 } */
 
+.main {
+  flex-grow: 1;
+  height: calc(100vh - var(--navBarHeight));
+  display: flex;
+  flex-direction: column;
+}
+
+.main > * {
+  flex-grow: 1;
+}
 body {
   color: var(--foreground);
   background: var(--background);
