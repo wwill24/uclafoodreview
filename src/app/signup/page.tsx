@@ -1,26 +1,116 @@
-'use client'
+'use client';
 
 import React from 'react';
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
+
+// Form
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form"
+
+// Shadcn
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+
 import Navbar from '../frontend/components/Navbar';
 
+const formSchema = z.object({
+  name: z.string().min(1, { message: "Name must contain at least 1 character(s)" }),
+  username: z.string().min(5, { message: "Username must contain at least 1 character(s)" }),
+  email: z.string().email().refine(val => val.includes('g.ucla.edu'), "Email must be a UCLA student address"),
+  phoneNumber: z.string().length(10)
+});
+
 export default function SignUp() {
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: "",
+      username: "",
+      email: "",
+      phoneNumber: ""
+    },
+  });
+  
+  function onSubmit(values: z.infer<typeof formSchema>) {
+    console.log(values);
+  }
+
   return (
     <div>
       <Navbar />
-      <div className='flex flex-col items-center mt-[30vh]'>
-        <h1>Sign Up to Give Food Reviews at UCLA!</h1>
-        <form className='flex flex-col items-center p-[2vh] gap-2'>
-          <Input minLength={1} className='' placeholder='Name' />
-          <Input minLength={5} className='' placeholder='Username'/>
-          <Input className='' placeholder='UCLA Email'/>
-          <Input minLength={10} className='' placeholder='Phone Number' />
-          <Input minLength={8} className='' placeholder='Password'/>
-          <Input minLength={8} className='' placeholder='Verify Password'/>
-          <Button className='items-center p-[1vh] w-45/100 h-1/2' variant="outline">Sign Up</Button>
+      <h1>Sign Up to Give Food Reviews at UCLA!</h1>
+      <Form {...form}>
+        <form className='flex flex-col items-center' onSubmit={form.handleSubmit(onSubmit)}>
+          {/* Name */}
+          <FormField
+            control={form.control}
+            name="name"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <Input placeholder="Name" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          {/* Username */}
+          <FormField
+            control={form.control}
+            name="username"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <Input placeholder="Username" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          {/* Email */}
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <Input placeholder="UCLA Email" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          {/* Phonenumber */}
+          <FormField
+            control={form.control}
+            name="phoneNumber"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <Input placeholder="Phone Number" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          {/* <Input minLength={8} className='' placeholder='Password'/> */}
+          {/* <Input minLength={8} className='' placeholder='Verify Password'/> */}
+          <Button className='items-center p-[1vh] w-45/100 h-1/2' variant="outline" type="submit">Sign Up</Button>
         </form>
-      </div>
+      </Form>
     </div>
   );
 }
