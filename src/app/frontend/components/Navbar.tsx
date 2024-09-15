@@ -11,7 +11,7 @@ export default function Navbar() {
   const router = useRouter();
   return (
     <div className="flex flex-row items-center gap-4 bg-gray-50 px-6 py-4 shadow-md">
-      <Link href="/home">
+      <Link href="/">
         <Image
           src={uclalogo}
           alt="UCLA Bruins Logo"
@@ -26,8 +26,8 @@ export default function Navbar() {
       <Button className="text-lg" variant="ghost">Restaurants</Button>
 
       <div className="ml-auto">
-        <Button variant="secondary" className="rounded-r-none" onClick={() => {router.push("/signin")}}>Sign In</Button>
-        <Button variant="default" className="rounded-l-none" onClick={() => {router.push("/signup")}}>Sign Up</Button>
+        <Button variant="secondary" className="rounded-r-none" onClick={() => {router.push('/signin')}}>Sign In</Button>
+        <Button variant="default" className="rounded-l-none" onClick={() => {router.push('/signup')}}>Sign Up</Button>
       </div>
     </div>
   );

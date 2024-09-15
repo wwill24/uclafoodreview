@@ -1,7 +1,9 @@
-import HomePage from "../../frontend/pages/homepage";
+import HomePage from "./frontend/pages/homepage";
 
 export default function Home() {
   return (
-    <HomePage />
+    <div>
+      <HomePage />
+    </div>
   );
 }
