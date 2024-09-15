@@ -49,7 +49,7 @@ export default function SignUp() {
     <div>
       <div className='flex flex-col items-center mt-[30vh]'>
         <Card>
-          <h1>Welcome Back!</h1>
+          <CardTitle>Welcome Back!</CardTitle>
           <form className='flex flex-col items-center p-[2vh] gap-2'>
             <Input minLength={5} className='' placeholder='Username'/>
             <Input minLength={8} className='' placeholder='Password'/>
