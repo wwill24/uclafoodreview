@@ -35,4 +35,4 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-/backend/uclafood/src/main/resources/application.properties
+backend/uclafood/src/main/resources/application.properties
