@@ -17,6 +17,16 @@ import {
   FormLabel,
   FormMessage
 } from "@/components/ui/form";
+
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle
+} from "@/components/ui/card";
+
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
@@ -52,99 +62,108 @@ export default function SignUp() {
   }
 
   return (
-    <div>
-      <h1>Sign Up to Give Food Reviews at UCLA!</h1>
-      <Form {...form}>
-        <form className='flex flex-col items-center' onSubmit={form.handleSubmit(onSubmit)}>
-          {/* Name */}
-          <FormField
-            control={form.control}
-            name="name"
-            render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <Input placeholder="Name" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+    <div className='flex flex-col justify-center items-center h-screen'>
+      <Card className='p-4 w-[460px]'>
+        <CardHeader className='flex flex-col gap-2 text-center'>
+          <CardTitle>Sign Up</CardTitle>
+          <CardDescription>Sign Up to Give Food Reviews at UCLA!</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Form {...form}>
+            <form className='flex flex-col items-center space-y-2' onSubmit={form.handleSubmit(onSubmit)}>
+              {/* Name */}
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem className='w-full'>
+                    <FormControl>
+                      <Input placeholder="Name" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-          {/* Username */}
-          <FormField
-            control={form.control}
-            name="username"
-            render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <Input placeholder="Username" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+              {/* Username */}
+              <FormField
+                control={form.control}
+                name="username"
+                render={({ field }) => (
+                  <FormItem className='w-full'>
+                    <FormControl>
+                      <Input placeholder="Username" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-          {/* Email */}
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <Input placeholder="UCLA Email" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+              {/* Email */}
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem className='w-full'>
+                    <FormControl>
+                      <Input placeholder="UCLA Email" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-          {/* Phonenumber */}
-          <FormField
-            control={form.control}
-            name="phoneNumber"
-            render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <Input placeholder="Phone Number" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+              {/* Phonenumber */}
+              <FormField
+                control={form.control}
+                name="phoneNumber"
+                render={({ field }) => (
+                  <FormItem className='w-full'>
+                    <FormControl>
+                      <Input placeholder="Phone Number" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-          {/* Password */}
-          <FormField
-            control={form.control}
-            name="password"
-            render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <Input placeholder="Password" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          
-          {/* Confirm Password */}
-          <FormField
-            control={form.control}
-            name="confirmPassword"
-            render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <Input placeholder="Confirm Password" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+              {/* Password */}
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem className='w-full'>
+                    <FormControl>
+                      <Input placeholder="Password" type="password" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              
+              {/* Confirm Password */}
+              <FormField
+                control={form.control}
+                name="confirmPassword"
+                render={({ field }) => (
+                  <FormItem className='w-full'>
+                    <FormControl>
+                      <Input placeholder="Confirm Password" type="password" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-          {/* <Input minLength={8} className='' placeholder='Password'/> */}
-          {/* <Input minLength={8} className='' placeholder='Verify Password'/> */}
-          <Button className='items-center p-[1vh] w-45/100 h-1/2' variant="secondary" type="submit">Sign Up</Button>
-        </form>
-      </Form>
+              <Button className='w-full h-1/2 bg-[#007ec4] hover:bg-[#00a6ff] text-[#fff] hover:text-[#fff]' variant="ghost" type="submit">Sign Up</Button>
+            </form>
+          </Form>
+          <span className="inline-flex">
+            <p>Already have an account?</p>
+            <Button className="p-0 h-auto" variant="link">Login here.</Button>
+          </span>
+        </CardContent>
+      </Card>
     </div>
   );
 }
