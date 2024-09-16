@@ -42,7 +42,7 @@ export default function ForgotPassword() {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
-    toast("Hello World");
+    toast.success("Success!", { position: "bottom-right" });
   }
 
   return (
