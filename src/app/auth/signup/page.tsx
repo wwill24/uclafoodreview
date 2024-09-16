@@ -167,7 +167,7 @@ export default function SignUp() {
           </Form>
           <span className="inline-flex gap-1 mt-2">
             <p>Already have an account?</p>
-            <Link href="/signin">Login here.</Link>
+            <Link href="/auth/signin">Login here.</Link>
           </span>
         </CardContent>
       </Card>
