@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 
 @SpringBootApplication
 @RestController
+@CrossOrigin
 public class UclafoodApplication {
 
     private static final Logger logger = Logger.getLogger(UclafoodApplication.class.getName());
@@ -22,8 +23,6 @@ public class UclafoodApplication {
         return "Welcome to UCLA Food!";
     }
 
-	// TODO: add prod server URL
-	@CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/signup")
     public String signup(@RequestBody Map<String, Object> payload) {
         logger.info("Received signup data: " + payload.toString());
@@ -31,7 +30,6 @@ public class UclafoodApplication {
         return "Signup data received successfully!";
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/signin")
     public String signin(@RequestBody Map<String, Object> payload) {
         logger.info(payload.toString());
