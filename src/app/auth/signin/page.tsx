@@ -37,8 +37,8 @@ export default function SignIn() {
     resolver: zodResolver(formSchema),
     defaultValues: {
       username: "",
-      password: "",
-    },
+      password: ""
+    }
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
