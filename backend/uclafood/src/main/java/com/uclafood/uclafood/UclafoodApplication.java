@@ -30,4 +30,12 @@ public class UclafoodApplication {
 
         return "Signup data received successfully!";
     }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PostMapping("/signin")
+    public String signin(@RequestBody Map<String, Object> payload) {
+        logger.info(payload.toString());
+
+        return "Signin data received successfully!";
+    }
 }

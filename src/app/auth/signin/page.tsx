@@ -45,8 +45,14 @@ export default function SignIn() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    try {
+      const res = await fetch("http://localhost:8080/signin", { method: "POST", headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(values) });
+      console.log(res);
+    } catch (e) {
+      console.error(e);
+      alert(e);
+    }
   }
 
   return (
