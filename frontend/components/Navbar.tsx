@@ -27,8 +27,8 @@ export default function Navbar() {
       <Button className="text-lg" variant="ghost" onClick={() => {router.push('/restaurants')}}>Restaurants</Button>
 
       <div className="ml-auto">
-        <Button variant="secondary" className="rounded-r-none" onClick={() => {router.push('/signin')}}>Sign In</Button>
-        <Button variant="default" className="rounded-l-none bg-[#007ec4] hover:bg-[#00a6ff]" onClick={() => {router.push('/signup')}}>Sign Up</Button>
+        <Button variant="secondary" className="rounded-r-none" onClick={() => {router.push('/auth/signin')}}>Sign In</Button>
+        <Button variant="default" className="rounded-l-none bg-[#007ec4] hover:bg-[#00a6ff]" onClick={() => {router.push('/auth/signup')}}>Sign Up</Button>
       </div>
     </div>
   );

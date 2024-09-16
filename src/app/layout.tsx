@@ -1,4 +1,4 @@
-import Navbar from "./frontend/components/Navbar";
+import Navbar from "../../frontend/components/Navbar";
 import "./globals.css";
 
 

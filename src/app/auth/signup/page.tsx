@@ -31,7 +31,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
-import Navbar from '../frontend/components/Navbar';
+import Navbar from '../../../../frontend/components/Navbar';
 
 const formSchema = z.object({
   name: z.string().min(1, { message: "Name must contain at least 1 character(s)" }),
