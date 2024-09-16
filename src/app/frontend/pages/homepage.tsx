@@ -79,8 +79,8 @@ export default function HomePage() {
         }}
         plugins={[
           Autoplay({
-            delay: 2500,
-          }),
+            delay: 2000
+          })
         ]}
         className="max-w-sm flex w-full"
       >
