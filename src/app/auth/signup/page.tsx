@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form"
+import toast, { Toaster } from "react-hot-toast";
 
 // Shadcn
 import {
@@ -59,13 +60,14 @@ export default function SignUp() {
   });
   
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    try {
-      const res = await fetch("http://localhost:8080/signup", { method: "POST", headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(values) });
-      console.log(res);
-    } catch (e) {
-      console.error(e);
-      alert(e);
-    }
+    const signupPromise = fetch("http://localhost:8080/signup", { method: "POST", headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(values) });
+    toast.promise(signupPromise, {
+        loading: 'Signing up',
+        success: 'Sign up successful!',
+        error: 'Sign up failed. Please try again.',
+      },
+      { position: "bottom-right" }
+    );
   }
 
   return (
@@ -171,6 +173,7 @@ export default function SignUp() {
           </span>
         </CardContent>
       </Card>
+      <Toaster />
     </div>
   );
 }
