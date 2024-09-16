@@ -29,7 +29,7 @@ export default function Navbar() {
 
       <div className="ml-auto">
         <Button variant="secondary" className="rounded-r-none" onClick={() => {router.push('/signin')}}>Sign In</Button>
-        <Button variant="default" className="rounded-l-none" onClick={() => {router.push('/signup')}}>Sign Up</Button>
+        <Button variant="default" className="rounded-l-none bg-[#007ec4] hover:bg-[#00a6ff]" onClick={() => {router.push('/signup')}}>Sign Up</Button>
       </div>
     </div>
   );
