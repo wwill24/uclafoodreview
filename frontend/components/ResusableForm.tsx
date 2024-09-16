@@ -17,7 +17,7 @@ import { Button } from '@/components/ui/button';
 
 type FormComponentProps<T extends z.ZodType<any>> = {
   schema: T;
-  formInputs: Array<{ name: keyof z.infer<T>; label: string; placeholder: string; type?: string }>;
+  formInputs: Array<{ name: keyof z.infer<T>; placeholder: string; type?: string }>;
   onSubmit: (values: z.infer<T>) => Promise<void>;
   cardTitle: string;
   submitButtonText: string;
