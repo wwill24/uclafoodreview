@@ -22,8 +22,9 @@ export default function Navbar() {
           className="cursor-pointer"
         />
       </Link>
-      
-      <Button className="text-lg" variant="ghost">Dining Halls</Button>
+      <Link href="/dining-halls">
+        <Button className="text-lg" variant="ghost">Dining Halls</Button>
+      </Link>
       <Button className="text-lg" variant="ghost">Food Trucks</Button>
       <Button className="text-lg" variant="ghost">Restaurants</Button>
 

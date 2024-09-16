@@ -1,7 +1,6 @@
 'use client';
 
 import * as React from 'react';
-import Navbar from '../components/Navbar';
 
 import {
   Card,
@@ -56,6 +55,18 @@ const items = [
 ];
 
 export default function HomePage() {
+  const plugin = React.useRef(
+    Autoplay({ delay: 2000 })
+  )
+
+  const resetAutoplay = () => {
+    if (plugin.current) {
+      plugin.current.stop(); // Stop the autoplay
+      plugin.current.reset(); // Reset the autoplay timer
+      plugin.current.play(); // Start it again
+    }
+  };
+
   return (
     <div className="flex flex-col items-center">
       <div className="flex flex-grow justify-center items-center mt-20 p-6">
@@ -77,11 +88,8 @@ export default function HomePage() {
           align: "start",
           loop: true
         }}
-        plugins={[
-          Autoplay({
-            delay: 2500,
-          }),
-        ]}
+        plugins={[plugin.current]}
+        onClick={resetAutoplay}
         className="max-w-sm flex w-full"
       >
         <CarouselContent>
