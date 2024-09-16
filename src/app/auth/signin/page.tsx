@@ -97,7 +97,7 @@ export default function SignIn() {
             </form>
           </Form>
           <span className="inline-flex gap-1 mt-2">
-            <Link href="/forgotpassword">Forgot Password?</Link>
+            <Link href="/auth/forgotpassword">Forgot Password?</Link>
           </span>
         </CardContent>
       </Card>
