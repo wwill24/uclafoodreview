@@ -12,18 +12,14 @@ import { useForm } from "react-hook-form"
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage
 } from "@/components/ui/form";
 
 import {
   Card,
   CardContent,
-  CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle
 } from "@/components/ui/card";
@@ -102,6 +98,5 @@ export default function SignIn() {
         </CardContent>
       </Card>
     </div>
-  );
-  
+  ); 
 }
