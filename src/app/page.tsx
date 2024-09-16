@@ -78,7 +78,7 @@ export default function HomePage() {
           onSelect={() => {}}
           onFocus={() => {}}
           formatResult={formatResult}
-          placeholder='Search for Dining Halls, Food Trucks, and Restaurants'
+          placeholder='Search for Dining Halls, Food Trucks, or Restaurants'
           autoFocus
         />
       </div>
