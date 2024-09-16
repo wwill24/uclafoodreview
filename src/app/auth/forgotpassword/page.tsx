@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form"
+import toast, { Toaster } from "react-hot-toast";
 
 // Shadcn
 import {
@@ -41,6 +42,7 @@ export default function ForgotPassword() {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
+    toast("Hello World");
   }
 
   return (
@@ -72,6 +74,7 @@ export default function ForgotPassword() {
           </Form>
         </CardContent>
       </Card>
+      <Toaster />
     </div>
   );
 }
