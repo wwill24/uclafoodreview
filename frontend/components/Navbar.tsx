@@ -22,9 +22,9 @@ export default function Navbar() {
           className="cursor-pointer"
         />
       </Link>
-      <Button className="text-lg" variant="ghost" onClick={() => {router.push('/dining-halls')}}>Dining Halls</Button>
-      <Button className="text-lg" variant="ghost" onClick={() => {router.push('/food-trucks')}}>Food Trucks</Button>
-      <Button className="text-lg" variant="ghost" onClick={() => {router.push('/restaurants')}}>Restaurants</Button>
+      <Button className="text-lg" variant="ghost" onClick={() => {router.push('/dining/dining-halls')}}>Dining Halls</Button>
+      <Button className="text-lg" variant="ghost" onClick={() => {router.push('/dining/food-trucks')}}>Food Trucks</Button>
+      <Button className="text-lg" variant="ghost" onClick={() => {router.push('/dining/restaurants')}}>Restaurants</Button>
 
       <div className="ml-auto">
         <Button variant="secondary" className="rounded-r-none" onClick={() => {router.push('/auth/signin')}}>Sign In</Button>
