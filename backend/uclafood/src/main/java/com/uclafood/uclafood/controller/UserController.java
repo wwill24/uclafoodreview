@@ -16,11 +16,6 @@ import java.util.logging.Logger;
 public class UserController {
     
     private static final Logger logger = Logger.getLogger(UclafoodApplication.class.getName());
-    
-    @GetMapping("/")
-    public String home() {
-        return "Welcome to UCLA Food!";
-    }
 
     @PostMapping("/signup")
     public String signup(@RequestBody Map<String, Object> payload) {
