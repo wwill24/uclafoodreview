@@ -38,7 +38,6 @@ public class UserController {
         return "Signin data received successfully!";
     }
 
-    // Temporary
     @GetMapping("/getUsers")
     public List<User> getAllUsers() {
         return userService.getAllUsers();
