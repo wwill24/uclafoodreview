@@ -69,8 +69,10 @@ export default function SignUp() {
         body: JSON.stringify(values)
       });
 
-      const x = await signupPromise.json();
-      toast.error(x.message);
+      if (!signupPromise.ok) {
+        const errMsg = (await signupPromise.json()).message;
+        toast.error(errMsg);
+      }
 
       // if (!signupPromise.ok) {
       //   const errorData = await signupPromise.json();
@@ -190,7 +192,7 @@ export default function SignUp() {
           </span>
         </CardContent>
       </Card>
-      <Toaster />
+      <Toaster position="bottom-right" />
     </div>
   );
 }
