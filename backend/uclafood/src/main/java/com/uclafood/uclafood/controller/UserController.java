@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.uclafood.uclafood.UclafoodApplication;
 import com.uclafood.uclafood.model.User;
 import com.uclafood.uclafood.service.UserService;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import com.uclafood.uclafood.utils.UserException;;
 
 @RestController
 @CrossOrigin
@@ -24,12 +26,12 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("/signup")
-    public String signup(@RequestBody Map<String, Object> payload) {
-        logger.info("Received signup data: " + payload.toString());
+    // @PostMapping("/signup")
+    // public String signup(@RequestBody Map<String, Object> payload) {
+    //     logger.info("Received signup data: " + payload.toString());
 
-        return "Signup data received successfully!";
-    }
+    //     return "Signup data received successfully!";
+    // }
 
     @PostMapping("/signin")
     public String signin(@RequestBody Map<String, Object> payload) {
@@ -43,13 +45,12 @@ public class UserController {
         return userService.getAllUsers();
     }
 
-    @PostMapping("/create")
+    @PostMapping("/signup")
     public User createUser(@RequestBody User payload) throws Exception {
         try {
             return userService.createUser(payload);
         } catch (Exception e) {
-            System.out.println("Error creating user: " + e.getMessage()); // Print the error message
-            throw new Exception("Error creating user", e);  // Rethrow the exception with a custom message
+            throw new UserException();
         }
     }    
 

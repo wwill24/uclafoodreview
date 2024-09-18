@@ -60,14 +60,31 @@ export default function SignUp() {
   });
   
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    const signupPromise = fetch("http://localhost:8080/signup", { method: "POST", headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(values) });
-    toast.promise(signupPromise, {
-        loading: 'Signing up',
-        success: 'Sign up successful!',
-        error: 'Sign up failed. Please try again.',
-      },
-      { position: "bottom-right" }
-    );
+    try {
+      const signupPromise = await fetch("http://localhost:8080/signup", {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(values)
+      });
+
+      const x = await signupPromise.json();
+      console.log(x);
+
+      // if (!signupPromise.ok) {
+      //   const errorData = await signupPromise.json();
+      //   const errMsg = errorData.message;
+      //   toast.error(errMsg);
+      // } else {
+      //   const data = await signupPromise.json();
+      //   console.log("Success:", data);
+      // }
+
+    } catch (err: any) {
+      console.error(err);
+      toast.error("Something went wrong. Please try again later.");
+    }
   }
 
   return (
