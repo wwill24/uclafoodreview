@@ -16,8 +16,6 @@ import com.uclafood.uclafood.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.uclafood.uclafood.utils.Exceptions.*;
-
 @RestController
 @CrossOrigin
 public class UserController {
@@ -41,11 +39,7 @@ public class UserController {
 
     @PostMapping("/signup")
     public User createUser(@RequestBody User payload) throws Exception {
-        try {
-            return userService.createUser(payload);
-        } catch (Exception e) {
-            throw new EmailException();
-        }
+        return userService.createUser(payload);
     }    
 
 }

@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import com.uclafood.uclafood.utils.Exceptions.*;
+
 @Service
 public class UserService {
 
@@ -19,7 +21,7 @@ public class UserService {
 
     public User createUser(User user) throws Exception {
         if (userRepository.existsByEmail(user.getEmail().toString())) {
-            throw new Exception("Email already in use.");
+            throw new EmailException();
         }
         return userRepository.save(user);
     }
