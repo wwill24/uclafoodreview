@@ -70,7 +70,7 @@ export default function SignUp() {
       });
 
       const x = await signupPromise.json();
-      console.log(x);
+      toast.error(x.message);
 
       // if (!signupPromise.ok) {
       //   const errorData = await signupPromise.json();
