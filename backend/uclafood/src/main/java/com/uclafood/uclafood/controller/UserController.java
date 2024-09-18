@@ -43,4 +43,14 @@ public class UserController {
         return userService.getAllUsers();
     }
 
+    @PostMapping("/create")
+    public User createUser(@RequestBody User payload) throws Exception {
+        try {
+            return userService.createUser(payload);
+        } catch (Exception e) {
+            System.out.println("Error creating user: " + e.getMessage()); // Print the error message
+            throw new Exception("Error creating user", e);  // Rethrow the exception with a custom message
+        }
+    }    
+
 }
