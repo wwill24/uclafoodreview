@@ -15,7 +15,8 @@ import com.uclafood.uclafood.model.User;
 import com.uclafood.uclafood.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import com.uclafood.uclafood.utils.UserException;;
+
+import com.uclafood.uclafood.utils.Exceptions.*;
 
 @RestController
 @CrossOrigin
@@ -25,13 +26,6 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-
-    // @PostMapping("/signup")
-    // public String signup(@RequestBody Map<String, Object> payload) {
-    //     logger.info("Received signup data: " + payload.toString());
-
-    //     return "Signup data received successfully!";
-    // }
 
     @PostMapping("/signin")
     public String signin(@RequestBody Map<String, Object> payload) {
@@ -50,7 +44,7 @@ public class UserController {
         try {
             return userService.createUser(payload);
         } catch (Exception e) {
-            throw new UserException();
+            throw new EmailException();
         }
     }    
 
