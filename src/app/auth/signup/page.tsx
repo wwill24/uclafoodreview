@@ -66,22 +66,19 @@ export default function SignUp() {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(values)
+        body: JSON.stringify({
+          name: values.name,
+          username: values.username,
+          email: values.email,
+          phone: values.phoneNumber,
+          password: values.password
+        })
       });
 
       if (!signupPromise.ok) {
         const errMsg = (await signupPromise.json()).message;
         toast.error(errMsg);
       }
-
-      // if (!signupPromise.ok) {
-      //   const errorData = await signupPromise.json();
-      //   const errMsg = errorData.message;
-      //   toast.error(errMsg);
-      // } else {
-      //   const data = await signupPromise.json();
-      //   console.log("Success:", data);
-      // }
 
     } catch (err: any) {
       console.error(err);
