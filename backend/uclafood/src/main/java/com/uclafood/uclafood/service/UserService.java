@@ -23,6 +23,11 @@ public class UserService {
         if (userRepository.existsByEmail(user.getEmail().toString())) {
             throw new EmailException();
         }
+
+        if (userRepository.existsByPhone(user.getPhone().toString())) {
+            throw new PhoneException();
+        }
+
         return userRepository.save(user);
     }
 }
