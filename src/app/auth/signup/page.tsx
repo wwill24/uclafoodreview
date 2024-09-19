@@ -33,6 +33,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
 import Navbar from '../../../../frontend/components/Navbar';
+import { redirect } from 'next/navigation';
 
 const formSchema = z.object({
   name: z.string().min(1, { message: "Name must contain at least 1 character(s)" }),
@@ -85,6 +86,9 @@ export default function SignUp() {
         toast.error(errMsg);
         return;
       }
+
+      redirect('/verify');
+      
     } catch (err: any) {
       console.error(err);
       toast.error("Something went wrong. Please try again later.");
