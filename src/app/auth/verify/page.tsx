@@ -1,4 +1,8 @@
+'use client';
+
 import { useState, useEffect } from "react";
+
+import OTP from "@/components/OTP";
 
 import {
     InputOTP,
@@ -42,29 +46,16 @@ export default function Verification() {
 
   return (
     <div className="flex flex-col items-center justify-center">
-      <Card className="p-4 w-[50vh]">
+      <Card className="p-4 w-[40vh]">
         <CardHeader className="text-center">
           Verify Using The OTP Sent To Your Email
         </CardHeader>
         <CardContent className="flex flex-col items-center gap-4">
-          <InputOTP maxLength={6} className="w-full">
-            <InputOTPGroup>
-              <InputOTPSlot index={0} />
-              <InputOTPSlot index={1} />
-              <InputOTPSlot index={2} />
-            </InputOTPGroup>
-            <InputOTPSeparator />
-            <InputOTPGroup>
-              <InputOTPSlot index={3} />
-              <InputOTPSlot index={4} />
-              <InputOTPSlot index={5} />
-            </InputOTPGroup>
-          </InputOTP>
-          <Button onClick={() => {verify}} className='w-[20vw] h-1/2 bg-[#007ec4] hover:bg-[#00a6ff] text-[#fff] hover:text-[#fff]' variant="ghost" type="submit">Verify</Button>
-        </CardContent>  
+          <OTP />
+          <Button onClick={() => {verify}} className='w-full h-1/2 bg-[#007ec4] hover:bg-[#00a6ff] text-[#fff] hover:text-[#fff]' variant="ghost" type="submit">Verify</Button>
+        </CardContent>
       </Card>
     </div>
-
   );
 }
 
