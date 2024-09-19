@@ -1,3 +1,5 @@
+'use client'
+
 import { useState, useEffect } from "react";
 
 import {
@@ -17,27 +19,22 @@ import {
 } from "@/components/ui/card";
 
 import { Button } from "@/components/ui/button";
+type props = {
+  otp: String,
+  otpGenerated: String
+}
 
-export default function Verification() {
-  const [otp, setOtp] = useState(Array(6).fill(""));
-  const [otpGenerated, setOtpGenerator] = useState<string>("");
-
-  const otpGenerator = () => {
-    const otp = Math.floor(100000 + Math.random() * 900000);
-    setOtpGenerator(otpGenerated);
-    console.log(otp);
-  }
-
-  useEffect(() => {
-    otpGenerator();
-  }, [])
-
-  const handleInput = () => {
-    
-  }
-
+export default function Verification({ otp, otpGenerated }: props) {
+  
   async function verify(){
-    
+    try {
+      if (otp == otpGenerated){
+
+      }
+    }
+    catch{
+
+    }
   }
 
   return (
@@ -47,9 +44,11 @@ export default function Verification() {
           Verify Using The OTP Sent To Your Email
         </CardHeader>
         <CardContent className="flex flex-col items-center gap-4">
-          <InputOTP maxLength={6} className="w-full">
+          <InputOTP maxLength={6} className="w-[15vw]">
             <InputOTPGroup>
-              <InputOTPSlot index={0} />
+              <InputOTPSlot 
+                index={0} 
+              />
               <InputOTPSlot index={1} />
               <InputOTPSlot index={2} />
             </InputOTPGroup>
@@ -60,7 +59,7 @@ export default function Verification() {
               <InputOTPSlot index={5} />
             </InputOTPGroup>
           </InputOTP>
-          <Button onClick={() => {verify}} className='w-[20vw] h-1/2 bg-[#007ec4] hover:bg-[#00a6ff] text-[#fff] hover:text-[#fff]' variant="ghost" type="submit">Verify</Button>
+          <Button onClick={() => {verify}} className='w-[15vw] h-1/2 bg-[#007ec4] hover:bg-[#00a6ff] text-[#fff] hover:text-[#fff]' variant="ghost" type="submit">Verify</Button>
         </CardContent>  
       </Card>
     </div>
