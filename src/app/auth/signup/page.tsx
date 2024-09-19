@@ -62,7 +62,7 @@ export default function SignUp() {
   
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      const signupPromise = await fetch("http://localhost:8080/signup", {
+      const signupReq = await fetch("http://localhost:8080/signup", {
         method: "POST",
         headers: {
           'Content-Type': 'application/json'
@@ -76,9 +76,15 @@ export default function SignUp() {
         })
       });
 
-      if (!signupPromise.ok) {
-        const errMsg = (await signupPromise.json()).message;
+      if (signupReq.status == 500) {
+        toast.error("Internal server error. Please try again.");
+        return;
+      }
+
+      if (!signupReq.ok) {
+        const errMsg = (await signupReq.json()).message;
         toast.error(errMsg);
+        return;
       }
 
       redirect('/verify');

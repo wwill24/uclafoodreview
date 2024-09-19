@@ -8,4 +8,7 @@ public class Exceptions {
     @ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "Email already in use.")
     public static class EmailException extends RuntimeException {};
 
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "Phone number already in use.")
+    public static class PhoneException extends RuntimeException {};
+
 }
