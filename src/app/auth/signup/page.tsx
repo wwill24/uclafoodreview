@@ -33,7 +33,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
 import Navbar from '../../../../frontend/components/Navbar';
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 const formSchema = z.object({
   name: z.string().min(1, { message: "Name must contain at least 1 character(s)" }),
@@ -48,6 +48,7 @@ const formSchema = z.object({
 });
 
 export default function SignUp() {
+  const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -87,7 +88,7 @@ export default function SignUp() {
         return;
       }
 
-      redirect('/verify');
+      router.push("/auth/verify")
       
     } catch (err: any) {
       console.error(err);
