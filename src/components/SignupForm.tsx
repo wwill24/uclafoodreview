@@ -7,7 +7,6 @@ import Link from 'next/link';
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form"
-import toast, { Toaster } from "react-hot-toast";
 
 // Shadcn
 import {
@@ -29,8 +28,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
-import { useRouter } from 'next/navigation';
-
 const formSchema = z.object({
     name: z.string().min(1, { message: "Name must contain at least 1 character(s)" }),
     username: z.string().min(5, { message: "Username must contain at least 1 character(s)" }),
@@ -43,8 +40,7 @@ const formSchema = z.object({
     path: ["confirmPassword"]
 });
 
-export default function SignupForm() {
-    const router = useRouter();
+export default function SignupForm({ setFormData }: { setFormData: Function }) {
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -58,38 +54,7 @@ export default function SignupForm() {
     });
 
     async function onSubmit(values: z.infer<typeof formSchema>) {
-        try {
-            const signupReq = await fetch("http://localhost:8080/signup", {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    name: values.name,
-                    username: values.username,
-                    email: values.email,
-                    phone: values.phoneNumber,
-                    password: values.password
-                })
-            });
-
-            if (signupReq.status == 500) {
-                toast.error("Internal server error. Please try again.");
-                return;
-            }
-
-            if (!signupReq.ok) {
-                const errMsg = (await signupReq.json()).message;
-                toast.error(errMsg);
-                return;
-            }
-
-            router.push("/auth/verify")
-
-        } catch (err: any) {
-            console.error(err);
-            toast.error("Something went wrong. Please try again later.");
-        }
+        setFormData(values);
     }
 
     return (
@@ -195,7 +160,6 @@ export default function SignupForm() {
                     </span>
                 </CardContent>
             </Card>
-            <Toaster position="bottom-right" />
         </div>
     );
 }

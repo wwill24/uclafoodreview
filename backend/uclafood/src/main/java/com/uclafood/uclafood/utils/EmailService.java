@@ -1,4 +1,4 @@
-package com.uclafood.uclafood.service;
+package com.uclafood.uclafood.utils;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
@@ -13,6 +13,7 @@ public class EmailService {
 
     public void sendEmail(String to, String subject, String body) {
         SimpleMailMessage message = new SimpleMailMessage();
+        
         message.setTo(to);
         message.setSubject(subject);
         message.setText(body);

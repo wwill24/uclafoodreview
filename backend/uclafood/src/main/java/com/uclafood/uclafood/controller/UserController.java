@@ -37,9 +37,9 @@ public class UserController {
         return userService.getAllUsers();
     }
 
-    @PostMapping("/signup")
-    public User createUser(@RequestBody User payload) throws Exception {
-        return userService.createUser(payload);
-    }    
+    // @PostMapping("/signup")
+    // public User createUser(@RequestBody User payload) throws Exception {
+    //     return userService.createUser(payload);
+    // }
 
 }
