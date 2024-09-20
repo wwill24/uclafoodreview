@@ -27,6 +27,10 @@ public class OtpController {
 
     @PostMapping("/generateOTP")
     public String signin(@RequestBody Map<String, Object> payload) {
+        if (!payload.containsKey("name") || payload.get("name") == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Missing required name field.");
+        }
+
         if (!payload.containsKey("email") || payload.get("email") == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Missing required email field.");
         }
