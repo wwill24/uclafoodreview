@@ -23,6 +23,6 @@ public class OtpController {
     public String signin(@RequestBody Map<String, Object> payload) {
         String otp = OtpService.GenerateOTP();
         System.out.println(otp);
-        return "Bob";
+        return "generated";
     }
 }
