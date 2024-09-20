@@ -15,6 +15,7 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
@@ -29,5 +30,15 @@ public class UserService {
         }
 
         return userRepository.save(user);
+    }
+
+    public boolean validateUser(String username, String password){
+        User user = userRepository.findByUsername(username);
+
+        if (user != null){
+            // return passwordEncoder.matches(password, user.getPassword());
+        }
+
+        return false;
     }
 }

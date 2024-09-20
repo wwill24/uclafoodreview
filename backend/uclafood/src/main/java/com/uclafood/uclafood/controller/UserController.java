@@ -27,9 +27,17 @@ public class UserController {
 
     @PostMapping("/signin")
     public String signin(@RequestBody Map<String, Object> payload) {
-        logger.info(payload.toString());
+        String username = payload.get("username").toString();
+        String password = payload.get("password").toString();
 
-        return "Signin data received successfully!";
+        boolean isValidUser = userService.validateUser(username, password);
+
+        if (isValidUser) {
+            return "Signin successful!";
+        }
+        else {
+            return "Signin error";
+        }
     }
 
     @GetMapping("/getUsers")
