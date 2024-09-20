@@ -16,39 +16,36 @@ public class Otp {
     @Column(nullable = false, length = 255)
     private String code;
 
-    @Lob
-    @Column(name = "formData")
-    private String formData;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getEmail() {
-        return email;
-    }
+    @Column(nullable = false, name = "formdata")
+    private String formdata;
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getCode() {
-        return code;
     }
 
     public void setCode(String code) {
         this.code = code;
     }
 
-    public String getFormData() {
+    public void setFormData(String formData) {
+        this.formdata = formData;
+    }
+
+    public String getEmail(String email) {
+        return email;
+    }
+
+    public String getCode(String code) {
+        return code;
+    }
+
+    public String getFormData(String formData) {
         return formData;
     }
 
-    public void setFormData(String formData) {
-        this.formData = formData;
+    public Otp(String email, String code, String formData) {
+        this.email = email;
+        this.code = code;
+        this.formdata = formData;
     }
 }
