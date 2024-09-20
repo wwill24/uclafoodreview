@@ -18,6 +18,20 @@ public class Reviews {
     @Column
     private String reviewText;
 
+    @Column
+    private String reviewDate;
+
+    @Column
+    private String reviewTime;
+
+    public Reviews(String title, Integer rating, String reviewText, String reviewDate, String reviewTime) {
+        this.title = title;
+        this.rating = rating;
+        this.reviewText = reviewText;
+        this.reviewDate = reviewDate;
+        this.reviewTime = reviewTime;
+    }
+
     public Long getId() {
         return id;
     }
@@ -47,6 +61,22 @@ public class Reviews {
     }
 
     public void setReviewText(String reviewText) {
+        this.reviewText = reviewText;
+    }
+
+    public String getReviewDate() {
+        return reviewText;
+    }
+
+    public void setReviewDate(String reviewText) {
+        this.reviewText = reviewText;
+    }
+
+    public String getReviewTime() {
+        return reviewText;
+    }
+
+    public void setReviewTime(String reviewText) {
         this.reviewText = reviewText;
     }
 }

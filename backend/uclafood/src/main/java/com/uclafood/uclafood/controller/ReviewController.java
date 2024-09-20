@@ -18,6 +18,7 @@ public class ReviewController {
 
     @PostMapping("/createReview") 
     public Reviews createReview(@RequestBody Reviews payload) throws Exception{
+        System.out.println(payload);
         return reviewService.createReview(payload);
     }
 }
