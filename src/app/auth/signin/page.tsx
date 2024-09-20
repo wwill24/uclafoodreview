@@ -27,12 +27,15 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
+import { useRouter } from 'next/navigation';
+
 const formSchema = z.object({
   username: z.string().min(1, "Please enter a username"),
   password: z.string().min(1, "Please enter a password")
 })
 
 export default function SignIn() {
+  const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -43,8 +46,17 @@ export default function SignIn() {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      const res = await fetch("http://localhost:8080/signin", { method: "POST", headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(values) });
-      console.log(res);
+      const signinReq = await fetch("http://localhost:8080/signin", {
+        method: "POST", 
+        headers: { 'Content-Type': 'application/json' }, 
+        body: JSON.stringify({
+          username: values.username,
+          password: values.password
+        }) 
+      });
+      console.log(signinReq);
+
+      router.push("/")
     } catch (e) {
       console.error(e);
       alert(e);

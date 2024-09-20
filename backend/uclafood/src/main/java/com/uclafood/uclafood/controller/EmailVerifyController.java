@@ -20,7 +20,7 @@ public class EmailVerifyController {
         this.emailService = emailService;
     }
 
-    @PostMapping("/signup")
+    @PostMapping("/otp")
     public String signin(@RequestBody Map<String, Object> payload) {
         String email = payload.get("email").toString();
         String subject = "Bruin Review OTP";

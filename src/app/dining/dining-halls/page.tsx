@@ -1,6 +1,8 @@
+import ReviewCard from "@/components/Review"
+
 export default function DiningHalls() {
     return (
-      <p>Dining Halls</p>
+      <ReviewCard></ReviewCard>
     )
   }
   
