@@ -34,7 +34,7 @@ import { ST } from 'next/dist/shared/lib/utils';
 import toast, { Toaster } from "react-hot-toast";
 
 const formatDate = (date: Date) => {
-  const month = String(date.getMonth() + 1).padStart(2, '0'); // getMonth() is zero-indexed
+  const month = String(date.getMonth() + 1).padStart(2, '0');
   const day = String(date.getDate()).padStart(2, '0');
   const year = date.getFullYear();
   
@@ -149,11 +149,11 @@ export default function ReviewForm({ name, setFormData }: { name: string, setFor
                               className="flex flex-row justify-start"
                               onMouseLeave={() => setHoveredIndex(null)}
                             >
-                              {[...Array(5)].map((_, index: number) => ( // Explicitly define index as number
+                              {[...Array(5)].map((_, index: number) => (
                                 <div
                                   key={index}
                                   onMouseEnter={() => setHoveredIndex(index)}
-                                  onClick={() => handleStarClick(index)} // Handle click to set selected index
+                                  onClick={() => handleStarClick(index)}
                                   className='cursor-pointer w-3/2 h-3/2'
                                 >
                                   <Star isHighlighted={index <= (hoveredIndex ?? -1) || index <= (selectedIndex ?? -1)} />
