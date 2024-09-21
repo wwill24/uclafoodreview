@@ -96,9 +96,9 @@ export default function ReviewForm({ setFormData }: { setFormData: Function }) {
               body: JSON.stringify({
                   title: values.title,
                   rating: values.rating,
-                  text: values.text,
-                  date: values.date,
-                  time: values.time
+                  reviewText: values.reviewText,
+                  reviewDate: values.reviewDate,
+                  reviewTime: values.reviewTime
               })
           });
 
