@@ -8,20 +8,23 @@ import Verify from "@/components/Verify";
 
 import toast, { Toaster } from "react-hot-toast";
 
-const x = true;
-
 export default function SignUp() {
 
     const router = useRouter();
-    const [signUpFormData, setSignUpFormData] = useState({});
+    const [showSignup, setShowSignup] = useState(true);
+    const [signUpFormData, setSignUpFormData] = useState(null);
 
     useEffect(() => {
-        console.log(signUpFormData);
+        if (!signUpFormData) {
+            return;
+        }
+
+        signupFormSubmit(signUpFormData);
     }, [signUpFormData]);
 
     async function signupFormSubmit(values: any) {
         try {
-            const signupReq = await fetch("http://localhost:8080/signup", {
+            const signupReq = await fetch("http://localhost:8080/generateOTP", {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json'
@@ -46,8 +49,7 @@ export default function SignUp() {
                 return;
             }
 
-            router.push("/auth/verify")
-
+            setShowSignup(false);
         } catch (err: any) {
             console.error(err);
             toast.error("Something went wrong. Please try again later.");
@@ -56,7 +58,7 @@ export default function SignUp() {
 
     return (
         <>
-            {x ? <SignupForm setFormData={setSignUpFormData} /> : <Verify />}
+            {showSignup ? <SignupForm setFormData={setSignUpFormData} /> : <Verify />}
             <Toaster position="bottom-right" />
         </>
     );
