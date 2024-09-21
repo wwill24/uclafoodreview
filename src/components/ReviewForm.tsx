@@ -31,6 +31,7 @@ import { Button } from "@/components/ui/button";
 import Star from "@/components/ui/star";
 import { Textarea } from './ui/textarea';
 import { ST } from 'next/dist/shared/lib/utils';
+import toast, { Toaster } from "react-hot-toast";
 
 const formatDate = (date: Date) => {
   const month = String(date.getMonth() + 1).padStart(2, '0'); // getMonth() is zero-indexed
@@ -72,8 +73,7 @@ export default function ReviewForm({ setFormData }: { setFormData: Function }) {
     });
 
     async function onSubmit(values: z.infer<typeof formSchema>) {
-        setFormData(values);
-        console.log(values);
+        reviewFormSubmit(values);
     }
 
     const handleStarClick = (index: number) => {
@@ -86,7 +86,7 @@ export default function ReviewForm({ setFormData }: { setFormData: Function }) {
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
     const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
-    async function signupFormSubmit(values: any) {
+    async function reviewFormSubmit(values: any) {
       try {
           const signupReq = await fetch("http://localhost:8080/createReview", {
               method: "POST",
@@ -103,19 +103,19 @@ export default function ReviewForm({ setFormData }: { setFormData: Function }) {
           });
 
           if (signupReq.status == 500) {
-              // toast.error("Internal server error. Please try again.");
+              toast.error("Internal server error. Please try again.");
               return;
           }
 
           if (!signupReq.ok) {
               const errMsg = (await signupReq.json()).message;
-              // toast.error(errMsg);
+              toast.error(errMsg);
               return;
           }
 
       } catch (err: any) {
           console.error(err);
-          // toast.error("Something went wrong. Please try again later.");
+          toast.error("Something went wrong. Please try again later.");
       }
     }
 
@@ -173,11 +173,12 @@ export default function ReviewForm({ setFormData }: { setFormData: Function }) {
                                 )}
                             />
 
-                            <Button className='w-full h-1/2 bg-[#007ec4] hover:bg-[#00a6ff] text-[#fff] hover:text-[#fff]' variant="ghost" type="submit">Submit Review</Button>
+                            <Button className='w-full h-1/2 bg-[#007ec4] hover:bg-[#00a6ff] text-[#fff] hover:text-[#fff]' variant="ghost" type="submit" >Submit Review</Button>
                         </form>
                     </Form>
                 </CardContent>
             </Card>
+            <Toaster position='bottom-right'/>
         </div>
     );
 }

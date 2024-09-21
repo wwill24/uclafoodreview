@@ -10,7 +10,7 @@ public class Reviews {
     private Long id;
 
     @Column(nullable = false)
-    private String title;
+    private String reviewTitle;
 
     @Column(nullable = false)
     private Integer rating;
@@ -24,14 +24,6 @@ public class Reviews {
     @Column
     private String reviewTime;
 
-    public Reviews(String title, Integer rating, String reviewText, String reviewDate, String reviewTime) {
-        this.title = title;
-        this.rating = rating;
-        this.reviewText = reviewText;
-        this.reviewDate = reviewDate;
-        this.reviewTime = reviewTime;
-    }
-
     public Long getId() {
         return id;
     }
@@ -41,11 +33,11 @@ public class Reviews {
     }
 
     public String getTitle() {
-        return title;
+        return reviewTitle;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setTitle(String reviewTitle) {
+        this.reviewTitle = reviewTitle;
     }
 
     public Integer getRating() {
