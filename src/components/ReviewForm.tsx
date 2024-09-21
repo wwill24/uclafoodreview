@@ -57,10 +57,11 @@ const formSchema = z.object({
   rating: z.number().min(1, "Rating must be at least 1"),
   reviewText: z.string(),
   reviewDate: z.string(),
-  reviewTime: z.string()
+  reviewTime: z.string(),
+  businessName: z.string()
 })
 
-export default function ReviewForm({ setFormData }: { setFormData: Function }) {
+export default function ReviewForm({ name, setFormData }: { name: string, setFormData: Function }) {
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -68,7 +69,8 @@ export default function ReviewForm({ setFormData }: { setFormData: Function }) {
             rating: 0,
             reviewText: "",
             reviewDate: today,
-            reviewTime: timePosted
+            reviewTime: timePosted,
+            businessName: name
         },
     });
 
@@ -80,7 +82,7 @@ export default function ReviewForm({ setFormData }: { setFormData: Function }) {
       setSelectedIndex(index);
       form.setValue('rating', index + 1);
       const values = form.getValues();
-      console.log(values.rating, values.reviewDate, values.title, values.reviewText);
+      console.log(values.rating, values.reviewDate, values.title, values.reviewText, values.businessName);
     };
 
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
@@ -123,7 +125,7 @@ export default function ReviewForm({ setFormData }: { setFormData: Function }) {
         <div className='flex flex-col justify-center items-center h-screen'>
             <Card className='p-4 w-[50vh]'>
                 <CardHeader className='flex flex-col gap-2 text-center'>
-                    <CardTitle>Restaurant name</CardTitle>
+                    <CardTitle>{name}</CardTitle>
                 </CardHeader>
                 <CardContent>
                     <Form {...form}>
@@ -172,6 +174,8 @@ export default function ReviewForm({ setFormData }: { setFormData: Function }) {
                                     </FormItem>
                                 )}
                             />
+
+                            <FormField control={form.control} name="businessName" render={({ field }) => (<div></div>)}/>
 
                             <Button className='w-full h-1/2 bg-[#007ec4] hover:bg-[#00a6ff] text-[#fff] hover:text-[#fff]' variant="ghost" type="submit" >Submit Review</Button>
                         </form>
