@@ -15,13 +15,13 @@ public class Reviews {
     @Column(name="rating", nullable = false)
     private Integer rating;
 
-    @Column(name="review_text", nullable = false)
+    @Column(name="reviewtext", nullable = false)
     private String reviewText;
 
-    @Column(name="review_date", nullable = false)
+    @Column(name="reviewdate", nullable = false)
     private String reviewDate;
 
-    @Column(name="review_time", nullable = false)
+    @Column(name="reviewtime", nullable = false)
     private String reviewTime;
 
     public Long getId() {
