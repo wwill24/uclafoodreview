@@ -17,8 +17,11 @@ import { Button } from "@/components/ui/button";
 import { useRouter } from 'next/navigation';
 import epicimg from '../../frontend/img/epicuriaimg.png';
 
-export default function ReviewCard() {
+import { useState } from 'react';
+
+export default function BusinessCard() {
   const router = useRouter();
+  const name = "Epicuria";
   return(
     <div className='flex flex-col items-center'>
       <Card className='w-[40vw] flex flex-row items-center'>
@@ -32,7 +35,7 @@ export default function ReviewCard() {
             />
           </div>
           <CardTitle className=''>
-            Epicuria
+            {name}
           </CardTitle>
           <div className='flex flex-row gap-1 items-center'>
             <CardDescription className='text-lg'>
@@ -44,7 +47,7 @@ export default function ReviewCard() {
             Italian restaurant with lots of pasta and pizza lol
           </CardDescription>
         </CardHeader>
-        <Button className="bg-[#007ec4] hover:bg-[#00a6ff]"/>
+        <Button onClick={() => {router.push(`/review/${name}`)}} className="bg-[#007ec4] hover:bg-[#00a6ff]"/>
       </Card>
     </div>
   );
