@@ -9,19 +9,19 @@ public class Reviews {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String reviewTitle;
+    @Column(name="title", nullable = false)
+    private String title;
 
-    @Column(nullable = false)
+    @Column(name="rating", nullable = false)
     private Integer rating;
 
-    @Column
+    @Column(name="review_text", nullable = false)
     private String reviewText;
 
-    @Column
+    @Column(name="review_date", nullable = false)
     private String reviewDate;
 
-    @Column
+    @Column(name="review_time", nullable = false)
     private String reviewTime;
 
     public Long getId() {
@@ -33,11 +33,11 @@ public class Reviews {
     }
 
     public String getTitle() {
-        return reviewTitle;
+        return title;
     }
 
-    public void setTitle(String reviewTitle) {
-        this.reviewTitle = reviewTitle;
+    public void setReviewTitle(String title) {
+        this.title = title;
     }
 
     public Integer getRating() {
@@ -52,23 +52,23 @@ public class Reviews {
         return reviewText;
     }
 
-    public void setReviewText(String reviewText) {
+    public void setText(String reviewText) {
         this.reviewText = reviewText;
     }
 
     public String getReviewDate() {
-        return reviewText;
+        return reviewDate;
     }
 
-    public void setReviewDate(String reviewText) {
-        this.reviewText = reviewText;
+    public void setReviewDate(String reviewDate) {
+        this.reviewDate = reviewDate;
     }
 
     public String getReviewTime() {
-        return reviewText;
+        return reviewTime;
     }
 
-    public void setReviewTime(String reviewText) {
-        this.reviewText = reviewText;
+    public void setReviewTime(String reviewTime) {
+        this.reviewTime = reviewTime;
     }
 }

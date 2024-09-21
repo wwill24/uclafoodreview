@@ -53,7 +53,7 @@ const formatTime = (time: Date) => {
 const timePosted = formatTime(new Date())
 
 const formSchema = z.object({
-  reviewTitle: z.string().min(1, "Review title can not be empty"),
+  title: z.string().min(1, "Review title can not be empty"),
   rating: z.number().min(1, "Rating must be at least 1"),
   reviewText: z.string(),
   reviewDate: z.string(),
@@ -64,7 +64,7 @@ export default function ReviewForm({ setFormData }: { setFormData: Function }) {
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            reviewTitle: "",
+            title: "",
             rating: 0,
             reviewText: "",
             reviewDate: today,
@@ -80,7 +80,7 @@ export default function ReviewForm({ setFormData }: { setFormData: Function }) {
       setSelectedIndex(index);
       form.setValue('rating', index + 1);
       const values = form.getValues();
-      console.log(values.rating, values.reviewDate, values.reviewTitle, values.reviewText);
+      console.log(values.rating, values.reviewDate, values.title, values.reviewText);
     };
 
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
@@ -94,11 +94,11 @@ export default function ReviewForm({ setFormData }: { setFormData: Function }) {
                   'Content-Type': 'application/json'
               },
               body: JSON.stringify({
-                  reviewTitle: values.reviewTitle,
+                  title: values.title,
                   rating: values.rating,
-                  reviewText: values.reviewText,
-                  reviewDate: values.reviewDate,
-                  reviewTime: values.reviewTime
+                  text: values.text,
+                  date: values.date,
+                  time: values.time
               })
           });
 
@@ -131,7 +131,7 @@ export default function ReviewForm({ setFormData }: { setFormData: Function }) {
                             {/* Name */}
                             <FormField
                                 control={form.control}
-                                name="reviewTitle"
+                                name="title"
                                 render={({ field }) => (
                                     <FormItem className='w-full'>
                                         <FormControl>
