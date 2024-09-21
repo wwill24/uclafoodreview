@@ -4,5 +4,5 @@ CREATE TABLE reviews (
     rating INTEGER NOT NULL,
     reviewText TEXT,
     reviewDate DATE,
-    revieTime TIME
+    reviewTime TIME
 );
