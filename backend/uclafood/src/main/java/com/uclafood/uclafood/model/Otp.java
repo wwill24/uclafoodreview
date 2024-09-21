@@ -14,6 +14,12 @@ public class Otp {
     private String email;
 
     @Column(nullable = false, length = 255)
+    private String phone;
+
+    @Column(nullable = false, length = 255)
+    private String username;
+
+    @Column(nullable = false, length = 255)
     private String code;
 
     @Column(nullable = false, name = "formdata")
@@ -21,6 +27,14 @@ public class Otp {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public void setCode(String code) {
@@ -35,6 +49,14 @@ public class Otp {
         return email;
     }
 
+    public String getPhone(String email) {
+        return phone;
+    }
+
+    public String getUsername(String email) {
+        return username;
+    }
+
     public String getCode(String code) {
         return code;
     }
@@ -43,8 +65,10 @@ public class Otp {
         return formData;
     }
 
-    public Otp(String email, String code, String formData) {
+    public Otp(String email, String phone, String username, String code, String formData) {
         this.email = email;
+        this.phone = phone;
+        this.username = username;
         this.code = code;
         this.formdata = formData;
     }

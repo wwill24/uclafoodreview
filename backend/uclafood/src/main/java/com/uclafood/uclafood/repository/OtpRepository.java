@@ -6,5 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface OtpRepository extends JpaRepository<Otp, Long> {
-    
+    boolean existsByEmail(String email);
+    boolean existsByPhone(String phone);
+    boolean existsByUsername(String username);
 }

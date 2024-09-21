@@ -1,5 +1,6 @@
 package com.uclafood.uclafood.service;
 
+import java.util.Map;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,5 +24,20 @@ public class OtpService {
 
     public Otp saveOTP(Otp otp) {
         return otpRepository.save(otp);
+    }
+
+    public Boolean checkEmail(Map<String, Object> payload) {
+        String email = payload.get("email").toString();
+        return otpRepository.existsByEmail(email);
+    }
+
+    public Boolean checkPhone(Map<String, Object> payload) {
+        String phone = payload.get("phone").toString();
+        return otpRepository.existsByPhone(phone);
+    }
+
+    public Boolean checkUsername(Map<String, Object> payload) {
+        String username = payload.get("username").toString();
+        return otpRepository.existsByUsername(username);
     }
 }

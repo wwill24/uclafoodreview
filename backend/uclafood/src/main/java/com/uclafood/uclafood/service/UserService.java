@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.uclafood.uclafood.utils.Exceptions.*;
 
@@ -40,5 +41,20 @@ public class UserService {
         }
 
         return false;
+    }
+
+    public Boolean checkEmail(Map<String, Object> payload) {
+        String email = payload.get("email").toString();
+        return userRepository.existsByEmail(email);
+    }
+
+    public Boolean checkPhone(Map<String, Object> payload) {
+        String phone = payload.get("phone").toString();
+        return userRepository.existsByPhone(phone);
+    }
+
+    public Boolean checkUsername(Map<String, Object> payload) {
+        String username = payload.get("username").toString();
+        return userRepository.existsByUsername(username);
     }
 }

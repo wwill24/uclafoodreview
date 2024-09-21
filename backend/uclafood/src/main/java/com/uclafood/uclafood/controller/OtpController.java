@@ -4,7 +4,6 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,9 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.uclafood.uclafood.model.Otp;
-import com.uclafood.uclafood.model.Queue;
-import com.uclafood.uclafood.service.QueueService;
 import com.uclafood.uclafood.service.OtpService;
+import com.uclafood.uclafood.service.UserService;
 import com.uclafood.uclafood.utils.EmailService;
 
 @RestController
@@ -29,7 +27,7 @@ public class OtpController {
     private OtpService otpService;
 
     @Autowired
-    private QueueService queueService;
+    private UserService userService;
 
     @PostMapping("/generateOTP")
     public String signin(@RequestBody Map<String, Object> payload) {
@@ -59,25 +57,28 @@ public class OtpController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Missing required password field.");
         }
 
-        // Check if formdata is in queue
-        if (queueService.checkEmail(payload)) { throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email already in use."); }
-        if (queueService.checkPhone(payload)) { throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Phone Number already in use."); }
-        if (queueService.checkUsername(payload)) { throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username already in use."); }
-
-        // Creates and inserts formdata into queue
-        Queue queue = new Queue(email, phone, username);
-        queueService.saveQueue(queue);
+        // Check if formdata is in otp table
+        if (otpService.checkEmail(payload) || userService.checkEmail(payload)) { throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email already in use."); }
+        if (otpService.checkPhone(payload) || userService.checkPhone(payload)) { throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Phone Number already in use."); }
+        if (otpService.checkUsername(payload) || userService.checkUsername(payload)) { throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username already in use."); }
 
         // Generate a OTP
         String otp = OtpService.GenerateOTP();
         System.out.println("Generated OTP: " + otp);
 
         // Creates OTP data with the payload
-        Otp optData = new Otp(payload.get("email").toString(), otp, payload.toString());
+        Otp optData = new Otp(email, phone, username, otp, payload.toString());
 
         // Saves optData to otp DB
         otpService.saveOTP(optData);
 
         return "OTP Created!";
     }
+
+    @PostMapping("/verify")
+    public String verify(@RequestBody Map<String, Object> payload) {
+        
+        return "verified!";
+    }
+    
 }
