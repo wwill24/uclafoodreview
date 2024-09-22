@@ -4,6 +4,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -72,12 +73,24 @@ public class OtpController {
         // Saves optData to otp DB
         otpService.saveOTP(optData);
 
+        // Sends OTP to email
+        emailService.sendEmail(email, "Your UCLA Food OTP Code ".concat(otp), "Your OTP code is: ".concat(otp));
+
         return "OTP Created!";
     }
 
     @PostMapping("/verify")
     public String verify(@RequestBody Map<String, Object> payload) {
-        
+        String email = payload.get("email").toString();
+        String code = payload.get("code").toString();
+
+        if (!payload.containsKey("email") || email == null) { throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Missing required email field."); }
+        if (!payload.containsKey("code") || code == null) { throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Missing required code field."); }
+
+        if (!otpService.verifyOTP(payload)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "OTP Code Invalid.");
+        }
+
         return "verified!";
     }
     

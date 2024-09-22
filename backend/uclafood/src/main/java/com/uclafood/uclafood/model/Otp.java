@@ -45,24 +45,28 @@ public class Otp {
         this.formdata = formData;
     }
 
-    public String getEmail(String email) {
+    public String getEmail() {
         return email;
     }
 
-    public String getPhone(String email) {
+    public String getPhone() {
         return phone;
     }
 
-    public String getUsername(String email) {
+    public String getUsername() {
         return username;
     }
 
-    public String getCode(String code) {
+    public String getCode() {
         return code;
     }
 
-    public String getFormData(String formData) {
-        return formData;
+    public String getFormData() {
+        return formdata;
+    }
+
+    public Otp() {
+
     }
 
     public Otp(String email, String phone, String username, String code, String formData) {
