@@ -42,8 +42,9 @@ export default function BusinessCard(props: Props) {
           <div className="flex items-center gap-0.5">
             {Array.from({ length: 5 }).map((_, i) => (
               <Star
+                fill={i < Math.floor(starRating) ? '#2b6db8' : '#d1d5db'}
                 key={i}
-                className={`${i < Math.floor(starRating) ? 'text-[#2b6db8]' : 'text-gray-300'}`}
+                className={`${i < Math.floor(starRating) ? 'text-[#2b6db8]' : 'text-[#d1d5db]'}`}
               />
             ))}
             <span className="text-gray-600 text-sm">{starRating} ({reviewsCount} reviews)</span>
