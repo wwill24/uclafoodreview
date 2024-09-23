@@ -19,10 +19,16 @@ import epicimg from '../../frontend/img/epicuriaimg.png';
 
 import { useState } from 'react';
 
-export default function BusinessCard() {
+interface Props {
+  businessName: string,
+  address: string,
+  rating: number
+}
+
+export default function BusinessCard(props: Props) {
   const router = useRouter();
-  const name = 'Epicuria';
-  const starRating = 4.5;
+  const name = props.businessName;
+  const starRating = props.rating;
   const reviewsCount = 12;
 
   return (
