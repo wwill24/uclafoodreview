@@ -77,7 +77,6 @@ public class OtpController {
         otpService.saveOTP(optData);
 
         // Sends OTP to email
-        // emailService.sendEmail(email, "Your UCLA Food OTP Code ".concat(otp), "Your OTP code is: ".concat(otp));
         emailService.sendEmail(email, "UCLA Food OTP Code ".concat(otp), "Your OTP Code is: ".concat(otp));
 
         return "OTP Created!";

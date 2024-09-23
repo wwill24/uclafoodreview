@@ -1,6 +1,6 @@
 'use client'
 
-import BusinessCard from "@/components/Business"
+import BusinessCard from "@/components/BusinessCard"
 
 import toast, { Toaster } from "react-hot-toast";
 
@@ -29,7 +29,8 @@ export default function DiningHalls() {
   }
 
   return (
-    <div>
+    <div className="flex flex-col gap-4 m-[2em]">
+      <BusinessCard />
       <BusinessCard />
     </div>
   )
