@@ -31,7 +31,8 @@ import { Button } from "@/components/ui/button";
 const formSchema = z.object({
     name: z.string().min(1, { message: "Name must contain at least 1 character(s)" }),
     username: z.string().min(5, { message: "Username must contain at least 1 character(s)" }),
-    email: z.string().email().refine(val => val.includes('g.ucla.edu'), "Email must be a UCLA student address"),
+    // TEMP EMAIL TEST
+    email: z.string().email().refine(val => val.includes('g.ucla.edu') || val.includes('gamesteven101@gmail.com'), "Email must be a UCLA student address"),
     phoneNumber: z.string().length(10),
     password: z.string().min(1, { message: "Password must contain at least 1 character(s)" }),
     confirmPassword: z.string().min(1, { message: "Confirm Password must contain at least 1 character(s)" })

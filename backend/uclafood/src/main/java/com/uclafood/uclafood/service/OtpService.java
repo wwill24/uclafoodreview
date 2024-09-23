@@ -1,6 +1,7 @@
 package com.uclafood.uclafood.service;
 
 import java.util.Map;
+import java.util.Optional;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,5 +40,46 @@ public class OtpService {
     public Boolean checkUsername(Map<String, Object> payload) {
         String username = payload.get("username").toString();
         return otpRepository.existsByUsername(username);
+    }
+
+    public Boolean verifyOTP(Map<String, Object> payload) {
+        String email = payload.get("email").toString();
+        String otpCodePayload = payload.get("code").toString();
+
+        Otp otpRow = otpRepository.findByEmail(email);
+
+        if (otpRow == null) {
+            return false;
+        }
+        
+        String otpCode = otpRow.getCode();
+
+        if (otpCode != null && otpCode.equals(otpCodePayload)) {
+            return true;
+        }
+
+        return false;
+    }
+    
+    public Otp removeOTP(Map<String, Object> payload) {
+        String otpCodePayload = payload.get("code").toString();
+        Otp otpRow = otpRepository.findByCode(otpCodePayload);
+    
+        if (otpRow != null) {
+            otpRepository.delete(otpRow);
+        }
+    
+        return otpRow;
+    }
+
+    public String getFormData(Map<String, Object> payload) {
+        String otpCodePayload = payload.get("code").toString();
+        Otp otpRow = otpRepository.findByCode(otpCodePayload);
+    
+        if (otpRow != null) {
+            return otpRow.getFormData();
+        }
+
+        return "bob";
     }
 }

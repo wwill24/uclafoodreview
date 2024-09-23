@@ -4,6 +4,8 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,6 +16,8 @@ import com.uclafood.uclafood.model.Otp;
 import com.uclafood.uclafood.service.OtpService;
 import com.uclafood.uclafood.service.UserService;
 import com.uclafood.uclafood.utils.EmailService;
+
+import jakarta.mail.MessagingException;
 
 @RestController
 @CrossOrigin
@@ -30,7 +34,7 @@ public class OtpController {
     private UserService userService;
 
     @PostMapping("/generateOTP")
-    public String signin(@RequestBody Map<String, Object> payload) {
+    public String signin(@RequestBody Map<String, Object> payload) throws MessagingException {
         String name = payload.get("name").toString();
         String email = payload.get("email").toString();
         String username = payload.get("username").toString();
@@ -72,12 +76,27 @@ public class OtpController {
         // Saves optData to otp DB
         otpService.saveOTP(optData);
 
+        // Sends OTP to email
+        // emailService.sendEmail(email, "Your UCLA Food OTP Code ".concat(otp), "Your OTP code is: ".concat(otp));
+        emailService.sendEmail(email, "UCLA Food OTP Code ".concat(otp), "Your OTP Code is: ".concat(otp));
+
         return "OTP Created!";
     }
 
     @PostMapping("/verify")
     public String verify(@RequestBody Map<String, Object> payload) {
-        
+        String email = payload.get("email").toString();
+        String code = payload.get("code").toString();
+
+        if (!payload.containsKey("email") || email == null) { throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Missing required email field."); }
+        if (!payload.containsKey("code") || code == null) { throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Missing required code field."); }
+
+        if (!otpService.verifyOTP(payload)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "OTP Code Invalid.");
+        }
+
+        otpService.removeOTP(payload);
+
         return "verified!";
     }
     
