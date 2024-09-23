@@ -37,7 +37,7 @@ export default function BusinessCard(props: Props) {
         <Image src={epicimg} height={120} width={120} alt="epicuria image" className="rounded-md" />
       </div>
       <div className='flex items-center'>
-        <div className='w-full h-full'>
+        <div className='w-[27vw] h-full'>
           <CardTitle className="text-xl text-[#238dd3]">{name}</CardTitle>
           <div className="flex items-center gap-0.5">
             {Array.from({ length: 5 }).map((_, i) => (
