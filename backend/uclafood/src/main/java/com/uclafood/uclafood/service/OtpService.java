@@ -59,5 +59,27 @@ public class OtpService {
         }
 
         return false;
-    }    
+    }
+    
+    public Otp removeOTP(Map<String, Object> payload) {
+        String otpCodePayload = payload.get("code").toString();
+        Otp otpRow = otpRepository.findByCode(otpCodePayload);
+    
+        if (otpRow != null) {
+            otpRepository.delete(otpRow);
+        }
+    
+        return otpRow;
+    }
+
+    public String getFormData(Map<String, Object> payload) {
+        String otpCodePayload = payload.get("code").toString();
+        Otp otpRow = otpRepository.findByCode(otpCodePayload);
+    
+        if (otpRow != null) {
+            return otpRow.getFormData();
+        }
+
+        return "bob";
+    }
 }
