@@ -17,6 +17,8 @@ import com.uclafood.uclafood.service.OtpService;
 import com.uclafood.uclafood.service.UserService;
 import com.uclafood.uclafood.utils.EmailService;
 
+import jakarta.mail.MessagingException;
+
 @RestController
 @CrossOrigin
 public class OtpController {
@@ -32,7 +34,7 @@ public class OtpController {
     private UserService userService;
 
     @PostMapping("/generateOTP")
-    public String signin(@RequestBody Map<String, Object> payload) {
+    public String signin(@RequestBody Map<String, Object> payload) throws MessagingException {
         String name = payload.get("name").toString();
         String email = payload.get("email").toString();
         String username = payload.get("username").toString();
@@ -75,7 +77,8 @@ public class OtpController {
         otpService.saveOTP(optData);
 
         // Sends OTP to email
-        emailService.sendEmail(email, "Your UCLA Food OTP Code ".concat(otp), "Your OTP code is: ".concat(otp));
+        // emailService.sendEmail(email, "Your UCLA Food OTP Code ".concat(otp), "Your OTP code is: ".concat(otp));
+        emailService.sendEmail(email, "UCLA Food OTP Code ".concat(otp), "Your OTP Code is: ".concat(otp));
 
         return "OTP Created!";
     }
