@@ -19,7 +19,11 @@ import epicimg from '../../frontend/img/epicuriaimg.png';
 
 import { useState } from 'react';
 
-export default function BusinessCard() {
+interface Props {
+
+}
+
+export default function BusinessCard(props: Props) {
   const router = useRouter();
   const name = 'Epicuria';
   const starRating = 4.5;
@@ -31,7 +35,7 @@ export default function BusinessCard() {
         <Image src={epicimg} height={120} width={120} alt="epicuria image" className="rounded-md" />
       </div>
       <div className='flex items-center'>
-        <div className='w-full h-full'>
+        <div className='w-[27vw] h-full'>
           <CardTitle className="text-xl text-[#238dd3]">{name}</CardTitle>
           <div className="flex items-center gap-0.5">
             {Array.from({ length: 5 }).map((_, i) => (
