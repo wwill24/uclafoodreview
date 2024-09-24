@@ -1,23 +1,19 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
 import { Star } from 'lucide-react';
 import Image from 'next/image';
 
 import {
   Card,
-  CardContent,
   CardDescription,
-  CardHeader,
-  CardTitle,
+  CardTitle
 } from '@/components/ui/card';
+import { Skeleton } from "@/components/ui/skeleton";
 
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
 import epicimg from '../../frontend/img/epicuriaimg.png';
-
-import { useState } from 'react';
 
 interface Props {
   businessName: string,
