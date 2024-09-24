@@ -9,9 +9,8 @@ import {
   CardDescription,
   CardTitle
 } from '@/components/ui/card';
-import { Skeleton } from "@/components/ui/skeleton";
-
 import { Button } from '@/components/ui/button';
+
 import { useRouter } from 'next/navigation';
 import epicimg from '../../frontend/img/epicuriaimg.png';
 
