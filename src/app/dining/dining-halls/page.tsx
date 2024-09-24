@@ -38,7 +38,9 @@ export default function DiningHalls() {
     <div className="flex flex-col gap-4 m-[2em] items-center">
       {businessData ? businessData.map((data: any, index: number) => (
         <BusinessCard key={index} businessName={data.businessName} address={data.address} rating={data.rating} description={data.description}/>
-      )) : <BusinessCardSkeleton />}
+      )) : Array.from({ length: 3 }).map((_, i) => ( <BusinessCardSkeleton /> ))}
+      {/* <BusinessCardSkeleton /> */}
+      <Toaster position="bottom-right" />
     </div>
   )
 }
