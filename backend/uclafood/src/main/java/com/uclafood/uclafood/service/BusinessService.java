@@ -15,4 +15,16 @@ public class BusinessService {
     public List<Business> getBusinesses() {
         return businessRepository.findAll();
     }
+
+    public List<Business> getDiningHalls() {
+        return businessRepository.findAllByCategory("Dining Halls");
+    }
+
+    public List<Business> getFoodTrucks() {
+        return businessRepository.findAllByCategory("Food Trucks");
+    }
+
+    public List<Business> getRestaurants() {
+        return businessRepository.findAllByCategory("Restaurants");
+    }
 }
