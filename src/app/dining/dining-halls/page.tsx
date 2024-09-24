@@ -1,6 +1,7 @@
 'use client'
 
 import BusinessCard from "@/components/BusinessCard"
+import BusinessCardSkeleton from "@/components/BusinessCardSkeleton";
 import { useState, useEffect } from "react";
 
 import toast, { Toaster } from "react-hot-toast";
@@ -37,7 +38,7 @@ export default function DiningHalls() {
     <div className="flex flex-col gap-4 m-[2em] items-center">
       {businessData ? businessData.map((data: any, index: number) => (
         <BusinessCard key={index} businessName={data.businessName} address={data.address} rating={data.rating} description={data.description}/>
-      )) : "Loading business data"}
+      )) : <BusinessCardSkeleton />}
     </div>
   )
 }
