@@ -62,6 +62,10 @@ const formSchema = z.object({
 })
 
 export default function ReviewForm({ name, setFormData }: { name: string, setFormData: Function }) {
+    function removeNonAlphabetic(str: string): string {
+        return str.replace(/[^A-Za-z]/g, ' ');
+    }
+
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -125,7 +129,7 @@ export default function ReviewForm({ name, setFormData }: { name: string, setFor
         <div className='flex flex-col justify-center items-center h-screen'>
             <Card className='p-4 w-[50vh]'>
                 <CardHeader className='flex flex-col gap-2 text-center'>
-                    <CardTitle>{name}</CardTitle>
+                    <CardTitle>{removeNonAlphabetic(name)}</CardTitle>
                 </CardHeader>
                 <CardContent>
                     <Form {...form}>
