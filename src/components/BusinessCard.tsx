@@ -35,12 +35,12 @@ export default function BusinessCard(props: Props) {
   
   return (
     <Card className="w-[40vw] h-[20vh] flex flex-row p-4 gap-4 items-center shadow-lg hover:shadow-2xl">
-      <div onClick={() => router.push(`/dining/dining-halls/${props.businessName}`)}>
+      <div className='cursor-pointer' onClick={() => router.push(`/dining/dining-halls/${props.businessName}`)}>
         <Image src={epicimg} height={120} width={120} alt="epicuria image" className="rounded-md" />
       </div>
       <div className='flex items-center'>
         <div className='w-[27vw] h-full'>
-          <CardTitle onClick={() => router.push(`/dining/dining-halls/${props.businessName}`)} className="text-xl text-[#238dd3]">{name}</CardTitle>
+          <CardTitle onClick={() => router.push(`/dining/dining-halls/${props.businessName.toLowerCase()}`)} className="cursor-pointer text-xl text-[#238dd3]">{name}</CardTitle>
           <div className="flex items-center gap-0.5">
             {Array.from({ length: 5 }).map((_, i) => (
               <Star
