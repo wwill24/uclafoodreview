@@ -8,7 +8,8 @@ import toast, { Toaster } from "react-hot-toast";
 interface BusinessData {
   businessName: string,
   address: string,
-  rating: number
+  rating: number,
+  description: string
 }
 
 export default function DiningHalls() {
@@ -33,9 +34,9 @@ export default function DiningHalls() {
   }
 
   return (
-    <div className="flex flex-col gap-4 m-[2em]">
+    <div className="flex flex-col gap-4 m-[2em] items-center">
       {businessData ? businessData.map((data: any, index: number) => (
-        <BusinessCard key={index} businessName={data.businessName} address={data.address} rating={data.rating}/>
+        <BusinessCard key={index} businessName={data.businessName} address={data.address} rating={data.rating} description={data.description}/>
       )) : "Loading business data"}
     </div>
   )

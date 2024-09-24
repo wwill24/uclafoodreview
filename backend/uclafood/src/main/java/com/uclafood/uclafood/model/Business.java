@@ -21,6 +21,9 @@ public class Business {
     @Column(name="rating", nullable = false)
     private Float rating;
 
+    @Column(name="description", nullable = false)
+    private String description;
+
     public Long getId() {
         return id;
     }
@@ -59,5 +62,13 @@ public class Business {
 
     public void setRating(Float rating) {
         this.rating = rating;
+    }
+    
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
