@@ -30,7 +30,7 @@ export default function DiningHalls() {
     }
     catch (err: any) {
       console.error(err);
-      toast.error("Could not retrieve businesses");
+      toast.error("Could not retrieve dining halls");
     }
   }
 
