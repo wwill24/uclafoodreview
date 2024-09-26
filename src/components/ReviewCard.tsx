@@ -21,10 +21,10 @@ export default function ReviewCard() {
             <Card className=''>
                 <CardHeader>
                     <div className='flex flex-col'>
-                      <CardTitle>User's name</CardTitle>
+                      <CardTitle>User's review title</CardTitle>
                       <div className='flex flex-row gap-2'>
                           <Star isHighlighted></Star>
-                          <CardDescription>Review title</CardDescription>
+                          <CardDescription>user's name</CardDescription>
                       </div>
                       <CardContent>Review text</CardContent>
                     </div>
