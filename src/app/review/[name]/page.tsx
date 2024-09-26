@@ -21,6 +21,8 @@ export default function Review(){
     const businessName = params.name.toString();
 
     return (
-        <ReviewForm name={businessName} setFormData={setSignUpFormData} />
+        <div>
+            <ReviewForm name={businessName} setFormData={setSignUpFormData} />
+        </div>
     )
 }
