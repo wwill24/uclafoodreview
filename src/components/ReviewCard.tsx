@@ -4,6 +4,7 @@ import React from 'react';
 
 import Star from "@/components/ui/star";
 import { ArrowBigDown, ArrowBigUp } from 'lucide-react';
+import { useEffect } from 'react';
 
 import {
     Card,
@@ -16,6 +17,7 @@ import {
 import { Button } from '@/components/ui/button';
 
 export default function ReviewCard() {
+
     return (
         <div className='flex flex-col w-[40vw] h-full'>
             <Card className=''>

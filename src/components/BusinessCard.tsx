@@ -18,7 +18,8 @@ interface Props {
   businessName: string,
   address: string,
   rating: number,
-  description: string
+  description: string,
+  businessID: number
 }
 
 export default function BusinessCard(props: Props) {
@@ -27,6 +28,7 @@ export default function BusinessCard(props: Props) {
   const starRating = props.rating;
   const reviewsCount = 12;
   const desc = props.description;
+  const businessID = props.businessID;
   
   return (
     <Card className="w-[40vw] h-[20vh] flex flex-row p-4 gap-4 items-center shadow-lg hover:shadow-2xl">
