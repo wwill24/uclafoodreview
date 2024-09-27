@@ -1,10 +1,10 @@
 'use client'
 
-import React from 'react';
+import React, { useState } from 'react';
 
 import Star from "@/components/ui/star";
-import { ArrowBigDown, ArrowBigUp } from 'lucide-react';
-import { useEffect } from 'react';
+import ArrowUp from './ui/arrowup';
+import ArrowDown from './ui/arrowdown';
 
 import {
     Card,
@@ -13,8 +13,6 @@ import {
     CardHeader,
     CardContent
 } from '@/components/ui/card';
-
-import { Button } from '@/components/ui/button';
 
 interface Props {
     title: string,
@@ -25,6 +23,18 @@ interface Props {
 }
 
 export default function ReviewCard( props: Props ) {
+    const [highlightedArrow, setHighlightedArrow] = useState<'up' | 'down' | null>(null);
+    const [isArrowUpHovered, setIsArrowUpHovered] = useState(false);
+    const [isArrowDownHovered, setIsArrowDownHovered] = useState(false);
+
+    const handleArrowUpClick = () => {
+        setHighlightedArrow(prev => (prev === 'up' ? null : 'up'));
+    };
+
+    const handleArrowDownClick = () => {
+        setHighlightedArrow(prev => (prev === 'down' ? null : 'down'));
+    };
+
     return (
         <div className='w-[40vw]'>
             <Card className=''>
@@ -38,8 +48,20 @@ export default function ReviewCard( props: Props ) {
                       <CardContent>{props.reviewText}</CardContent>
                     </div>
                     <div className='flex flex-row justify-end'>
-                      <ArrowBigUp className='hover:bg-blue-500'/>
-                      <ArrowBigDown />
+                      <ArrowUp 
+                        isHighlighted={highlightedArrow === 'up'}
+                        isHovered={isArrowUpHovered}
+                        onClick={handleArrowUpClick} 
+                        onMouseEnter={() => setIsArrowUpHovered(true)}
+                        onMouseLeave={() => setIsArrowUpHovered(false)}
+                      />
+                      <ArrowDown 
+                        isHighlighted={highlightedArrow === 'down'}
+                        isHovered={isArrowDownHovered}
+                        onClick={handleArrowDownClick} 
+                        onMouseEnter={() => setIsArrowDownHovered(true)}
+                        onMouseLeave={() => setIsArrowDownHovered(false)}
+                      />
                     </div>
                 </CardHeader>
             </Card>
