@@ -8,7 +8,7 @@ export default function BusinessReviews({ name } : { name: string}) {
     useEffect(() => { console.log("business name: " + name) }, []);
 
     return (
-        <div>
+        <div className="flex justify-center items-start mt-8">
             <ReviewCard />
         </div>
     );

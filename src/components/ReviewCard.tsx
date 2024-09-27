@@ -17,7 +17,7 @@ import { Button } from '@/components/ui/button';
 
 export default function ReviewCard() {
     return (
-        <div className='flex flex-col w-[40vw] h-full'>
+        <div className='w-[40vw]'>
             <Card className=''>
                 <CardHeader>
                     <div className='flex flex-col'>
