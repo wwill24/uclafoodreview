@@ -27,7 +27,7 @@ export default function BusinessReviews({ name } : { name: string}) {
     }
 
     return (
-        <div>
+        <div className="flex justify-center items-start mt-8">
             <ReviewCard />
         </div>
     );
