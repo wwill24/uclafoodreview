@@ -24,6 +24,9 @@ public class Reviews {
     @Column(name="reviewtime", nullable = false)
     private String reviewTime;
 
+    @Column(name="businessid", nullable = false)
+    private Integer businessID;
+
     public Long getId() {
         return id;
     }
@@ -70,5 +73,13 @@ public class Reviews {
 
     public void setReviewTime(String reviewTime) {
         this.reviewTime = reviewTime;
+    }
+
+    public Integer getBusinessId(){
+        return businessID;
+    }
+
+    public void setBusinessId(Integer businessID){
+        this.businessID = businessID;
     }
 }

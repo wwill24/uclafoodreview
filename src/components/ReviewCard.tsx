@@ -16,22 +16,29 @@ import {
 
 import { Button } from '@/components/ui/button';
 
-export default function ReviewCard() {
+interface Props {
+    title: string,
+    rating: number,
+    reviewText: string,
+    reviewDate: string,
+    reviewTime: string
+}
 
+export default function ReviewCard( props: Props ) {
     return (
         <div className='w-[40vw]'>
             <Card className=''>
                 <CardHeader>
                     <div className='flex flex-col'>
-                      <CardTitle>User's review title</CardTitle>
+                      <CardTitle>{props.title}</CardTitle>
                       <div className='flex flex-row gap-2'>
                           <Star isHighlighted></Star>
                           <CardDescription>user's name</CardDescription>
                       </div>
-                      <CardContent>Review text</CardContent>
+                      <CardContent>{props.reviewText}</CardContent>
                     </div>
                     <div className='flex flex-row justify-end'>
-                      <ArrowBigUp />
+                      <ArrowBigUp className='hover:bg-blue-500'/>
                       <ArrowBigDown />
                     </div>
                 </CardHeader>

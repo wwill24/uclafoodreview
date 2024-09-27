@@ -3,6 +3,8 @@ package com.uclafood.uclafood.service;
 import com.uclafood.uclafood.model.Reviews;
 import com.uclafood.uclafood.repository.ReviewsRepository;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,5 +15,9 @@ public class ReviewsService {
 
     public Reviews createReview(Reviews review) throws Exception {
       return ReviewsRepository.save(review);
+    }
+
+    public List<Reviews> getReviews(Integer businessID) throws Exception {
+      return ReviewsRepository.findAllByBusinessID(businessID);
     }
 }

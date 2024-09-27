@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { useEffect } from 'react';
 import { Star } from 'lucide-react';
 import Image from 'next/image';
 
@@ -29,15 +30,21 @@ export default function BusinessCard(props: Props) {
   const reviewsCount = 12;
   const desc = props.description;
   const businessID = props.businessID;
+
+  const routePush = () => {
+    router.push(`/dining/dining-halls/${props.businessName.toLowerCase()}/${businessID}`);
+  }
+
+  useEffect(() => { console.log(props.businessID) }, [])
   
   return (
     <Card className="w-[40vw] h-[20vh] flex flex-row p-4 gap-4 items-center shadow-lg hover:shadow-2xl">
-      <div className='cursor-pointer' onClick={() => router.push(`/dining/dining-halls/${props.businessName.toLowerCase()}`)}>
+      <div className='cursor-pointer' onClick={() => routePush()}>
         <Image src={epicimg} height={120} width={120} alt="epicuria image" className="rounded-md" />
       </div>
       <div className='flex items-center'>
         <div className='w-[27vw] h-full'>
-          <CardTitle onClick={() => router.push(`/dining/dining-halls/${props.businessName.toLowerCase()}`)} className="cursor-pointer text-xl text-[#238dd3]">{name}</CardTitle>
+          <CardTitle onClick={() => routePush()} className="cursor-pointer text-xl text-[#238dd3]">{name}</CardTitle>
           <div className="flex items-center gap-0.5">
             {Array.from({ length: 5 }).map((_, i) => (
               <Star
