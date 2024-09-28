@@ -27,4 +27,8 @@ public class BusinessService {
     public List<Business> getRestaurants() {
         return businessRepository.findAllByCategory("Restaurants");
     }
+
+    public Business getBusinessID(String businessName) throws Exception{
+        return businessRepository.findByBusinessName(businessName);
+    }
 }

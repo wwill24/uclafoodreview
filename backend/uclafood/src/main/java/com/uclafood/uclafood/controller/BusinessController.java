@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.uclafood.uclafood.model.Business;
@@ -32,5 +33,10 @@ public class BusinessController {
     @GetMapping("/restaurants")
     public List<Business> getRestaurants() {
         return businessService.getRestaurants();
+    }
+
+    @GetMapping
+    public Business getBusinessID(@RequestParam String businessName) throws Exception{
+        return businessService.getBusinessID(businessName);
     }
 }

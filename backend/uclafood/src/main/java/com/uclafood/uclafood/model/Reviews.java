@@ -25,7 +25,10 @@ public class Reviews {
     private String reviewTime;
 
     @Column(name="businessid", nullable = false)
-    private Integer businessID;
+    private Integer businessId;
+
+    @Column(name="upvotes")
+    private Integer upvotes = 0;
 
     public Long getId() {
         return id;
@@ -76,10 +79,10 @@ public class Reviews {
     }
 
     public Integer getBusinessId(){
-        return businessID;
+        return businessId;
     }
 
     public void setBusinessId(Integer businessID){
-        this.businessID = businessID;
+        this.businessId = businessID;
     }
 }

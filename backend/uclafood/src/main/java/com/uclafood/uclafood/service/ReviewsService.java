@@ -18,6 +18,6 @@ public class ReviewsService {
     }
 
     public List<Reviews> getReviews(Integer businessID) throws Exception {
-      return ReviewsRepository.findAllByBusinessID(businessID);
+      return ReviewsRepository.findAllByBusinessId(businessID);
     }
 }

@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { useState } from 'react' 
+import { useState, useEffect } from 'react' 
 
 // Form
 import { z } from "zod";
@@ -58,10 +58,24 @@ const formSchema = z.object({
   reviewText: z.string(),
   reviewDate: z.string(),
   reviewTime: z.string(),
-  businessName: z.string()
+  businessName: z.string(),
+  businessid: z.number().min(1)
 })
 
+interface BusinessData {
+  id: number,
+  businessName: string,
+  address: string,
+  rating: number,
+  description: string
+}
+
 export default function ReviewForm({ name, setFormData }: { name: string, setFormData: Function }) {
+    const [businessID, setBusinessID] = useState<number>(0);
+    useEffect(() => {
+      getBusinessID();
+    }, [name]);
+
     function removeNonAlphabetic(str: string): string {
         return str.replace(/[^A-Za-z]/g, ' ');
     }
@@ -74,9 +88,28 @@ export default function ReviewForm({ name, setFormData }: { name: string, setFor
             reviewText: "",
             reviewDate: today,
             reviewTime: timePosted,
-            businessName: name
+            businessName: name,
         },
     });
+
+    async function getBusinessID() {
+        try {
+            const getBusinessIDReq = await fetch(`http://localhost:8080/getBusiness?businessName=${removeNonAlphabetic(name)}`, {
+                method: "GET",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+            })
+            const req: BusinessData = await getBusinessIDReq.json();
+            const BID = req.id;
+            setBusinessID(BID);
+            console.log(BID);
+        }
+        catch (e) {
+            console.error(e);
+            toast.error("Something went wrong. Please try again later.");
+        }
+    }
 
     async function onSubmit(values: z.infer<typeof formSchema>) {
         reviewFormSubmit(values);
@@ -86,7 +119,7 @@ export default function ReviewForm({ name, setFormData }: { name: string, setFor
       setSelectedIndex(index);
       form.setValue('rating', index + 1);
       const values = form.getValues();
-      console.log(values.rating, values.reviewDate, values.title, values.reviewText, values.businessName);
+      console.log(values.rating, values.reviewDate, values.title, values.reviewText, values.businessName, values.businessid);
     };
 
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
@@ -104,7 +137,8 @@ export default function ReviewForm({ name, setFormData }: { name: string, setFor
                   rating: values.rating,
                   reviewText: values.reviewText,
                   reviewDate: values.reviewDate,
-                  reviewTime: values.reviewTime
+                  reviewTime: values.reviewTime,
+                  businessid: values.businessID
               })
           });
 

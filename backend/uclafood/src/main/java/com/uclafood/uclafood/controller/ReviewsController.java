@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 @RestController
 @CrossOrigin
-public class ReviewController {
+public class ReviewsController {
     @Autowired
     private ReviewsService reviewService;
 
