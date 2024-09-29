@@ -67,6 +67,15 @@ export default function HomePage() {
     }
   };
 
+  async function getTopFiveBusinesses() {
+    try {
+      
+    }
+    catch(e) {
+
+    }
+  }
+
   return (
     <div className="flex flex-col items-center">
       <div className="flex flex-grow justify-center items-center mt-20 p-6">
@@ -98,7 +107,9 @@ export default function HomePage() {
               <div className="p-1">
                 <Card className=''>
                   <CardContent className="flex aspect-square items-center justify-center p-6">
-                    <span className="text-3xl font-semibold justify-center">{index + 1}</span>
+                    <span className="text-3xl font-semibold justify-center">
+                      {index + 1}
+                    </span>
                   </CardContent>
                 </Card>
               </div>

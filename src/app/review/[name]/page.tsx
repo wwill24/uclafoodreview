@@ -26,7 +26,9 @@ export default function Review() {
     useEffect(() => {
         (async () => {
             try {
-                const getBusinessIDReq = await fetch(`http://localhost:8080/getBusiness?businessName=${removeNonAlphabetic(businessName)}`, {
+                businessName.replace(/[^a-zA-Z]+/g, ' ').trim();
+                console.log(businessName)
+                const getBusinessIDReq = await fetch(`http://localhost:8080/getBusiness?businessName=${businessName}`, {
                     method: "GET",
                     headers: {
                         'Content-Type': 'application/json'

@@ -13,7 +13,8 @@ interface ReviewData {
     rating: number,
     reviewText: string,
     reviewDate: string,
-    reviewTime: string
+    reviewTime: string,
+    upvotes: number
 }
 
 export default function BusinessReviews({  } : {  }) {
@@ -33,7 +34,6 @@ export default function BusinessReviews({  } : {  }) {
       });
         const req: ReviewData[] = await getReviewsReq.json();
         setReviewData(req);
-        console.log(req);
       }
       catch (err: any) {
         console.error(err);
@@ -44,7 +44,7 @@ export default function BusinessReviews({  } : {  }) {
     return (
         <div className="flex flex-col gap-4 items-center mt-8">
           {reviewData ? reviewData.map((data: any, index: number) => (
-            <ReviewCard key={index} title={data.title} rating={data.rating} reviewText={data.reviewText} reviewDate={data.reviewDate} reviewTime={data.reviewTime} />
+            <ReviewCard key={index} id={data.id} title={data.title} rating={data.rating} reviewText={data.reviewText} reviewDate={data.reviewDate} reviewTime={data.reviewTime} upvotes={data.upvotes}/>
           )) : Array.from({ length: 1 }).map((_, i) => ( <BusinessCardSkeleton key={i} /> ))}
           {/* <BusinessCardSkeleton /> */}
           <Toaster position="bottom-right" />

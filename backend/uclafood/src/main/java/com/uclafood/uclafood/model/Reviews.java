@@ -85,4 +85,20 @@ public class Reviews {
     public void setBusinessId(Integer businessID){
         this.businessId = businessID;
     }
+
+    public Integer getUpvotes(){
+        return upvotes;
+    }
+
+    public void setUpvotes(Integer upvotes){ 
+        this.upvotes = upvotes;
+    }
+
+    public void incrementUpvotes() {
+        this.upvotes++;
+    }
+
+    public void decrementUpvotes() {
+        this.upvotes--;
+    }
 }

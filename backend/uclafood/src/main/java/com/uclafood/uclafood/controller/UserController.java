@@ -24,7 +24,7 @@ import org.springframework.http.HttpStatus;
 
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
+@CrossOrigin(origins = "http://localhost:3000/", allowCredentials = "true")
 public class UserController {
 
     @Autowired
@@ -49,12 +49,6 @@ public class UserController {
 
         boolean isValidUser = userService.validateUser(username, password);
         if (isValidUser) {
-            Cookie cookie = new Cookie("username", username);
-            cookie.setMaxAge(7*24*60*60);
-            cookie.setHttpOnly(true);
-            cookie.setSecure(true);
-            response.addCookie(cookie);
-
             HttpSession session = request.getSession(true);
             session.setAttribute("username", username);
 
@@ -75,14 +69,17 @@ public class UserController {
         }
     }
 
-
-    @GetMapping("/logout")
-    public String logout(HttpServletResponse response){
-        Cookie cookie = new Cookie("username", null);
-        cookie.setMaxAge(0);
-        response.addCookie(cookie);
-        return "Log out successful";
+    @PostMapping("/logout")
+    public ResponseEntity<String> logout(HttpServletRequest request, HttpServletResponse response) {
+        HttpSession session = request.getSession(false);
+    
+        if (session != null) {
+            session.invalidate();
+        }
+    
+        return ResponseEntity.ok("Logged out successfully!");
     }
+    
 
     @GetMapping("/getUsers")
     public List<User> getAllUsers() {

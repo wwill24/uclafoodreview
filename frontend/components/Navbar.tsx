@@ -24,6 +24,7 @@ import {
 import { Button } from "@/components/ui/button";
 
 import uclalogo from '../img/uclalogo.png';
+import toast, { Toaster } from "react-hot-toast";
 
 interface LoginProps {
   isLoggedIn: boolean
@@ -31,6 +32,52 @@ interface LoginProps {
 
 export default function Navbar( props: LoginProps ) {
   const router = useRouter();
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+
+  async function LogOut() {
+    try {
+      const logoutReq = await fetch("http://localhost:8080/logout", {
+        method: "POST", 
+        headers: { 'Content-Type': 'application/json' }, 
+        credentials: 'include'
+      });
+
+      if (logoutReq) {
+        toast.success("Log out successful!");
+        router.push("/");
+      }
+      else{
+        
+      }
+    }
+    catch (e){
+      console.error(e);
+      toast.error("Could not log out. Please try again!")
+    }
+  }
+
+  useEffect(() => {
+    const checkLoginStatus = async () => {
+      try {
+        const res = await fetch('http://localhost:8080/check-login', {
+          method: 'GET',
+          credentials: 'include'
+        });
+
+        if (res.ok) {
+          const isLogged = await res.json();
+          setIsLoggedIn(isLogged);
+        } else {
+          setIsLoggedIn(false);
+        }
+      } catch (error) {
+        console.error("Error checking login status", error);
+        setIsLoggedIn(false);
+      }
+    };
+
+    checkLoginStatus();
+  }, []);
 
   return (
     <div className="flex flex-row items-center gap-4 bg-gray-50 px-6 py-4 shadow-md h-[var(--navBarHeight)]">
@@ -48,7 +95,7 @@ export default function Navbar( props: LoginProps ) {
       <Button className="text-lg" variant="ghost" onClick={() => {router.push('/dining/restaurants')}}>Restaurants</Button>
 
       <div className='ml-auto'>
-        {props.isLoggedIn ? (    
+        {isLoggedIn ? (    
           <>
             <DropdownMenu>
               <DropdownMenuTrigger>
@@ -61,7 +108,7 @@ export default function Navbar( props: LoginProps ) {
                 <DropdownMenuLabel>My Account</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem className='cursor-pointer' onClick={() => router.push("/my-profile")}>Profile</DropdownMenuItem>
-                <DropdownMenuItem className='cursor-pointer'>Log Out</DropdownMenuItem> 
+                <DropdownMenuItem className='cursor-pointer' onClick={() => LogOut()}>Log Out</DropdownMenuItem> 
               </DropdownMenuContent>
             </DropdownMenu>
           </>
@@ -75,6 +122,7 @@ export default function Navbar( props: LoginProps ) {
         )
       }
       </div>
+      <Toaster position='bottom-right'/>
     </div>
   );
 }

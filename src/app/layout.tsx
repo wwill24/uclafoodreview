@@ -4,6 +4,7 @@ import React, { Suspense, useState, useEffect } from 'react';
 import Navbar from "../../frontend/components/Navbar";
 import "./globals.css";
 
+
 function LoginStatus() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   

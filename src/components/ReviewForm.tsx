@@ -33,6 +33,7 @@ import Star from "@/components/ui/star";
 import { Textarea } from './ui/textarea';
 import { ST } from 'next/dist/shared/lib/utils';
 import toast, { Toaster } from "react-hot-toast";
+import { useRouter } from 'next/navigation'
 
 import { removeNonAlphabetic } from "@/lib/utils";
 
@@ -66,6 +67,7 @@ const formSchema = z.object({
 })
 
 export default function ReviewForm({ name, businessID }: { name: string, businessID: number }) {
+    const router = useRouter();
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
     const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
@@ -83,9 +85,7 @@ export default function ReviewForm({ name, businessID }: { name: string, busines
     });
 
     async function onSubmit(values: z.infer<typeof formSchema>) {
-        console.log("values");
-        console.log(values);
-        // reviewFormSubmit(values);
+        reviewFormSubmit(values);
     }
 
     const handleStarClick = (index: number) => {
@@ -94,37 +94,40 @@ export default function ReviewForm({ name, businessID }: { name: string, busines
     }
 
     async function reviewFormSubmit(values: any) {
-    //   try {
-    //       const signupReq = await fetch("http://localhost:8080/createReview", {
-    //           method: "POST",
-    //           headers: {
-    //               'Content-Type': 'application/json'
-    //           },
-    //           body: JSON.stringify({
-    //               title: values.title,
-    //               rating: values.rating,
-    //               reviewText: values.reviewText,
-    //               reviewDate: values.reviewDate,
-    //               reviewTime: values.reviewTime,
-    //               businessid: values.businessID
-    //           })
-    //       });
+      console.log(values);
+      try {
+          const reviewReq = await fetch("http://localhost:8080/createReview", {
+              method: "POST",
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                  title: values.title,
+                  rating: values.rating,
+                  reviewText: values.reviewText,
+                  reviewDate: values.reviewDate,
+                  reviewTime: values.reviewTime,
+                  businessId: values.businessid
+              })
+          });
 
-    //       if (signupReq.status == 500) {
-    //           toast.error("Internal server error. Please try again.");
-    //           return;
-    //       }
+          if (reviewReq.status == 500) {
+              toast.error("Internal server error. Please try again.");
+              return;
+          }
 
-    //       if (!signupReq.ok) {
-    //           const errMsg = (await signupReq.json()).message;
-    //           toast.error(errMsg);
-    //           return;
-    //       }
+          if (!reviewReq.ok) {
+              const errMsg = (await reviewReq.json()).message;
+              toast.error(errMsg);
+              return;
+          }
 
-    //   } catch (err: any) {
-    //       console.error(err);
-    //       toast.error("Something went wrong. Please try again later.");
-    //   }
+          toast.success("Review submitted!");
+          router.push("/")
+      } catch (err: any) {
+          console.error(err);
+          toast.error("Something went wrong. Please try again later.");
+      }
     }
 
     return (
@@ -181,67 +184,6 @@ export default function ReviewForm({ name, businessID }: { name: string, busines
                                     </FormItem>
                                 )}
                             />
-
-
-
-
-
-                            {/* <FormField
-                                control={form.control}
-                                name="businessName"
-                                render={({ field }) => (
-                                    <FormItem className='w-full'>
-                                        <FormControl>
-                                            <Textarea className='h-[20vh]' placeholder="Write your review!" {...field} />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-
-                            <FormField
-                                control={form.control}
-                                name="reviewDate"
-                                render={({ field }) => (
-                                    <FormItem className='w-full'>
-                                        <FormControl>
-                                            <Textarea className='h-[20vh]' placeholder="Write your review!" {...field} />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-
-                            <FormField
-                                control={form.control}
-                                name="reviewTime"
-                                render={({ field }) => (
-                                    <FormItem className='w-full'>
-                                        <FormControl>
-                                            <Textarea className='h-[20vh]' placeholder="Write your review!" {...field} />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-
-                            <FormField
-                                control={form.control}
-                                name="businessid"
-                                render={({ field }) => (
-                                    <FormItem className='w-full'>
-                                        <FormControl>
-                                            <Textarea className='h-[20vh]' placeholder="Write your review!" {...field} />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-
-                            <FormField control={form.control} name="businessName" render={({ field }) => (<div></div>)}/>
-                            <FormField control={form.control} name="reviewDate" render={({ field }) => (<div></div>)}/>
-                            <FormField control={form.control} name="reviewTime" render={({ field }) => (<div></div>)}/>
-                            <FormField control={form.control} name="businessid" render={({ field }) => (<div></div>)}/> */}
 
                             <Button className='w-full h-1/2 bg-[#007ec4] hover:bg-[#00a6ff] text-[#fff] hover:text-[#fff]' variant="ghost" type="submit">Submit Review</Button>
                         </form>
