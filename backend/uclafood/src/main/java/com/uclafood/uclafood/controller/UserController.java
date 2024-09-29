@@ -2,7 +2,6 @@ package com.uclafood.uclafood.controller;
 
 import java.util.Map;
 import java.util.List;
-import java.util.logging.Logger;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,20 +10,22 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.uclafood.uclafood.UclafoodApplication;
 import com.uclafood.uclafood.model.User;
 import com.uclafood.uclafood.service.UserService;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
+
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 public class UserController {
-
-    private static final Logger logger = Logger.getLogger(UclafoodApplication.class.getName());
 
     @Autowired
     private UserService userService;
@@ -42,18 +43,45 @@ public class UserController {
     }
 
     @PostMapping("/signin")
-    public String signin(@RequestBody Map<String, Object> payload) {
+    public ResponseEntity<String> signin(@RequestBody Map<String, Object> payload, HttpServletResponse response, HttpServletRequest request) {
         String username = payload.get("username").toString();
         String password = payload.get("password").toString();
 
         boolean isValidUser = userService.validateUser(username, password);
-
         if (isValidUser) {
-            return "Signin successful!";
+            Cookie cookie = new Cookie("username", username);
+            cookie.setMaxAge(7*24*60*60);
+            cookie.setHttpOnly(true);
+            cookie.setSecure(true);
+            response.addCookie(cookie);
+
+            HttpSession session = request.getSession(true);
+            session.setAttribute("username", username);
+
+            return ResponseEntity.ok("Signin successful!");
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Signin error. Wrong username or password");
         }
-        else {
-            return "Signin error";
+    }
+
+    @GetMapping("/check-login")
+    public ResponseEntity<Boolean> checkLoginStatus(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+
+        if (session != null && session.getAttribute("username") != null) {
+            return ResponseEntity.ok(true);
+        } else {
+            return ResponseEntity.ok(false);
         }
+    }
+
+
+    @GetMapping("/logout")
+    public String logout(HttpServletResponse response){
+        Cookie cookie = new Cookie("username", null);
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+        return "Log out successful";
     }
 
     @GetMapping("/getUsers")
@@ -65,5 +93,4 @@ public class UserController {
     // public User createUser(@RequestBody User payload) throws Exception {
     //     return userService.createUser(payload);
     // }
-
 }

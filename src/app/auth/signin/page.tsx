@@ -29,6 +29,8 @@ import { Button } from "@/components/ui/button";
 
 import { useRouter } from 'next/navigation';
 
+import toast, { Toaster } from "react-hot-toast";
+
 const formSchema = z.object({
   username: z.string().min(1, "Please enter a username"),
   password: z.string().min(1, "Please enter a password")
@@ -52,16 +54,21 @@ export default function SignIn() {
         body: JSON.stringify({
           username: values.username,
           password: values.password
-        }) 
+        }),
+        credentials: 'include',
       });
-      console.log(signinReq);
-
-      router.push("/")
+      
+      if (signinReq.ok) {
+        toast.success("Sign in successful!");
+        router.push("/");
+      } else {
+        toast.error("Sign in error. Wrong username or password");
+      }
     } catch (e) {
       console.error(e);
-      alert(e);
+      toast.error("An unexpected error occurred");
     }
-  }
+  }  
 
   return (
     <div className='flex flex-col justify-center items-center h-screen'>
@@ -109,6 +116,7 @@ export default function SignIn() {
           </span>
         </CardContent>
       </Card>
+      <Toaster position='bottom-right'/>
     </div>
   ); 
 }

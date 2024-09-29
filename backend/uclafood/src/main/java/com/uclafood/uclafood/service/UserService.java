@@ -3,6 +3,8 @@ package com.uclafood.uclafood.service;
 import com.uclafood.uclafood.model.User;
 import com.uclafood.uclafood.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+// import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,7 +17,7 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
-
+    // private PasswordEncoder passwordEncoder;
 
     public List<User> getAllUsers() {
         return userRepository.findAll();
@@ -33,13 +35,16 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public boolean validateUser(String username, String password){
+    public boolean validateUser(String username, String password) {
         User user = userRepository.findByUsername(username);
-
-        if (user != null){
-            // return passwordEncoder.matches(password, user.getPassword());
+    
+        if (user != null) {
+            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+            if (password.matches(user.getPassword())) {
+                return true;
+            }
         }
-
+        
         return false;
     }
 
