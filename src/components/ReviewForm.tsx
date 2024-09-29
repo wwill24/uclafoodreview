@@ -73,8 +73,8 @@ interface BusinessData {
 export default function ReviewForm({ name, setFormData }: { name: string, setFormData: Function }) {
     const [businessID, setBusinessID] = useState<number>(0);
     useEffect(() => {
-      getBusinessID();
-    }, [name]);
+        (async () => {  getBusinessID(); })();
+    }, []);
 
     function removeNonAlphabetic(str: string): string {
         return str.replace(/[^A-Za-z]/g, ' ');
@@ -89,6 +89,7 @@ export default function ReviewForm({ name, setFormData }: { name: string, setFor
             reviewDate: today,
             reviewTime: timePosted,
             businessName: name,
+            businessid: businessID
         },
     });
 
@@ -101,9 +102,9 @@ export default function ReviewForm({ name, setFormData }: { name: string, setFor
                 },
             })
             const req: BusinessData = await getBusinessIDReq.json();
-            const BID = req.id;
-            setBusinessID(BID);
-            console.log(BID);
+            setBusinessID(req.id);
+            console.log("BID:", req.id);
+            console.log("business ID:", businessID);
         }
         catch (e) {
             console.error(e);

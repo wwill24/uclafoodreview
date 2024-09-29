@@ -11,6 +11,15 @@ import {
   AvatarImage,
 } from "@/components/ui/avatar"
 
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+
 // Shadcn Components
 import { Button } from "@/components/ui/button";
 
@@ -41,10 +50,20 @@ export default function Navbar( props: LoginProps ) {
       <div className='ml-auto'>
         {props.isLoggedIn ? (    
           <>
-            <Avatar>
-              <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-              <AvatarFallback>CN</AvatarFallback>
-            </Avatar>   
+            <DropdownMenu>
+              <DropdownMenuTrigger>
+                <Avatar>
+                  <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+                  <AvatarFallback>CN</AvatarFallback>
+                </Avatar>  
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem className='cursor-pointer' onClick={() => router.push("/my-profile")}>Profile</DropdownMenuItem>
+                <DropdownMenuItem className='cursor-pointer'>Log Out</DropdownMenuItem> 
+              </DropdownMenuContent>
+            </DropdownMenu>
           </>
         ) : (
           <>
