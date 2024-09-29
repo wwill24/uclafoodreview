@@ -21,7 +21,6 @@ export default function RootLayout({
                   credentials: 'include',
               });
               const isLoggedIn = await response.json();
-              setIsLoading(false);
               setIsLoggedIn(isLoggedIn);
           } catch (error) {
               console.error('Error checking login status:', error);
@@ -29,6 +28,7 @@ export default function RootLayout({
       };
       
       checkLogin();
+      setIsLoading(false);
   }, [isLoggedIn, isLoading]);
 
   return (
