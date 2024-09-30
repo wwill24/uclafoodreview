@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Star from "@/components/ui/star";
 import ArrowUp from './ui/arrowup';
@@ -29,33 +29,19 @@ export default function ReviewCard( props: Props ) {
     const [isArrowUpHovered, setIsArrowUpHovered] = useState(false);
     const [isArrowDownHovered, setIsArrowDownHovered] = useState(false);
 
-    const handleArrowUpClick = () => {
-        setHighlightedArrow(prev => {
-            if (prev === 'up') {
-                RemoveUpvote();
-                return null;
-            } else {
+    useEffect(() => {
+        switch (highlightedArrow) {
+            case 'up':
                 Upvote();
-                return 'up';
-            }
-        });        
-    };
-
-    const handleArrowDownClick = () => {
-        setHighlightedArrow(prev => {
-            if (prev === 'down') {
-                RemoveDownvote();
-                return null;
-            } else {
+                break;
+            case 'down':
                 Downvote();
-                return 'down';
-            }
-        });
-    };
-    
+                break;
+        }
+    }, [highlightedArrow]);
 
     async function Upvote() {
-        try{
+        try {
             const upvoteReq = await fetch(`http://localhost:8080/upvote/${props.id}`, {
                 method: "PUT",
                 headers: {
@@ -64,10 +50,11 @@ export default function ReviewCard( props: Props ) {
             });
 
             if (upvoteReq) {
-                console.log("Upvote successful!")
+                console.log("Upvote successful!");
             }
-            else{
-                console.log("Unsuccessful upvote")
+            
+            else {
+                console.log("Unsuccessful upvote");
             }
         }
         catch (e){
@@ -155,14 +142,14 @@ export default function ReviewCard( props: Props ) {
                       <ArrowUp 
                         isHighlighted={highlightedArrow === 'up'}
                         isHovered={isArrowUpHovered}
-                        onClick={handleArrowUpClick} 
+                        onClick={() => setHighlightedArrow('up')}
                         onMouseEnter={() => setIsArrowUpHovered(true)}
                         onMouseLeave={() => setIsArrowUpHovered(false)}
                       />
                       <ArrowDown 
                         isHighlighted={highlightedArrow === 'down'}
                         isHovered={isArrowDownHovered}
-                        onClick={handleArrowDownClick} 
+                        onClick={() => setHighlightedArrow('down')}
                         onMouseEnter={() => setIsArrowDownHovered(true)}
                         onMouseLeave={() => setIsArrowDownHovered(false)}
                       />
