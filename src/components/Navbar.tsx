@@ -23,7 +23,7 @@ import {
 // Shadcn Components
 import { Button } from "@/components/ui/button";
 
-import uclalogo from '../img/uclalogo.png';
+import uclalogo from '../../frontend/img/uclalogo.png';
 import toast, { Toaster } from "react-hot-toast";
 
 interface LoginProps {
