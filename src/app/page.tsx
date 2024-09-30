@@ -22,6 +22,10 @@ import {
 import Autoplay from "embla-carousel-autoplay"
 
 import { ReactSearchAutocomplete } from 'react-search-autocomplete';
+import { useEffect, useState } from 'react'
+import toast, { Toaster } from 'react-hot-toast';
+
+import BusinessCard from '@/components/BusinessCard';
 
 const formatResult = (item: any) => {
   return (
@@ -54,6 +58,13 @@ const items = [
   },
 ];
 
+interface BusinessData {
+  businessName: string,
+  address: string,
+  rating: number,
+  description: string
+}
+
 export default function HomePage() {
   const plugin = React.useRef(
     Autoplay({ delay: 2000 })
@@ -68,11 +79,27 @@ export default function HomePage() {
   };
 
   async function getTopFiveBusinesses() {
+    const [topFiveBusinesses, setTopFiveBusinesses] = useState<BusinessData[]|null>(null);
     try {
-      
+      const getTopFiveBusinessesReq = await fetch("http://localhost:8080/getBusinesses/getTopFive", {
+        method: "GET",
+        headers: {
+            'Content-Type': 'application/json'
+        }
+      });
+
+      if(getTopFiveBusinessesReq) {
+        console.log("Top 5 retrieved correctly");
+        const req: BusinessData[] = await getTopFiveBusinessesReq.json();
+        setTopFiveBusinesses(req);
+      }
+      else{
+        toast.error("Could not retrieve top 5");
+        console.log("Could not retrieve top 5");
+      }
     }
     catch(e) {
-
+      console.error(e);
     }
   }
 
@@ -110,6 +137,7 @@ export default function HomePage() {
                     <span className="text-3xl font-semibold justify-center">
                       {index + 1}
                     </span>
+                    {/* <BusinessCard key={index} businessName={data.businessName} address={data.address} rating={data.rating} description={data.description} businessID={data.id}/> */}
                   </CardContent>
                 </Card>
               </div>
@@ -119,6 +147,7 @@ export default function HomePage() {
         <CarouselPrevious />
         <CarouselNext />
       </Carousel>
+      <Toaster position='bottom-right' />
     </div>
   );
 }

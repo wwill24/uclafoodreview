@@ -39,4 +39,9 @@ public class BusinessController {
     public Business getBusinessID(@RequestParam String businessName) throws Exception{
         return businessService.getBusinessID(businessName);
     }
+
+    @GetMapping("/getTopFive")
+    public List<Business> getTop5Businesses(){
+        return businessService.getTop5Businesses();
+    }
 }

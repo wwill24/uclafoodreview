@@ -66,7 +66,7 @@ const formSchema = z.object({
   businessid: z.number().min(1)
 })
 
-export default function ReviewForm({ name, businessID }: { name: string, businessID: number }) {
+export default function ReviewForm({ name, businessID, category }: { name: string, businessID: number, category: string }) {
     const router = useRouter();
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
     const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
@@ -123,7 +123,7 @@ export default function ReviewForm({ name, businessID }: { name: string, busines
           }
 
           toast.success("Review submitted!");
-          router.push("/")
+          router.push(`/dining/${category.toLowerCase().replace(/\s+/g, '-')}/${name}/${businessID.toString()}`);
       } catch (err: any) {
           console.error(err);
           toast.error("Something went wrong. Please try again later.");

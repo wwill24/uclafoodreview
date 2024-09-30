@@ -11,6 +11,7 @@ import { removeNonAlphabetic } from "@/lib/utils";
 interface BusinessData {
     id: number,
     businessName: string,
+    category: string,
     address: string,
     rating: number,
     description: string
@@ -20,6 +21,7 @@ export default function Review() {
     const params = useParams();
 
     const [businessID, setBusinessID] = useState<number>(0);
+    const [businessCategory, setBusinessCategory] = useState("")
 
     const businessName = params.name.toString();
 
@@ -27,7 +29,6 @@ export default function Review() {
         (async () => {
             try {
                 businessName.replace(/[^a-zA-Z]+/g, ' ').trim();
-                console.log(businessName)
                 const getBusinessIDReq = await fetch(`http://localhost:8080/getBusiness?businessName=${businessName}`, {
                     method: "GET",
                     headers: {
@@ -36,6 +37,7 @@ export default function Review() {
                 })
                 const req: BusinessData = await getBusinessIDReq.json();
                 setBusinessID(req.id);
+                setBusinessCategory(req.category)
             }
             catch (e) {
                 console.error(e);
@@ -47,7 +49,7 @@ export default function Review() {
     return (
         <>
             {businessID == 0 ? "" :
-                <ReviewForm name={businessName} businessID={businessID} />
+                <ReviewForm name={businessName} businessID={businessID} category={businessCategory}/>
             }
         </>
     )
