@@ -38,12 +38,17 @@ public class BusinessService {
         return businessRepository.findByBusinessName(businessName);
     }
 
-    public Business findBusinessByID(Long id){
-        Optional<Business> optionalBusiness = businessRepository.findById(id);
-        return optionalBusiness.orElseThrow();
-    }
-
     public void incrementReviewCount(Integer id){
         businessRepository.addReviewCount(id);
+    }
+
+    public void updateRating(Long id, Float reviewRating){
+        Business business = businessRepository.getReferenceById(id);
+        Float currentRating = business.getRating();
+        Integer reviewCount = business.getReviewCount();
+
+        Float newRating = ((currentRating * reviewCount) + reviewRating)/(reviewCount + 1);
+        business.setRating(newRating);
+        businessRepository.save(business);
     }
 }

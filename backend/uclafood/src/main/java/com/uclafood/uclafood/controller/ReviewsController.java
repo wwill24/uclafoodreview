@@ -34,6 +34,8 @@ public class ReviewsController {
         reviewService.createReview(payload);
         Long businessID = payload.getBusinessId().longValue();
         Float rating = payload.getRating();
+        
+        businessService.updateRating(businessID, rating);
     }
 
     @GetMapping("/getReviews")

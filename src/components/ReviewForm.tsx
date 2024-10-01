@@ -95,6 +95,7 @@ export default function ReviewForm({ name, businessID, category }: { name: strin
 
     async function reviewFormSubmit(values: any) {
       try {
+        console.log(values);
           const reviewReq = await fetch("http://localhost:8080/createReview", {
               method: "POST",
               headers: {
