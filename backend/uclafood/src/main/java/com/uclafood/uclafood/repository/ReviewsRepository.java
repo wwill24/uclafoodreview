@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ReviewsRepository extends JpaRepository<Reviews, Long>{
+    @Query("SELECT r FROM Reviews r WHERE r.businessId = :businessID ORDER BY r.upvotes DESC")
     List<Reviews> findAllByBusinessId(Integer businessID);
 
     @Modifying

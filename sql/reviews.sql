@@ -5,6 +5,6 @@ CREATE TABLE reviews (
     reviewText TEXT NOT NULL,
     reviewDate DATE NOT NULL,
     reviewTime TIME NOT NULL,
-    businessid INTEGER NOT NULL,
-    userid INTEGER NOT NULL
+    upvotes INTEGER DEFAULT 0,
+    businessid INTEGER NOT NULL
 );

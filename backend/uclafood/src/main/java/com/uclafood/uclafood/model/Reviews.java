@@ -13,7 +13,7 @@ public class Reviews {
     private String title;
 
     @Column(name="rating", nullable = false)
-    private Integer rating;
+    private Float rating;
 
     @Column(name="reviewtext", nullable = false)
     private String reviewText;
@@ -46,11 +46,11 @@ public class Reviews {
         this.title = title;
     }
 
-    public Integer getRating() {
+    public Float getRating() {
         return rating;
     }
 
-    public void setRating(Integer rating) {
+    public void setRating(Float rating) {
         this.rating = rating;
     }
 

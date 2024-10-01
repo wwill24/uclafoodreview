@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.uclafood.uclafood.model.Reviews;
 import com.uclafood.uclafood.service.ReviewsService;
 
+import com.uclafood.uclafood.service.BusinessService;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -24,10 +26,14 @@ public class ReviewsController {
     @Autowired
     private ReviewsService reviewService;
 
+    @Autowired
+    private BusinessService businessService;
+
     @PostMapping("/createReview") 
-    public Reviews createReview(@RequestBody Reviews payload) throws Exception{
-        System.out.println(payload);
-        return reviewService.createReview(payload);
+    public void createReview(@RequestBody Reviews payload) throws Exception{
+        reviewService.createReview(payload);
+        Long businessID = payload.getBusinessId().longValue();
+        Float rating = payload.getRating();
     }
 
     @GetMapping("/getReviews")

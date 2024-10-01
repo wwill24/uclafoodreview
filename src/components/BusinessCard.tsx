@@ -20,16 +20,17 @@ interface Props {
   address: string,
   rating: number,
   description: string,
-  businessID: number
+  businessID: number,
+  reviewCount: number
 }
 
 export default function BusinessCard(props: Props) {
   const router = useRouter();
   const name = props.businessName;
   const starRating = props.rating;
-  const reviewsCount = 12;
   const desc = props.description;
   const businessID = props.businessID;
+  const reviewCount = props.reviewCount;
 
   const routePush = () => {
     router.push(`/dining/dining-halls/${props.businessName.toLowerCase()}/${businessID}`);
@@ -50,7 +51,7 @@ export default function BusinessCard(props: Props) {
                 className={`${i < Math.floor(starRating) ? 'text-[#2b6db8]' : 'text-[#d1d5db]'}`}
               />
             ))}
-            <span className="text-gray-600 text-sm">{starRating} ({reviewsCount} reviews)</span>
+            <span className="text-gray-600 text-sm">{starRating} ({reviewCount} {reviewCount == 1 ? "Review" : "Reviews" })</span>
           </div>
           <CardDescription className="text-gray-500 text-sm mt">{desc}</CardDescription>
           <div className='flex flex-row items-end justify-end'>

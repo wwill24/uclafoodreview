@@ -94,7 +94,6 @@ export default function ReviewForm({ name, businessID, category }: { name: strin
     }
 
     async function reviewFormSubmit(values: any) {
-      console.log(values);
       try {
           const reviewReq = await fetch("http://localhost:8080/createReview", {
               method: "POST",
@@ -109,6 +108,13 @@ export default function ReviewForm({ name, businessID, category }: { name: strin
                   reviewTime: values.reviewTime,
                   businessId: values.businessid
               })
+          });
+
+          const reviewCountReq = await fetch(`http://localhost:8080/getBusiness/incrementReviewCount/${values.businessid}`, {
+            method: "PUT",
+            headers: {
+                'Content-Type': 'application/json'
+            },
           });
 
           if (reviewReq.status == 500) {

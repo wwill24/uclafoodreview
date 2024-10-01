@@ -22,7 +22,6 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
 ## TODO
-[] - redirect to restaurants list of reviews after submitting review
 [] - logout
 [] - change the review count, probably add a count in business db table
 

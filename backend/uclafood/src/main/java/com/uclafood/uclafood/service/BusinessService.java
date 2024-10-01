@@ -1,6 +1,7 @@
 package com.uclafood.uclafood.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -35,5 +36,14 @@ public class BusinessService {
 
     public Business getBusinessID(String businessName) throws Exception{
         return businessRepository.findByBusinessName(businessName);
+    }
+
+    public Business findBusinessByID(Long id){
+        Optional<Business> optionalBusiness = businessRepository.findById(id);
+        return optionalBusiness.orElseThrow();
+    }
+
+    public void incrementReviewCount(Integer id){
+        businessRepository.addReviewCount(id);
     }
 }
