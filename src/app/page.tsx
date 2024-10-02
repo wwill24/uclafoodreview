@@ -62,10 +62,15 @@ interface BusinessData {
   businessName: string,
   address: string,
   rating: number,
-  description: string
+  description: string,
+  businessID: number,
+  reviewCount: number
 }
 
 export default function HomePage() {
+  const [topFiveBusinesses, setTopFiveBusinesses] = useState<BusinessData[]|null>(null);
+  useEffect(() => { getTopFiveBusinesses() }, []);
+
   const plugin = React.useRef(
     Autoplay({ delay: 2000 })
   )
@@ -79,9 +84,8 @@ export default function HomePage() {
   };
 
   async function getTopFiveBusinesses() {
-    const [topFiveBusinesses, setTopFiveBusinesses] = useState<BusinessData[]|null>(null);
     try {
-      const getTopFiveBusinessesReq = await fetch("http://localhost:8080/getBusinesses/getTopFive", {
+      const getTopFiveBusinessesReq = await fetch("http://localhost:8080/getBusiness/getTopFive", {
         method: "GET",
         headers: {
             'Content-Type': 'application/json'
@@ -105,7 +109,7 @@ export default function HomePage() {
 
   return (
     <div className="flex flex-col items-center">
-      <div className="flex flex-grow justify-center items-center mt-20 p-6">
+      <div className="flex justify-center items-center mt-20 p-6">
         <ReactSearchAutocomplete
           className='w-[80vh]'
           items={items}
@@ -129,15 +133,12 @@ export default function HomePage() {
         className="max-w-sm flex w-full"
       >
         <CarouselContent>
-          {Array.from({ length: 5 }).map((_, index) => (
+          {topFiveBusinesses?.map((data: any, index: number) => (
             <CarouselItem key={index}>
               <div className="p-1">
                 <Card className=''>
                   <CardContent className="flex aspect-square items-center justify-center p-6">
-                    <span className="text-3xl font-semibold justify-center">
-                      {index + 1}
-                    </span>
-                    {/* <BusinessCard key={index} businessName={data.businessName} address={data.address} rating={data.rating} description={data.description} businessID={data.id}/> */}
+                    <BusinessCard key={index} businessName={data.businessName} address={data.address} rating={data.rating} description={data.description} businessID={data.id} reviewCount={data.reviewCount}/>
                   </CardContent>
                 </Card>
               </div>

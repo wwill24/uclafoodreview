@@ -23,5 +23,4 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 ## TODO
 [] - logout
-[] - change the review count, probably add a count in business db table
 
