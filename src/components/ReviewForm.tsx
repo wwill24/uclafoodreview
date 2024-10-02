@@ -110,13 +110,14 @@ export default function ReviewForm({ name, businessID, category }: { name: strin
                   businessId: values.businessid
               })
           });
-
-          const reviewCountReq = await fetch(`http://localhost:8080/getBusiness/incrementReviewCount/${values.businessid}`, {
-            method: "PUT",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-          });
+          if (reviewReq.status == 200) {
+              const reviewCountReq = await fetch(`http://localhost:8080/getBusiness/incrementReviewCount/${values.businessid}`, {
+                  method: "PUT",
+                  headers: {
+                      'Content-Type': 'application/json'
+                  },
+              })
+          }
 
           if (reviewReq.status == 500) {
               toast.error("Internal server error. Please try again.");
