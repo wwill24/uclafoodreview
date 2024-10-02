@@ -63,7 +63,9 @@ const formSchema = z.object({
   reviewDate: z.string(),
   reviewTime: z.string(),
   businessName: z.string(),
-  businessid: z.number().min(1)
+  businessid: z.number().min(1),
+  upvotesid: z.number(),
+  userid: z.number()
 })
 
 export default function ReviewForm({ name, businessID, category }: { name: string, businessID: number, category: string }) {
@@ -110,6 +112,7 @@ export default function ReviewForm({ name, businessID, category }: { name: strin
                   businessId: values.businessid
               })
           });
+
           if (reviewReq.status == 200) {
               const reviewCountReq = await fetch(`http://localhost:8080/getBusiness/incrementReviewCount/${values.businessid}`, {
                   method: "PUT",
