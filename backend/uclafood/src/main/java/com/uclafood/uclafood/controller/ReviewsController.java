@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.uclafood.uclafood.model.Reviews;
 import com.uclafood.uclafood.service.ReviewsService;
+import com.uclafood.uclafood.service.UpvotesService;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +25,27 @@ public class ReviewsController {
     @Autowired
     private ReviewsService reviewService;
 
+    @Autowired
+    private UpvotesService upvotesService;
+
     @PostMapping("/createReview") 
     public Reviews createReview(@RequestBody Reviews payload) throws Exception{
+        System.out.println("BOB");
+        System.out.println("BOB");
+        System.out.println("BOB");
+        System.out.println("BOB");
+        System.out.println("BOB");
+        System.out.println("BOB");
+        System.out.println("BOB");
+        System.out.println("BOB");
+        System.out.println("BOB");
+        System.out.println("BOB");
+        System.out.println("BOB");
+
         System.out.println(payload);
-        return reviewService.createReview(payload);
+
+        reviewService.createReview(payload);
+        upvotesService.createUpvote();
     }
 
     @GetMapping("/getReviews")
