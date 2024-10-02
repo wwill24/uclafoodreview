@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "Cookie")
-public class Cookie {
+public class CookieModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
