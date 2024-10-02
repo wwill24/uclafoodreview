@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.uclafood.uclafood.model.Reviews;
+import com.uclafood.uclafood.model.Upvote;
 import com.uclafood.uclafood.service.ReviewsService;
 import com.uclafood.uclafood.service.UpvotesService;
 
@@ -30,13 +31,36 @@ public class ReviewsController {
     @Autowired
     private BusinessService businessService;
 
+    @Autowired
+    private UpvotesService upvotesService;
+
     @PostMapping("/createReview") 
     public void createReview(@RequestBody Reviews payload) throws Exception{
-        reviewService.createReview(payload);
+        System.out.println("bob");
+        System.out.println("bob");
+        System.out.println("bob");
+        System.out.println("bob");
+        System.out.println("bob");
+        System.out.println("bob");
+        System.out.println("bob");
+        System.out.println("bob");
+        System.out.println("bob");
+        System.out.println("bob");
+        System.out.println("bob");
+        System.out.println("bob");
+        System.out.println(payload);
+        Reviews review = reviewService.createReview(payload);
+        
         Long businessID = payload.getBusinessId().longValue();
         Float rating = payload.getRating();
         
         businessService.updateRating(businessID, rating);
+
+        // Upvote upvote = new Upvote();
+        // upvote.setUserID(review.getUserId());
+        // upvote.setReviewID(review.getId());
+
+        // upvotesService.createUpvote(upvote);
     }
 
     @GetMapping("/getReviews")

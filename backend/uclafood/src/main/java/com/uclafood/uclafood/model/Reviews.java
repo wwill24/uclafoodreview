@@ -27,6 +27,9 @@ public class Reviews {
     @Column(name="businessid", nullable = false)
     private Integer businessId;
 
+    @Column(name="userid", nullable = false)
+    private Long userid;
+
     @Column(name="upvotes")
     private Integer upvotes = 0;
 
@@ -87,6 +90,14 @@ public class Reviews {
 
     public void setBusinessId(Integer businessID){
         this.businessId = businessID;
+    }
+
+    public Long getUserId(){
+        return userid;
+    }
+
+    public void setUserId(Long userid){
+        this.userid = userid;
     }
 
     public Integer getUpvotes(){
