@@ -15,5 +15,19 @@ public class Upvote {
     @Column(name="reviewid", nullable = false)
     private Long reviewid;
 
-    
+    public void setUserID(Long userid) {
+        this.userid = userid;
+    }
+
+    public void setReviewID(Long reviewid) {
+        this.reviewid = reviewid;
+    }
+
+    public Long getUserID() {
+        return userid;
+    }
+
+    public Long getReviewID() {
+        return reviewid;
+    }
 }

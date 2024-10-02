@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.uclafood.uclafood.model.Reviews;
+import com.uclafood.uclafood.model.Upvote;
 import com.uclafood.uclafood.service.ReviewsService;
 import com.uclafood.uclafood.service.UpvotesService;
 
@@ -28,38 +29,38 @@ public class ReviewsController {
     private ReviewsService reviewService;
 
     @Autowired
-<<<<<<< HEAD
+    private BusinessService businessService;
+
+    @Autowired
     private UpvotesService upvotesService;
 
     @PostMapping("/createReview") 
-    public Reviews createReview(@RequestBody Reviews payload) throws Exception{
-        System.out.println("BOB");
-        System.out.println("BOB");
-        System.out.println("BOB");
-        System.out.println("BOB");
-        System.out.println("BOB");
-        System.out.println("BOB");
-        System.out.println("BOB");
-        System.out.println("BOB");
-        System.out.println("BOB");
-        System.out.println("BOB");
-        System.out.println("BOB");
-
-        System.out.println(payload);
-
-        reviewService.createReview(payload);
-        upvotesService.createUpvote();
-=======
-    private BusinessService businessService;
-
-    @PostMapping("/createReview") 
     public void createReview(@RequestBody Reviews payload) throws Exception{
-        reviewService.createReview(payload);
+        System.out.println("bob");
+        System.out.println("bob");
+        System.out.println("bob");
+        System.out.println("bob");
+        System.out.println("bob");
+        System.out.println("bob");
+        System.out.println("bob");
+        System.out.println("bob");
+        System.out.println("bob");
+        System.out.println("bob");
+        System.out.println("bob");
+        System.out.println("bob");
+        System.out.println(payload);
+        Reviews review = reviewService.createReview(payload);
+        
         Long businessID = payload.getBusinessId().longValue();
         Float rating = payload.getRating();
         
         businessService.updateRating(businessID, rating);
->>>>>>> 7b0a8a85ddd2dd5c59f3460bf319d3f2663fb3ec
+
+        // Upvote upvote = new Upvote();
+        // upvote.setUserID(review.getUserId());
+        // upvote.setReviewID(review.getId());
+
+        // upvotesService.createUpvote(upvote);
     }
 
     @GetMapping("/getReviews")

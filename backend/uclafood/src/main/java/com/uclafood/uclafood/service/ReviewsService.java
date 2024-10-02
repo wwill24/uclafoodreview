@@ -16,8 +16,8 @@ public class ReviewsService {
     private ReviewsRepository ReviewsRepository;
 
     @Transactional
-    public void createReview(Reviews review) throws Exception {
-      ReviewsRepository.save(review);
+    public Reviews createReview(Reviews review) throws Exception {
+      return ReviewsRepository.save(review);
     }
 
     public List<Reviews> getReviews(Integer businessID) throws Exception {
