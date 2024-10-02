@@ -28,28 +28,6 @@ public class ReviewsController {
     private ReviewsService reviewService;
 
     @Autowired
-<<<<<<< HEAD
-    private UpvotesService upvotesService;
-
-    @PostMapping("/createReview") 
-    public Reviews createReview(@RequestBody Reviews payload) throws Exception{
-        System.out.println("BOB");
-        System.out.println("BOB");
-        System.out.println("BOB");
-        System.out.println("BOB");
-        System.out.println("BOB");
-        System.out.println("BOB");
-        System.out.println("BOB");
-        System.out.println("BOB");
-        System.out.println("BOB");
-        System.out.println("BOB");
-        System.out.println("BOB");
-
-        System.out.println(payload);
-
-        reviewService.createReview(payload);
-        upvotesService.createUpvote();
-=======
     private BusinessService businessService;
 
     @PostMapping("/createReview") 
@@ -59,7 +37,6 @@ public class ReviewsController {
         Float rating = payload.getRating();
         
         businessService.updateRating(businessID, rating);
->>>>>>> 7b0a8a85ddd2dd5c59f3460bf319d3f2663fb3ec
     }
 
     @GetMapping("/getReviews")
