@@ -13,7 +13,7 @@ import {
 import { Button } from '@/components/ui/button';
 
 import { useRouter } from 'next/navigation';
-import epicimg from '../../frontend/img/epicuriaimg.png';
+import epicimg from './img/epicuriaimg.png';
 
 interface Props {
   businessName: string,
