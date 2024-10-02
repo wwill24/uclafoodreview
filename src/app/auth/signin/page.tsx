@@ -61,6 +61,7 @@ export default function SignIn() {
       if (signinReq.ok) {
         toast.success("Sign in successful!");
         router.push("/");
+        router.refresh();
       } else {
         toast.error("Sign in error. Wrong username or password");
       }

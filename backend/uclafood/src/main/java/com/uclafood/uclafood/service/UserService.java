@@ -35,6 +35,10 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    public Long getUserID(String username) {
+        return userRepository.findByUsername(username).getId();
+    } 
+
     public boolean validateUser(String username, String password) {
         User user = userRepository.findByUsername(username);
     

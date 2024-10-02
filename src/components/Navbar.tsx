@@ -26,11 +26,7 @@ import { Button } from "@/components/ui/button";
 import uclalogo from './img/uclalogo.png';
 import toast, { Toaster } from "react-hot-toast";
 
-interface LoginProps {
-  isLoggedIn: boolean
-}
-
-export default function Navbar( props: LoginProps ) {
+export default function Navbar() {
   const router = useRouter();
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 

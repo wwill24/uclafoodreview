@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.uclafood.uclafood.model.CookieModel;
 import com.uclafood.uclafood.model.User;
 import com.uclafood.uclafood.service.UserService;
+import com.uclafood.uclafood.service.CookieService;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
@@ -29,6 +31,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private CookieService cookieService;
 
     @GetMapping("/change-username/{username}")
         public String setCookie(@PathVariable String username, HttpServletResponse response) {
@@ -48,10 +53,16 @@ public class UserController {
         String password = payload.get("password").toString();
 
         boolean isValidUser = userService.validateUser(username, password);
+
         if (isValidUser) {
             HttpSession session = request.getSession(true);
             session.setAttribute("username", username);
 
+            CookieModel cookieModel = new CookieModel();
+            cookieModel.setUserid(userService.getUserID(username));
+            cookieModel.setJsessionid(session.getId());
+
+            cookieService.createCookie(cookieModel);
             return ResponseEntity.ok("Signin successful!");
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Signin error. Wrong username or password");
