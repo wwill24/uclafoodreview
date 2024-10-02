@@ -25,7 +25,7 @@ public class Business {
     private String description;
 
     @Column(name="reviewcount")
-    private Integer reviewCount;
+    private Integer reviewCount = 0;
 
     public Long getId() {
         return id;
