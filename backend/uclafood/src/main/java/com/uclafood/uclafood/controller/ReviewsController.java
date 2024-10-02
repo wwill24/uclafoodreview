@@ -15,6 +15,8 @@ import com.uclafood.uclafood.model.Reviews;
 import com.uclafood.uclafood.service.ReviewsService;
 import com.uclafood.uclafood.service.UpvotesService;
 
+import com.uclafood.uclafood.service.BusinessService;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +28,7 @@ public class ReviewsController {
     private ReviewsService reviewService;
 
     @Autowired
+<<<<<<< HEAD
     private UpvotesService upvotesService;
 
     @PostMapping("/createReview") 
@@ -46,6 +49,17 @@ public class ReviewsController {
 
         reviewService.createReview(payload);
         upvotesService.createUpvote();
+=======
+    private BusinessService businessService;
+
+    @PostMapping("/createReview") 
+    public void createReview(@RequestBody Reviews payload) throws Exception{
+        reviewService.createReview(payload);
+        Long businessID = payload.getBusinessId().longValue();
+        Float rating = payload.getRating();
+        
+        businessService.updateRating(businessID, rating);
+>>>>>>> 7b0a8a85ddd2dd5c59f3460bf319d3f2663fb3ec
     }
 
     @GetMapping("/getReviews")

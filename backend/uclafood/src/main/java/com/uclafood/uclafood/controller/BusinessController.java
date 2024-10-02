@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,6 +14,8 @@ import com.uclafood.uclafood.model.Business;
 import com.uclafood.uclafood.service.BusinessService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 @RestController
 @RequestMapping("/getBusiness")
@@ -38,5 +42,20 @@ public class BusinessController {
     @GetMapping
     public Business getBusinessID(@RequestParam String businessName) throws Exception{
         return businessService.getBusinessID(businessName);
+    }
+
+    @GetMapping("/getTopFive")
+    public List<Business> getTop5Businesses(){
+        return businessService.getTop5Businesses();
+    }
+
+    @PutMapping("/incrementReviewCount/{id}")
+    public ResponseEntity<String> incrementReviewCount(@PathVariable Integer id){
+        try {
+            businessService.incrementReviewCount(id);
+            return ResponseEntity.ok("Review count increment successful!");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Review count did not increment");
+        }
     }
 }

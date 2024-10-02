@@ -1,7 +1,7 @@
 'use client';
 
 import React, { Suspense, useState, useEffect } from 'react';
-import Navbar from "../../frontend/components/Navbar";
+import Navbar from "../components/Navbar";
 import "./globals.css";
 
 

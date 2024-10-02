@@ -16,6 +16,10 @@ public class BusinessService {
         return businessRepository.findAll();
     }
 
+    public List<Business> getTop5Businesses() {
+        return businessRepository.findTop5ByRating();
+    }
+
     public List<Business> getDiningHalls() {
         return businessRepository.findAllByCategory("Dining Halls");
     }
@@ -30,5 +34,19 @@ public class BusinessService {
 
     public Business getBusinessID(String businessName) throws Exception{
         return businessRepository.findByBusinessName(businessName);
+    }
+
+    public void incrementReviewCount(Integer id){
+        businessRepository.addReviewCount(id);
+    }
+
+    public void updateRating(Long id, Float reviewRating){
+        Business business = businessRepository.getReferenceById(id);
+        Float currentRating = business.getRating();
+        Integer reviewCount = business.getReviewCount();
+
+        Float newRating = ((currentRating * reviewCount) + reviewRating)/(reviewCount + 1);
+        business.setRating(newRating);
+        businessRepository.save(business);
     }
 }

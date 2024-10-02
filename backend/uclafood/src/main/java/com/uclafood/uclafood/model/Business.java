@@ -24,6 +24,9 @@ public class Business {
     @Column(name="description", nullable = false)
     private String description;
 
+    @Column(name="reviewcount")
+    private Integer reviewCount;
+
     public Long getId() {
         return id;
     }
@@ -70,5 +73,21 @@ public class Business {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Integer getReviewCount(){
+        return reviewCount;
+    }
+
+    public void setReviewCount(Integer reviewCount){
+        this.reviewCount = reviewCount;
+    }
+
+    public void addReviewCount() {
+        this.reviewCount++;
+    }
+
+    public void decrementReviewCount() {
+        this.reviewCount--;
     }
 }
