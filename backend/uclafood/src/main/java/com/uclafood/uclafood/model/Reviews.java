@@ -30,6 +30,9 @@ public class Reviews {
     @Column(name="upvotes")
     private Integer upvotes = 0;
 
+    @Column(name="upvotesid", nullable = false)
+    private Integer upvotesid = 0;
+
     public Long getId() {
         return id;
     }
@@ -92,6 +95,14 @@ public class Reviews {
 
     public void setUpvotes(Integer upvotes){ 
         this.upvotes = upvotes;
+    }
+
+    public Integer getUpvotesid(){
+        return upvotesid;
+    }
+
+    public void setUpvotesid(Integer upvotesid){ 
+        this.upvotesid = upvotesid;
     }
 
     public void incrementUpvotes() {
