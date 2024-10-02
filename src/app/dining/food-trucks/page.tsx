@@ -10,7 +10,9 @@ interface BusinessData {
   businessName: string,
   address: string,
   rating: number,
-  description: string
+  description: string,
+  businessID: number,
+  reviewCount: number
 }
 
 export default function FoodTrucks() {
@@ -37,7 +39,7 @@ export default function FoodTrucks() {
   return (
     <div className="flex flex-col gap-4 m-[2em] items-center">
       {businessData ? businessData.map((data: any, index: number) => (
-        <BusinessCard key={index} businessName={data.businessName} address={data.address} rating={data.rating} description={data.description} businessID={data.id}/>
+        <BusinessCard key={index} businessName={data.businessName} address={data.address} rating={data.rating} description={data.description} businessID={data.id} reviewCount={data.reviewCount}/>
       )) : Array.from({ length: 3 }).map((_, i) => ( <BusinessCardSkeleton key={i} /> ))}
       {/* <BusinessCardSkeleton /> */}
       <Toaster position="bottom-right" />

@@ -49,4 +49,17 @@ public class BusinessService {
         business.setRating(newRating);
         businessRepository.save(business);
     }
+
+    public void createBusiness() {
+        Business business = new Business();
+        business.setRating(0.0f);
+        business.setReviewCount(0);
+        business.setAddress("not sure");
+        business.setBusinessName("Epicuria");
+        business.setCategory("Dining Halls");
+        business.setDescription("Great pizza and pasta");
+
+        // Save the business entity to the database
+        businessRepository.save(business);
+    }
 }
