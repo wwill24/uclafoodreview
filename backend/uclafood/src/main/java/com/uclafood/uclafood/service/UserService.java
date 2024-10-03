@@ -3,6 +3,8 @@ package com.uclafood.uclafood.service;
 import com.uclafood.uclafood.model.CookieModel;
 import com.uclafood.uclafood.model.User;
 import com.uclafood.uclafood.repository.UserRepository;
+
+import org.apache.el.stream.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 // import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -92,4 +94,11 @@ public class UserService {
 
         return null;
     }
+
+    public String getUsername(Long userId) {
+        User user = userRepository.findById(userId).get();
+
+        return user.getUsername();
+    }
+
 }

@@ -21,13 +21,15 @@ interface Props {
     reviewText: string,
     reviewDate: string,
     reviewTime: string,
-    upvotes: number
+    upvotes: number,
+    userid: number
 }
 
 export default function ReviewCard( props: Props ) {
     const [highlightedArrow, setHighlightedArrow] = useState<'up' | 'down' | null>(null);
     const [isArrowUpHovered, setIsArrowUpHovered] = useState(false);
     const [isArrowDownHovered, setIsArrowDownHovered] = useState(false);
+    const [username, setUsername] = useState<String | null>(null);
 
     useEffect(() => {
         switch (highlightedArrow) {
@@ -39,6 +41,23 @@ export default function ReviewCard( props: Props ) {
                 break;
         }
     }, [highlightedArrow]);
+
+    useEffect(() => {
+        (async() => await getUsername())()
+    }, []);
+    async function getUsername() {
+        try {
+            const usernameReq = await fetch(`http://localhost:8080/user?userid=${props.userid}`, {mode: 'no-cors'});
+
+            if (usernameReq.ok) {
+                const username: String = await usernameReq.json();
+                setUsername(username);
+            }
+        }
+        catch (e) {
+            console.error(e);
+        }
+    }
 
     async function Upvote() {
         try {
@@ -133,7 +152,7 @@ export default function ReviewCard( props: Props ) {
                       <CardTitle>{props.title}</CardTitle>
                       <div className='flex flex-row gap-2 items-center'>
                           <Star isHighlighted></Star>
-                          <CardDescription>user's name</CardDescription>
+                          <CardDescription>{username}</CardDescription>
                       </div>
                       <CardContent>{props.reviewText}</CardContent>
                     </div>

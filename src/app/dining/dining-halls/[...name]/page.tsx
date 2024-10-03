@@ -40,11 +40,12 @@ export default function BusinessReviews({  } : {  }) {
         toast.error("Could not retrieve business reviews");
       }
     }
+    console.log(reviewData);
     
     return (
         <div className="flex flex-col gap-4 items-center mt-8">
           {reviewData ? reviewData.map((data: any, index: number) => (
-            <ReviewCard key={index} id={data.id} title={data.title} rating={data.rating} reviewText={data.reviewText} reviewDate={data.reviewDate} reviewTime={data.reviewTime} upvotes={data.upvotes}/>
+            <ReviewCard key={index} id={data.id} title={data.title} rating={data.rating} reviewText={data.reviewText} reviewDate={data.reviewDate} reviewTime={data.reviewTime} upvotes={data.upvotes} userid={data.userId}/>
           )) : Array.from({ length: 1 }).map((_, i) => ( <BusinessCardSkeleton key={i} /> ))}
           {/* <BusinessCardSkeleton /> */}
           <Toaster position="bottom-right" />

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.uclafood.uclafood.model.CookieModel;
@@ -103,6 +104,20 @@ public class UserController {
     @GetMapping("/id")
     public Long getUser(HttpServletRequest request, HttpServletResponse response){
         return userService.getUser(request, response);
+    }
+
+    @GetMapping("/x")
+    public String getUsername(@RequestParam Long userId) {
+        System.out.println("BOB");
+        System.out.println("BOB");
+        System.out.println("BOB");
+        System.out.println("BOB");
+        System.out.println("BOB");
+        System.out.println("BOB");
+        System.out.println("BOB");
+        System.out.println("BOB");
+        System.out.println(userId);
+        return userService.getUsername(userId);
     }
 
     @GetMapping("/getUsers")
