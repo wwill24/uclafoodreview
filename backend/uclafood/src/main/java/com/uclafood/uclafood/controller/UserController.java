@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,7 +27,7 @@ import org.springframework.http.HttpStatus;
 
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000/", allowCredentials = "true")
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 public class UserController {
 
     @Autowired
@@ -87,8 +88,14 @@ public class UserController {
         if (session != null) {
             session.invalidate();
         }
+
+        Cookie cookie = new Cookie("JSESSIONID", null);
+        cookie.setPath(request.getContextPath());
+        cookie.setHttpOnly(true);
+        cookie.setMaxAge(0); 
+        response.addCookie(cookie);
     
-        return ResponseEntity.ok("Logged out successfully!");
+        return ResponseEntity.ok().build();
     }
     
 

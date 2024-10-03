@@ -54,6 +54,20 @@ const formatTime = (time: Date) => {
   return `${hours}:${minutes}`;
 }
 
+async function getUserId() {
+    try {
+      const getUserIdReq = await fetch("http://localhost:8080/user", {
+        method: "GET",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+      })
+    }
+    catch (e) {
+      console.error(e);
+    }
+}
+
 const timePosted = formatTime(new Date())
 
 const formSchema = z.object({
@@ -82,7 +96,7 @@ export default function ReviewForm({ name, businessID, category }: { name: strin
             businessName: name,
             reviewDate: today,
             reviewTime: timePosted,
-            businessid: businessID
+            businessid: businessID,
         },
     });
 
