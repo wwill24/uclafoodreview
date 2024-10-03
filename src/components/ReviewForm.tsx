@@ -88,59 +88,56 @@ export default function ReviewForm({ name, businessID, category, userID }: { nam
     });
 
     async function onSubmit(values: z.infer<typeof formSchema>) {
-        reviewFormSubmit(values);
-        console.log(values);
+        try {
+            const payload = JSON.stringify({
+                title: values.title,
+                rating: values.rating,
+                reviewText: values.reviewText,
+                reviewDate: values.reviewDate,
+                reviewTime: values.reviewTime,
+                businessId: values.businessId,
+                userid: values.userid
+            });
+
+            const reviewReq = await fetch("http://localhost:8080/createReview", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: payload
+            });
+  
+            if (reviewReq.status == 200) {
+                const reviewCountReq = await fetch(`http://localhost:8080/getBusiness/incrementReviewCount/${values.businessId}`, {
+                    method: "PUT",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                })
+            }
+  
+            if (reviewReq.status == 500) {
+                toast.error("Internal server error. Please try again.");
+                return;
+            }
+  
+            if (!reviewReq.ok) {
+                const errMsg = (await reviewReq.json()).message;
+                toast.error(errMsg);
+                return;
+            }
+  
+            toast.success("Review submitted!");
+            router.push(`/dining/${category.toLowerCase().replace(/\s+/g, '-')}/${name}/${businessID.toString()}`);
+        } catch (err: any) {
+            console.error(err);
+            toast.error("Something went wrong. Please try again later.");
+        }
     }
 
     const handleStarClick = (index: number) => {
       setSelectedIndex(index);
       form.setValue('rating', index + 1);
-    }
-
-    async function reviewFormSubmit(values: any) {
-      try {
-        console.log(values);
-          const reviewReq = await fetch("http://localhost:8080/createReview", {
-              method: "POST",
-              headers: {
-                  'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({
-                  title: values.title,
-                  rating: values.rating,
-                  reviewText: values.reviewText,
-                  reviewDate: values.reviewDate,
-                  reviewTime: values.reviewTime,
-                  businessId: values.businessid
-              })
-          });
-
-          if (reviewReq.status == 200) {
-              const reviewCountReq = await fetch(`http://localhost:8080/getBusiness/incrementReviewCount/${values.businessid}`, {
-                  method: "PUT",
-                  headers: {
-                      'Content-Type': 'application/json'
-                  },
-              })
-          }
-
-          if (reviewReq.status == 500) {
-              toast.error("Internal server error. Please try again.");
-              return;
-          }
-
-          if (!reviewReq.ok) {
-              const errMsg = (await reviewReq.json()).message;
-              toast.error(errMsg);
-              return;
-          }
-
-          toast.success("Review submitted!");
-          router.push(`/dining/${category.toLowerCase().replace(/\s+/g, '-')}/${name}/${businessID.toString()}`);
-      } catch (err: any) {
-          console.error(err);
-          toast.error("Something went wrong. Please try again later.");
-      }
     }
 
     return (

@@ -68,6 +68,8 @@ export default function Review() {
         }
       }
 
+      console.log(userid);
+
     return (
         <>
             {businessID == 0 ? "" :
