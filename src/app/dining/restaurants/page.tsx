@@ -8,6 +8,7 @@ import toast, { Toaster } from "react-hot-toast";
 
 interface BusinessData {
   businessName: string,
+  category: string,
   address: string,
   rating: number,
   description: string,
@@ -35,11 +36,12 @@ export default function Restaurants() {
       toast.error("Could not retrieve food trucks");
     }
   }
+  console.log(businessData);
 
   return (
     <div className="flex flex-col gap-4 m-[2em] items-center">
       {businessData ? businessData.map((data: any, index: number) => (
-        <BusinessCard key={index} businessName={data.businessName} address={data.address} rating={data.rating} description={data.description} businessID={data.id} reviewCount={data.reviewCount}/>
+        <BusinessCard key={index} businessName={data.businessName} category={data.category} address={data.address} rating={data.rating} description={data.description} businessID={data.id} reviewCount={data.reviewCount}/>
       )) : Array.from({ length: 3 }).map((_, i) => ( <BusinessCardSkeleton key={i} /> ))} 
       {/* <BusinessCardSkeleton /> */}
       <Toaster position="bottom-right" />

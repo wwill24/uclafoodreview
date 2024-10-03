@@ -22,6 +22,7 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import jakarta.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -102,8 +103,8 @@ public class UserController {
         return userService.getUser(request, response);
     }
 
-    @GetMapping
-    public String getUsername(@RequestParam Long userId) {
+    @GetMapping("/username/{userId}")
+    public String getUsername(@PathVariable Long userId) {
         return userService.getUsername(userId);
     }
 

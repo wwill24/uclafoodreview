@@ -14,9 +14,11 @@ import { Button } from '@/components/ui/button';
 
 import { useRouter } from 'next/navigation';
 import epicimg from './img/epicuriaimg.png';
+import { replaceSpaceWithDash } from '@/lib/utils';
 
 interface Props {
   businessName: string,
+  category: string,
   address: string,
   rating: number,
   description: string,
@@ -33,7 +35,7 @@ export default function BusinessCard(props: Props) {
   const reviewCount = props.reviewCount;
 
   const routePush = () => {
-    router.push(`/dining/dining-halls/${props.businessName.toLowerCase()}/${businessID}`);
+    router.push(`/dining/${replaceSpaceWithDash(props.category.toLowerCase())}/${props.businessName.toLowerCase()}/${businessID}`);
   }
   return (
     <Card className="w-[40vw] h-[20vh] flex flex-row p-4 gap-4 items-center shadow-lg hover:shadow-2xl">

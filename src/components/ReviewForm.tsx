@@ -128,7 +128,7 @@ export default function ReviewForm({ name, businessID, category, userID }: { nam
             }
   
             toast.success("Review submitted!");
-            router.push(`/dining/${category.toLowerCase().replace(/\s+/g, '-')}/${name}/${businessID.toString()}`);
+            router.push(`/dining/${category.toLowerCase().replace(/\s+/g, '-')}/${name.toLowerCase()}/${businessID.toString()}`);
         } catch (err: any) {
             console.error(err);
             toast.error("Something went wrong. Please try again later.");

@@ -9,6 +9,10 @@ export function removeNonAlphabetic(str: string): string {
   return str.replace(/[^A-Za-z]/g, ' ');
 }
 
+export function replaceSpaceWithDash(str: string): string {
+  return str.replace(/ /g, "-");
+}
+
 // export function validateRequest(): boolean {
 
 // }
