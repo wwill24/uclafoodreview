@@ -29,6 +29,7 @@ import toast, { Toaster } from "react-hot-toast";
 export default function Navbar() {
   const router = useRouter();
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const [username, setUsername] = useState<String | null>(null);
 
   async function LogOut() {
     try {
@@ -76,6 +77,39 @@ export default function Navbar() {
     checkLoginStatus();
   }, []);
 
+  useEffect(() => {
+    (async() => await getUsername())()
+  }, []);
+
+  async function getUsername() {
+    try {
+      const userIdReq = await fetch("http://localhost:8080/user/id", {
+        method: "GET",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include'
+      });
+      if (userIdReq.ok){
+        const userId: number = await userIdReq.json();
+        try {
+          const usernameReq = await fetch(`http://localhost:8080/user?userId=${userId}`);
+
+          if (usernameReq.ok) {
+              const username: String = await usernameReq.text();
+              setUsername(username);
+          }
+        }
+        catch (e) {
+            console.error(e);
+        }
+      }
+    }
+    catch (e) {
+      console.error(e);
+    }
+  }
+
   return (
     <div className="flex flex-row items-center gap-4 bg-gray-50 px-6 py-4 shadow-md h-[var(--navBarHeight)]">
       <Link href="/">
@@ -104,7 +138,7 @@ export default function Navbar() {
               <DropdownMenuContent>
                 <DropdownMenuLabel>My Account</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem className='cursor-pointer' onClick={() => router.push("/my-profile")}>Profile</DropdownMenuItem>
+                <DropdownMenuItem className='cursor-pointer' onClick={() => router.push(`/profile/${username}`)}>Profile</DropdownMenuItem>
                 <DropdownMenuItem className='cursor-pointer' onClick={() => LogOut()}>Log Out</DropdownMenuItem> 
               </DropdownMenuContent>
             </DropdownMenu>

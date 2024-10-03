@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.uclafood.uclafood.model.CookieModel;
 import com.uclafood.uclafood.model.User;
-import com.uclafood.uclafood.repository.CookieRepository;
 import com.uclafood.uclafood.service.UserService;
 import com.uclafood.uclafood.service.CookieService;
 
@@ -39,9 +38,6 @@ public class UserController {
 
     @Autowired
     private CookieService cookieService;
-
-    @Autowired
-    private CookieRepository cookieRepository;
 
     @GetMapping("/change-username/{username}")
         public String setCookie(@PathVariable String username, HttpServletResponse response) {
@@ -106,17 +102,8 @@ public class UserController {
         return userService.getUser(request, response);
     }
 
-    @GetMapping("/x")
+    @GetMapping
     public String getUsername(@RequestParam Long userId) {
-        System.out.println("BOB");
-        System.out.println("BOB");
-        System.out.println("BOB");
-        System.out.println("BOB");
-        System.out.println("BOB");
-        System.out.println("BOB");
-        System.out.println("BOB");
-        System.out.println("BOB");
-        System.out.println(userId);
         return userService.getUsername(userId);
     }
 
@@ -126,7 +113,7 @@ public class UserController {
     }
 
     // @PostMapping("/signup")
-    // public User createUser(@RequestBody User payload) throws Exception {
-    //     return userService.createUser(payload);
+    // public void createUser(@RequestBody User payload) throws Exception {
+    //     userService.createUser(payload);
     // }
 }

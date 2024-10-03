@@ -47,10 +47,10 @@ export default function ReviewCard( props: Props ) {
     }, []);
     async function getUsername() {
         try {
-            const usernameReq = await fetch(`http://localhost:8080/user?userid=${props.userid}`, {mode: 'no-cors'});
+            const usernameReq = await fetch(`http://localhost:8080/user?userId=${props.userid}`);
 
             if (usernameReq.ok) {
-                const username: String = await usernameReq.json();
+                const username: String = await usernameReq.text();
                 setUsername(username);
             }
         }

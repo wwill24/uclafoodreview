@@ -4,7 +4,6 @@ import com.uclafood.uclafood.model.CookieModel;
 import com.uclafood.uclafood.model.User;
 import com.uclafood.uclafood.repository.UserRepository;
 
-import org.apache.el.stream.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 // import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -35,7 +34,7 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public User createUser(User user) throws Exception {
+    public void createUser(User user) throws Exception {
         if (userRepository.existsByEmail(user.getEmail().toString())) {
             throw new EmailException();
         }
@@ -44,7 +43,7 @@ public class UserService {
             throw new PhoneException();
         }
 
-        return userRepository.save(user);
+        userRepository.save(user);
     }
 
     public Long getUserID(String username) {
