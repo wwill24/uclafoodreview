@@ -25,7 +25,7 @@ export default function DiningHalls() {
         headers: {
           'Content-Type': 'application/json'
         }
-      })
+      });
       const req: BusinessData[] = await getBusinessesReq.json();
       setBusinessData(req);
       console.log(req);

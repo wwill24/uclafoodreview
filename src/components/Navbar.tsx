@@ -32,7 +32,7 @@ export default function Navbar() {
 
   async function LogOut() {
     try {
-      const logoutReq = await fetch("http://localhost:8080/logout", {
+      const logoutReq = await fetch("http://localhost:8080/user/logout", {
         method: "POST", 
         headers: { 'Content-Type': 'application/json' }, 
         credentials: 'include'
@@ -40,6 +40,7 @@ export default function Navbar() {
 
       if (logoutReq) {
         toast.success("Log out successful!");
+        setIsLoggedIn(false);
         router.push("/");
       }
       else{
@@ -55,7 +56,7 @@ export default function Navbar() {
   useEffect(() => {
     const checkLoginStatus = async () => {
       try {
-        const res = await fetch('http://localhost:8080/check-login', {
+        const res = await fetch('http://localhost:8080/user/check-login', {
           method: 'GET',
           credentials: 'include'
         });

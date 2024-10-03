@@ -1,5 +1,6 @@
 package com.uclafood.uclafood.service;
 
+import com.uclafood.uclafood.model.CookieModel;
 import com.uclafood.uclafood.model.User;
 import com.uclafood.uclafood.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,12 +13,21 @@ import java.util.Map;
 
 import com.uclafood.uclafood.utils.Exceptions.*;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
+import com.uclafood.uclafood.repository.CookieRepository;
+
 @Service
 public class UserService {
 
     @Autowired
     private UserRepository userRepository;
     // private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private CookieRepository cookieRepository;
 
     public List<User> getAllUsers() {
         return userRepository.findAll();
@@ -66,5 +76,20 @@ public class UserService {
         String username = payload.get("username").toString();
         return userRepository.existsByUsername(username);
     }
-    
+
+    public Long getUser(HttpServletRequest request, HttpServletResponse response) {
+        HttpSession session = request.getSession(false);
+
+        if (session != null) {
+            String sessionid = session.getId();
+            CookieModel cookieModel = cookieRepository.findByJsessionid(sessionid);
+            
+            if (cookieModel != null) {
+                Long userid = cookieModel.getUserid();
+                return userid;
+            }
+        }
+
+        return null;
+    }
 }

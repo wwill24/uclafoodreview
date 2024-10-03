@@ -36,21 +36,8 @@ public class ReviewsController {
 
     @PostMapping("/createReview") 
     public void createReview(@RequestBody Reviews payload) throws Exception{
-        System.out.println("bob");
-        System.out.println("bob");
-        System.out.println("bob");
-        System.out.println("bob");
-        System.out.println("bob");
-        System.out.println("bob");
-        System.out.println("bob");
-        System.out.println("bob");
-        System.out.println("bob");
-        System.out.println("bob");
-        System.out.println("bob");
-        System.out.println("bob");
+        reviewService.createReview(payload);
         System.out.println(payload);
-        Reviews review = reviewService.createReview(payload);
-        
         Long businessID = payload.getBusinessId().longValue();
         Float rating = payload.getRating();
         

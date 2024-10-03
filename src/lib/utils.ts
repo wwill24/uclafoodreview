@@ -8,3 +8,7 @@ export function cn(...inputs: ClassValue[]) {
 export function removeNonAlphabetic(str: string): string {
   return str.replace(/[^A-Za-z]/g, ' ');
 }
+
+// export function validateRequest(): boolean {
+
+// }

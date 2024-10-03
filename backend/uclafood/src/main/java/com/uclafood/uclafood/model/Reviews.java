@@ -88,15 +88,15 @@ public class Reviews {
         return businessId;
     }
 
-    public void setBusinessId(Integer businessID){
-        this.businessId = businessID;
+    public void setBusinessId(Integer businessId){
+        this.businessId = businessId;
     }
 
     public Long getUserId(){
         return userid;
     }
 
-    public void setUserId(Long userid){
+    public void setUserid(Long userid){
         this.userid = userid;
     }
 

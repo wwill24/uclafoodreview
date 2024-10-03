@@ -9,10 +9,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.uclafood.uclafood.model.CookieModel;
 import com.uclafood.uclafood.model.User;
+import com.uclafood.uclafood.repository.CookieRepository;
 import com.uclafood.uclafood.service.UserService;
 import com.uclafood.uclafood.service.CookieService;
 
@@ -27,7 +29,8 @@ import org.springframework.http.HttpStatus;
 
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
+@CrossOrigin(origins = "http://localhost:3000/", allowCredentials = "true")
+@RequestMapping("/user")
 public class UserController {
 
     @Autowired
@@ -35,6 +38,9 @@ public class UserController {
 
     @Autowired
     private CookieService cookieService;
+
+    @Autowired
+    private CookieRepository cookieRepository;
 
     @GetMapping("/change-username/{username}")
         public String setCookie(@PathVariable String username, HttpServletResponse response) {
@@ -87,17 +93,17 @@ public class UserController {
     
         if (session != null) {
             session.invalidate();
+            String sessionid = session.getId();
+            cookieService.deleteCookie(sessionid);
         }
-
-        Cookie cookie = new Cookie("JSESSIONID", null);
-        cookie.setPath(request.getContextPath());
-        cookie.setHttpOnly(true);
-        cookie.setMaxAge(0); 
-        response.addCookie(cookie);
-    
+        
         return ResponseEntity.ok().build();
     }
     
+    @GetMapping("/id")
+    public Long getUser(HttpServletRequest request, HttpServletResponse response){
+        return userService.getUser(request, response);
+    }
 
     @GetMapping("/getUsers")
     public List<User> getAllUsers() {

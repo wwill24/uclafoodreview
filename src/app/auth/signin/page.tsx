@@ -48,7 +48,7 @@ export default function SignIn() {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      const signinReq = await fetch("http://localhost:8080/signin", {
+      const signinReq = await fetch("http://localhost:8080/user/signin", {
         method: "POST", 
         headers: { 'Content-Type': 'application/json' }, 
         body: JSON.stringify({
@@ -61,7 +61,6 @@ export default function SignIn() {
       if (signinReq.ok) {
         toast.success("Sign in successful!");
         router.push("/");
-        router.refresh();
       } else {
         toast.error("Sign in error. Wrong username or password");
       }

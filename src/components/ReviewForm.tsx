@@ -54,20 +54,6 @@ const formatTime = (time: Date) => {
   return `${hours}:${minutes}`;
 }
 
-async function getUserId() {
-    try {
-      const getUserIdReq = await fetch("http://localhost:8080/user", {
-        method: "GET",
-        headers: {
-            'Content-Type': 'application/json'
-        },
-      })
-    }
-    catch (e) {
-      console.error(e);
-    }
-}
-
 const timePosted = formatTime(new Date())
 
 const formSchema = z.object({
@@ -77,31 +63,33 @@ const formSchema = z.object({
   reviewDate: z.string(),
   reviewTime: z.string(),
   businessName: z.string(),
-  businessid: z.number().min(1),
+  businessId: z.number().min(1),
   upvotesid: z.number(),
   userid: z.number()
 })
 
-export default function ReviewForm({ name, businessID, category }: { name: string, businessID: number, category: string }) {
+export default function ReviewForm({ name, businessID, category, userID }: { name: string, businessID: number, category: string, userID: number }) {
     const router = useRouter();
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
     const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
-
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
             title: "",
             rating: 0,
             reviewText: "",
-            businessName: name,
+            businessName: removeNonAlphabetic(name),
             reviewDate: today,
             reviewTime: timePosted,
-            businessid: businessID,
+            businessId: businessID,
+            upvotesid: 1,
+            userid: userID
         },
     });
 
     async function onSubmit(values: z.infer<typeof formSchema>) {
         reviewFormSubmit(values);
+        console.log(values);
     }
 
     const handleStarClick = (index: number) => {

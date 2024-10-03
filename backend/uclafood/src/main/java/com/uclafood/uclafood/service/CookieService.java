@@ -14,4 +14,9 @@ public class CookieService {
     public CookieModel createCookie(CookieModel cookie) {
         return cookieRepository.save(cookie);
     }
+
+    public void deleteCookie(String sessionid) {
+        CookieModel cookieModel = cookieRepository.findByJsessionid(sessionid);
+        cookieRepository.delete(cookieModel);
+    }
 }

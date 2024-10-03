@@ -21,8 +21,10 @@ export default function Review() {
     const params = useParams();
 
     const [businessID, setBusinessID] = useState<number>(0);
-    const [businessCategory, setBusinessCategory] = useState("")
+    const [businessCategory, setBusinessCategory] = useState("");
+    const [userid, setUserId] = useState<number>(0);
 
+    useEffect(() => { getUserId() }, []);
     const businessName = params.name.toString();
 
     useEffect(() => {
@@ -46,10 +48,30 @@ export default function Review() {
         })();
     }, []);
 
+    async function getUserId() {
+        try {
+          const userIdReq = await fetch("http://localhost:8080/user/id", {
+            method: "GET",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include'
+          });
+          if (userIdReq.ok){
+            const userId: number = await userIdReq.json();
+            console.log(userId);
+            setUserId(userId);
+          }
+        }
+        catch (e) {
+          console.error(e);
+        }
+      }
+
     return (
         <>
             {businessID == 0 ? "" :
-                <ReviewForm name={businessName} businessID={businessID} category={businessCategory}/>
+                <ReviewForm name={businessName} businessID={businessID} category={businessCategory} userID={userid}/>
             }
         </>
     )
