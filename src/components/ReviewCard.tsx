@@ -27,20 +27,35 @@ interface Props {
 
 export default function ReviewCard( props: Props ) {
     const [highlightedArrow, setHighlightedArrow] = useState<'up' | 'down' | null>(null);
+    const [previousArrow, setPreviousArrow] = useState<string | null>(null);
     const [isArrowUpHovered, setIsArrowUpHovered] = useState(false);
     const [isArrowDownHovered, setIsArrowDownHovered] = useState(false);
     const [username, setUsername] = useState<String | null>(null);
+    const [upvotes, setUpvotes] = useState(0);
+
+    useEffect(() => { setUpvotes(props.upvotes) }, []);
 
     useEffect(() => {
-        switch (highlightedArrow) {
-            case 'up':
-                Upvote();
-                break;
-            case 'down':
-                Downvote();
-                break;
+        if (highlightedArrow === 'up' && previousArrow === 'down') {
+          RemoveDownvote();
+          Upvote();      
+        } else if (highlightedArrow === 'up') {
+          Upvote(); 
+        } else if (highlightedArrow === 'down' && previousArrow === 'up') {
+          RemoveUpvote();  
+          Downvote();    
+        } else if (highlightedArrow === 'down') {
+          Downvote(); 
+        } else if (highlightedArrow === null) {
+          if (previousArrow === 'up') {
+            RemoveUpvote(); 
+          } else if (previousArrow === 'down') {
+            RemoveDownvote(); 
+          }
         }
-    }, [highlightedArrow]);
+    
+        setPreviousArrow(highlightedArrow);
+      }, [highlightedArrow]);
 
     useEffect(() => {
         (async() => await getUsername())()
@@ -157,18 +172,35 @@ export default function ReviewCard( props: Props ) {
                       <CardContent>{props.reviewText}</CardContent>
                     </div>
                     <div className='flex flex-row justify-end'>
-                      <div className='pl-1 pr-1'>{props.upvotes}</div>
+                      <div className='pl-1 pr-1'>{upvotes}</div>
                       <ArrowUp 
                         isHighlighted={highlightedArrow === 'up'}
                         isHovered={isArrowUpHovered}
-                        onClick={() => setHighlightedArrow('up')}
+                        onClick={() => {
+                            setHighlightedArrow('up'); 
+                            if (previousArrow === 'down'){
+                              setUpvotes(upvotes + 2);
+                            }
+                            else {
+                              setUpvotes(upvotes + 1);
+                            }
+                          }
+                        }
                         onMouseEnter={() => setIsArrowUpHovered(true)}
                         onMouseLeave={() => setIsArrowUpHovered(false)}
                       />
                       <ArrowDown 
                         isHighlighted={highlightedArrow === 'down'}
                         isHovered={isArrowDownHovered}
-                        onClick={() => setHighlightedArrow('down')}
+                        onClick={() => {
+                          setHighlightedArrow('down'); 
+                          if (previousArrow === 'up'){
+                            setUpvotes(upvotes - 2);
+                          }
+                          else {
+                            setUpvotes(upvotes - 1);
+                          }
+                        }}
                         onMouseEnter={() => setIsArrowDownHovered(true)}
                         onMouseLeave={() => setIsArrowDownHovered(false)}
                       />

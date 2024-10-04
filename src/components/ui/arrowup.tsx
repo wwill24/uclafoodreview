@@ -22,7 +22,7 @@ export default function ArrowUp({ isHighlighted, isHovered, onClick, onMouseEnte
           strokeWidth="2" 
           strokeLinecap="round" 
           strokeLinejoin="round" 
-          className="lucide lucide-arrow-big-up cursor-pointer"
+          className="lucide lucide-arrow-big-up cursor-pointer hover:scale-125"
           onClick={onClick}
           onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave} 

@@ -22,7 +22,7 @@ export default function ArrowDown({ isHighlighted, isHovered, onClick, onMouseEn
           strokeWidth="2" 
           strokeLinecap="round" 
           strokeLinejoin="round" 
-          className="lucide lucide-arrow-big-down cursor-pointer"
+          className="lucide lucide-arrow-big-down cursor-pointer hover:scale-125"
           onClick={onClick}
           onMouseEnter={onMouseEnter} // Attach mouse enter event
           onMouseLeave={onMouseLeave} // Attach mouse leave event
