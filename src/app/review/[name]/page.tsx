@@ -72,7 +72,7 @@ export default function Review() {
 
     return (
         <>
-            {businessID == 0 ? "" :
+            {businessID == 0 || userid == 0 ? "" :
                 <ReviewForm name={businessName} businessID={businessID} category={businessCategory} userID={userid}/>
             }
         </>

@@ -29,14 +29,12 @@ export default function Restaurants() {
       })
       const req: BusinessData[] = await getBusinessesReq.json();
       setBusinessData(req);
-      console.log(req);
     }
     catch (err: any) {
       console.error(err);
       toast.error("Could not retrieve food trucks");
     }
   }
-  console.log(businessData);
 
   return (
     <div className="flex flex-col gap-4 m-[2em] items-center">

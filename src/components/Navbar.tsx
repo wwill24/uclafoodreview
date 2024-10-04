@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
+import { LogOut, UserRound } from 'lucide-react';
 
 import {
   Avatar,
@@ -31,7 +32,7 @@ export default function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [username, setUsername] = useState<String | null>(null);
 
-  async function LogOut() {
+  async function Logout() {
     try {
       const logoutReq = await fetch("http://localhost:8080/user/logout", {
         method: "POST", 
@@ -93,11 +94,12 @@ export default function Navbar() {
       if (userIdReq.ok){
         const userId: number = await userIdReq.json();
         try {
-          const usernameReq = await fetch(`http://localhost:8080/user?userId=${userId}`);
+          const usernameReq = await fetch(`http://localhost:8080/user/username/${userId}`);
 
           if (usernameReq.ok) {
               const username: String = await usernameReq.text();
               setUsername(username);
+              console.log(username);
           }
         }
         catch (e) {
@@ -138,8 +140,8 @@ export default function Navbar() {
               <DropdownMenuContent>
                 <DropdownMenuLabel>My Account</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem className='cursor-pointer' onClick={() => router.push(`/profile/${username}`)}>Profile</DropdownMenuItem>
-                <DropdownMenuItem className='cursor-pointer' onClick={() => LogOut()}>Log Out</DropdownMenuItem> 
+                <DropdownMenuItem className='cursor-pointer' onClick={() => router.push(`/profile/${username}`)}><UserRound className='mr-2'/>Profile</DropdownMenuItem>
+                <DropdownMenuItem className='cursor-pointer' onClick={() => Logout()}><LogOut className='mr-2'/>Log Out</DropdownMenuItem> 
               </DropdownMenuContent>
             </DropdownMenu>
           </>

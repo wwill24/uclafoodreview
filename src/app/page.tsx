@@ -138,7 +138,7 @@ export default function HomePage() {
               <div className="p-1">
                 <Card className=''>
                   <CardContent className="flex aspect-square items-center justify-center p-6">
-                    <BusinessCard key={index} businessName={data.businessName} address={data.address} rating={data.rating} description={data.description} businessID={data.id} reviewCount={data.reviewCount}/>
+                  <BusinessCard key={index} businessName={data.businessName} category={data.category} address={data.address} rating={data.rating} description={data.description} businessID={data.id} reviewCount={data.reviewCount}/>
                   </CardContent>
                 </Card>
               </div>
