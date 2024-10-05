@@ -85,7 +85,7 @@ export default function HomePage() {
 
   async function getTopFiveBusinesses() {
     try {
-      const getTopFiveBusinessesReq = await fetch("http://localhost:8080/businesses/getTopFive", {
+      const getTopFiveBusinessesReq = await fetch("http://localhost:8080/businesses/top?n=5", {
         method: "GET",
         headers: {
             'Content-Type': 'application/json'

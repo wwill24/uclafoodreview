@@ -25,7 +25,7 @@ public class BusinessController {
     @Autowired
     private BusinessService businessService;
 
-    @PostMapping("/createBusiness")
+    @PostMapping
     public void createBusiness() {
         businessService.createBusiness();
     }
@@ -50,9 +50,9 @@ public class BusinessController {
         return businessService.getBusinessID(businessName);
     }
 
-    @GetMapping("/getTopFive")
-    public List<Business> getTop5Businesses(){
-        return businessService.getTop5Businesses();
+    @GetMapping("/top")
+    public List<Business> getTopNBusinesses(@RequestParam Integer n){
+        return businessService.getTopNBusinesses(n);
     }
 
     @PutMapping("/review-count/{id}")

@@ -1,6 +1,8 @@
 package com.uclafood.uclafood.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.Comparator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,8 +18,13 @@ public class BusinessService {
         return businessRepository.findAll();
     }
 
-    public List<Business> getTop5Businesses() {
-        return businessRepository.findTop5ByRating();
+    public List<Business> getTopNBusinesses(Integer n) {
+        List<Business> businesses = businessRepository.findAll();
+        List<Business> sortedBusinesses = businesses.stream()
+                .sorted(Comparator.comparingDouble(Business::getRating).reversed())
+                .limit(n)
+                .collect(Collectors.toList());
+        return sortedBusinesses;
     }
 
     public List<Business> getDiningHalls() {
