@@ -26,7 +26,7 @@ export default function BusinessReviews({  } : {  }) {
     useEffect(() => { getReviews() }, []);
     async function getReviews() {
       try {
-        const getReviewsReq = await fetch(`http://localhost:8080/getReviews?businessID=${id}`, {
+        const getReviewsReq = await fetch(`http://localhost:8080/reviews?businessID=${id}`, {
           method: "GET",
           headers: {
               'Content-Type': 'application/json',

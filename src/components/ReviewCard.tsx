@@ -83,7 +83,7 @@ export default function ReviewCard( props: Props ) {
 
     async function Upvote() {
         try {
-            const upvoteReq = await fetch(`http://localhost:8080/upvote/${props.id}`, {
+            const upvoteReq = await fetch(`http://localhost:8080/reviews/upvote/${props.id}`, {
                 method: "PUT",
                 headers: {
                     'Content-Type': 'application/json'
@@ -105,7 +105,7 @@ export default function ReviewCard( props: Props ) {
 
     async function RemoveUpvote() {
         try{
-            const removeUpvoteReq = await fetch(`http://localhost:8080/removeUpvote/${props.id}`, {
+            const removeUpvoteReq = await fetch(`http://localhost:8080/reviews/downvote/${props.id}`, {
                 method: "PUT",
                 headers: {
                     'Content-Type': 'application/json'
@@ -126,7 +126,7 @@ export default function ReviewCard( props: Props ) {
 
     async function Downvote() {
         try{
-            const downvoteReq = await fetch(`http://localhost:8080/downvote/${props.id}`, {                
+            const downvoteReq = await fetch(`http://localhost:8080/reviews/downvote/${props.id}`, {                
                 method: "PUT",
                 headers: {
                     'Content-Type': 'application/json'
@@ -147,7 +147,7 @@ export default function ReviewCard( props: Props ) {
 
     async function RemoveDownvote() {
         try{
-            const removeDownvoteReq = await fetch(`http://localhost:8080/removeDownvote/${props.id}`, {                
+            const removeDownvoteReq = await fetch(`http://localhost:8080/reviews/upvote/${props.id}`, {                
                 method: "PUT",
                 headers: {
                     'Content-Type': 'application/json'

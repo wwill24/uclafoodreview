@@ -101,7 +101,7 @@ export default function ReviewForm({ name, businessID, category, userID }: { nam
                 userid: values.userid
             });
 
-            const reviewReq = await fetch("http://localhost:8080/createReview", {
+            const reviewReq = await fetch("http://localhost:8080/reviews", {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json'
@@ -110,7 +110,7 @@ export default function ReviewForm({ name, businessID, category, userID }: { nam
             });
   
             if (reviewReq.status == 200) {
-                const reviewCountReq = await fetch(`http://localhost:8080/getBusiness/incrementReviewCount/${values.businessId}`, {
+                const reviewCountReq = await fetch(`http://localhost:8080/businesses/review-count/${values.businessId}`, {
                     method: "PUT",
                     headers: {
                         'Content-Type': 'application/json'

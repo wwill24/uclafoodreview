@@ -31,7 +31,7 @@ export default function Review() {
         (async () => {
             try {
                 businessName.replace(/[^a-zA-Z]+/g, ' ').trim();
-                const getBusinessIDReq = await fetch(`http://localhost:8080/getBusiness?businessName=${businessName}`, {
+                const getBusinessIDReq = await fetch(`http://localhost:8080/businesses?businessName=${businessName}`, {
                     method: "GET",
                     headers: {
                         'Content-Type': 'application/json'

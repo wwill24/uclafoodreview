@@ -21,7 +21,7 @@ export default function Restaurants() {
   useEffect(() => { getBusinesses() }, []);
   async function getBusinesses() {
     try {
-      const getBusinessesReq = await fetch ("http://localhost:8080/getBusiness/restaurants", {
+      const getBusinessesReq = await fetch ("http://localhost:8080/businesses/restaurants", {
         method: "GET",
         headers: {
           'Content-Type': 'application/json'

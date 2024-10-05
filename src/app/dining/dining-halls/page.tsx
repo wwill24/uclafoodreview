@@ -20,7 +20,7 @@ export default function DiningHalls() {
   useEffect(() => { getBusinesses() }, []);
   async function getBusinesses() {
     try {
-      const getBusinessesReq = await fetch ("http://localhost:8080/getBusiness/dining-halls", {
+      const getBusinessesReq = await fetch ("http://localhost:8080/businesses/dining-halls", {
         method: "GET",
         headers: {
           'Content-Type': 'application/json'

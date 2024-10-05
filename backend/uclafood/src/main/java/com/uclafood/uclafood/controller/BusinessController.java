@@ -19,7 +19,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 @RestController
-@RequestMapping("/getBusiness")
+@RequestMapping("/businesses")
 @CrossOrigin
 public class BusinessController {
     @Autowired
@@ -55,7 +55,7 @@ public class BusinessController {
         return businessService.getTop5Businesses();
     }
 
-    @PutMapping("/incrementReviewCount/{id}")
+    @PutMapping("/review-count/{id}")
     public ResponseEntity<String> incrementReviewCount(@PathVariable Integer id){
         try {
             businessService.incrementReviewCount(id);

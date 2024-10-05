@@ -24,11 +24,11 @@ public class ReviewsService {
       return ReviewsRepository.findAllByBusinessId(businessID);
     }
 
-    public void addUpvoteReview(Integer reviewId) {
+    public void upvoteReview(Integer reviewId) {
       ReviewsRepository.incrementUpvotes(reviewId);
     }
 
-    public void subUpvoteReview(Integer reviewId) {
+    public void downvoteReview(Integer reviewId) {
       ReviewsRepository.decrementUpvotes(reviewId);
     }
 }
