@@ -14,6 +14,13 @@ import {
     CardContent
 } from '@/components/ui/card';
 
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/components/ui/avatar"
+import { CircleUserRound } from 'lucide-react';
+
 interface Props {
     id: number,
     title: string,
@@ -163,48 +170,66 @@ export default function ReviewCard( props: Props ) {
         <div className='w-[40vw]'>
             <Card className=''>
                 <CardHeader>
-                    <div className='flex flex-col'>
-                      <CardTitle>{props.title}</CardTitle>
-                      <div className='flex flex-row gap-2 items-center'>
-                          <Star isHighlighted></Star>
-                          <CardDescription>{username}</CardDescription>
+                    <div className='flex flex-row'>
+                      <div className='flex flex-col'>
+                        <div className='flex flex-row'>
+                          <Avatar className='mr-2'>
+                            <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+                            <AvatarFallback>
+                              <CircleUserRound />
+                            </AvatarFallback>
+                          </Avatar>  
+                          <div className='flex flex-col'>
+                            <CardTitle className='text-[#238dd3]'>{props.title}</CardTitle>
+                            <CardDescription className='text-[#3f3f46] hover:underline hover:cursor-pointer'>{username}</CardDescription>
+                          </div>
+                        </div>
+                        <div className='flex flex-row'>
+                          {[...Array(5)].map((_, index: number) => (
+                            <div key={index} className='flex flex-row gap-2 items-center'>
+                              <Star isHighlighted={index < props.rating} />
+                            </div>
+                          ))}
+                        </div>
+                        <CardDescription className='text-black text-md mt-1 mb-3'>{props.reviewText}</CardDescription>
                       </div>
-                      <CardContent>{props.reviewText}</CardContent>
                     </div>
-                    <div className='flex flex-row justify-end'>
-                      <div className='pl-1 pr-1'>{upvotes}</div>
-                      <ArrowUp 
-                        isHighlighted={highlightedArrow === 'up'}
-                        isHovered={isArrowUpHovered}
-                        onClick={() => {
-                            setHighlightedArrow('up'); 
-                            if (previousArrow === 'down'){
-                              setUpvotes(upvotes + 2);
+                    <div className='flex flex-row justify-between items-center'>
+                      <div className='flex flex-row justify-start'>{props.reviewDate} {props.reviewTime}</div>
+                      <div className='flex flex-row justify-end items-center'>
+                        <div className='pl-1 pr-1'>{upvotes}</div>
+                        <ArrowUp 
+                          isHighlighted={highlightedArrow === 'up'}
+                          isHovered={isArrowUpHovered}
+                          onClick={() => {
+                              setHighlightedArrow('up'); 
+                              if (previousArrow === 'down'){
+                                setUpvotes(upvotes + 2);
+                              } else {
+                                setUpvotes(upvotes + 1);
+                              }
                             }
-                            else {
-                              setUpvotes(upvotes + 1);
+                          }
+                          onMouseEnter={() => setIsArrowUpHovered(true)}
+                          onMouseLeave={() => setIsArrowUpHovered(false)}
+                        />
+                        <ArrowDown 
+                          isHighlighted={highlightedArrow === 'down'}
+                          isHovered={isArrowDownHovered}
+                          onClick={() => {
+                            setHighlightedArrow('down'); 
+                            if (previousArrow === 'up'){
+                              setUpvotes(upvotes - 2);
+                            } else {
+                              setUpvotes(upvotes - 1);
                             }
-                          }
-                        }
-                        onMouseEnter={() => setIsArrowUpHovered(true)}
-                        onMouseLeave={() => setIsArrowUpHovered(false)}
-                      />
-                      <ArrowDown 
-                        isHighlighted={highlightedArrow === 'down'}
-                        isHovered={isArrowDownHovered}
-                        onClick={() => {
-                          setHighlightedArrow('down'); 
-                          if (previousArrow === 'up'){
-                            setUpvotes(upvotes - 2);
-                          }
-                          else {
-                            setUpvotes(upvotes - 1);
-                          }
-                        }}
-                        onMouseEnter={() => setIsArrowDownHovered(true)}
-                        onMouseLeave={() => setIsArrowDownHovered(false)}
-                      />
+                          }}
+                          onMouseEnter={() => setIsArrowDownHovered(true)}
+                          onMouseLeave={() => setIsArrowDownHovered(false)}
+                        />
+                      </div>
                     </div>
+
                 </CardHeader>
             </Card>
         </div>

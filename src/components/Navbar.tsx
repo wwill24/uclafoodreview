@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
-import { LogOut, UserRound } from 'lucide-react';
+import { CircleUserRound, LogOut, UserRound } from 'lucide-react';
 
 import {
   Avatar,
@@ -134,7 +134,9 @@ export default function Navbar() {
               <DropdownMenuTrigger>
                 <Avatar>
                   <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-                  <AvatarFallback>CN</AvatarFallback>
+                  <AvatarFallback>
+                    <CircleUserRound />
+                  </AvatarFallback>
                 </Avatar>  
               </DropdownMenuTrigger>
               <DropdownMenuContent>

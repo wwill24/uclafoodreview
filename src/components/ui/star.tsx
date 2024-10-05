@@ -12,7 +12,7 @@ export default function Star({ isHighlighted }: StarProps) {
       height="24"
       viewBox="0 0 24 24"
       fill={isHighlighted ? "gold" : "none"}
-      stroke="currentColor"
+      stroke="#238dd3"
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"

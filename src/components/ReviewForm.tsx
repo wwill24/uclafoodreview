@@ -48,11 +48,13 @@ const formatDate = (date: Date) => {
 const today = formatDate(new Date());
 
 const formatTime = (time: Date) => {
-  const hours = String(time.getHours() % 12).padStart(2, '0');
+  const hours = String(time.getHours() % 12 || 12).padStart(2, '0');
   const minutes = String(time.getMinutes()).padStart(2, '0');
+  const period = time.getHours() < 12 ? 'AM' : 'PM';
 
-  return `${hours}:${minutes}`;
+  return `${hours}:${minutes} ${period}`;
 }
+  
 
 const timePosted = formatTime(new Date())
 

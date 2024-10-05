@@ -15,6 +15,7 @@ import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
 import epicimg from './img/epicuriaimg.png';
 import { replaceSpaceWithDash } from '@/lib/utils';
+import BusinessCardStar from './ui/businesscardstar';
 
 interface Props {
   businessName: string,
@@ -44,20 +45,22 @@ export default function BusinessCard(props: Props) {
       </div>
       <div className='flex items-center'>
         <div className='w-[27vw] h-full'>
-          <CardTitle onClick={() => routePush()} className="cursor-pointer text-xl text-[#238dd3]">{name}</CardTitle>
+          <CardTitle onClick={() => routePush()} className="cursor-pointer text-xl text-[#238dd3] hover:underline">{name}</CardTitle>
           <div className="flex items-center gap-0.5">
-            {Array.from({ length: 5 }).map((_, i) => (
-              <Star
-                fill={i < Math.floor(starRating) ? '#2b6db8' : '#d1d5db'}
+          {Array.from({ length: 5 }).map((_, i) => {
+            const fillPercentage = Math.max(0, Math.min(100, (starRating - i) * 100));
+            return (
+              <BusinessCardStar
+                fillPercentage={fillPercentage}
                 key={i}
-                className={`${i < Math.floor(starRating) ? 'text-[#2b6db8]' : 'text-[#d1d5db]'}`}
               />
-            ))}
+            );
+          })}
             <span className="text-gray-600 text-sm">{starRating} ({reviewCount} {reviewCount == 1 ? "Review" : "Reviews" })</span>
           </div>
           <CardDescription className="text-gray-500 text-sm mt">{desc}</CardDescription>
           <div className='flex flex-row items-end justify-end'>
-            <Button className="mt-2 bg-[#4773ec] text-white rounded-md text-sm" onClick={() => router.push(`/review/${name}`)}>Leave Review</Button>
+            <Button className="mt-2 bg-[#4773ec] text-white rounded-md text-sm hover:scale-110 hover:bg-[#4773ec]" onClick={() => router.push(`/review/${name}`)}>Leave Review</Button>
           </div>
         </div>
       </div>

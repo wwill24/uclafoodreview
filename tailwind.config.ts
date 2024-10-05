@@ -12,6 +12,7 @@ const config: Config = {
   theme: {
   	extend: {
 			scale: {
+				'110': '1.10',
         '175': '1.75',
 				'250': '2.50',
 				'400': '4.00'
