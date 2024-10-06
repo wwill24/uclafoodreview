@@ -19,12 +19,12 @@ public class UpvotesService {
     }
 
     public void deleteUpvote(Long reviewid) {
-      upvotesRepository.deleteByReviewId(reviewid);
+      upvotesRepository.deleteByReviewid(reviewid);
     }
 
     public Boolean checkIfUserUpvoted(Long userid, Long reviewid) {
       Upvote upvote = new Upvote();
-      upvote = upvotesRepository.findByReviewId(reviewid);
+      upvote = upvotesRepository.findByReviewid(reviewid);
       Long loggedUserId = upvote.getUserID();
 
       if (loggedUserId == userid) {

@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.uclafood.uclafood.service.UpvotesService;
 
+import jakarta.transaction.Transactional;
+
 @RestController
 @CrossOrigin
 @RequestMapping("/upvote")
@@ -29,6 +31,7 @@ public class UpvotesController {
     return upvotesService.checkIfUserUpvoted(userid, reviewid);
   }
 
+  @Transactional
   @DeleteMapping("/{reviewid}")
   public void deleteUpvote(@PathVariable Long reviewid) {
     upvotesService.deleteUpvote(reviewid);
