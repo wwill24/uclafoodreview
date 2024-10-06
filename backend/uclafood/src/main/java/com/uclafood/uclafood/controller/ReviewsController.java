@@ -51,6 +51,11 @@ public class ReviewsController {
         return reviewService.getReviews(businessID);
     }
 
+    @GetMapping("/user/{userid}")
+    public List<Reviews> getReviewsForUser(@PathVariable Long userid){
+        return reviewService.getReviewsByUser(userid);
+    }
+
     @PutMapping("/upvote/{id}")
     public ResponseEntity<String> upvoteReview(@PathVariable Integer id) {
         try {

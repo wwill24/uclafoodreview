@@ -111,6 +111,11 @@ public class UserController {
         return userService.getAllUsers();
     }
 
+    @GetMapping("/profile/{username}")
+    public Long getUserId(@PathVariable String username){
+        return userService.getUserID(username);
+    }
+
     // @PostMapping("/signup")
     // public void createUser(@RequestBody User payload) throws Exception {
     //     userService.createUser(payload);

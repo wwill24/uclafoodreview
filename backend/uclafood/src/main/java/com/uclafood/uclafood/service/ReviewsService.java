@@ -6,6 +6,7 @@ import com.uclafood.uclafood.repository.ReviewsRepository;
 import jakarta.transaction.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,16 @@ public class ReviewsService {
 
     public List<Reviews> getReviews(Integer businessID) throws Exception {
       return ReviewsRepository.findAllByBusinessId(businessID);
+    }
+
+    public List<Reviews> getReviewsByUser(Long userId) {
+      List<Reviews> reviews = ReviewsRepository.findAll();
+
+      List<Reviews> filteredReviewsById = reviews.stream()
+                                           .filter(review -> review.getUserId().equals(userId))
+                                           .collect(Collectors.toList());
+
+      return filteredReviewsById;
     }
 
     public void upvoteReview(Integer reviewId) {

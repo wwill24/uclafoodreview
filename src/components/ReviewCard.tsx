@@ -20,6 +20,7 @@ import {
   AvatarImage,
 } from "@/components/ui/avatar"
 import { CircleUserRound } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 interface Props {
     id: number,
@@ -39,6 +40,8 @@ export default function ReviewCard( props: Props ) {
     const [isArrowDownHovered, setIsArrowDownHovered] = useState(false);
     const [username, setUsername] = useState<String | null>(null);
     const [upvotes, setUpvotes] = useState(0);
+
+    const router = useRouter();
 
     useEffect(() => { setUpvotes(props.upvotes) }, []);
 
@@ -181,7 +184,7 @@ export default function ReviewCard( props: Props ) {
                           </Avatar>  
                           <div className='flex flex-col'>
                             <CardTitle className='text-[#238dd3]'>{props.title}</CardTitle>
-                            <CardDescription className='text-[#3f3f46] hover:underline hover:cursor-pointer'>{username}</CardDescription>
+                            <CardDescription className='text-[#3f3f46] hover:underline hover:cursor-pointer' onClick={() => router.push(`/profile/${username}`)}>{username}</CardDescription>
                           </div>
                         </div>
                         <div className='flex flex-row'>

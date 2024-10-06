@@ -61,7 +61,7 @@ export default function BusinessCard(props: Props) {
     router.push(`/dining/${replaceSpaceWithDash(props.category.toLowerCase())}/${props.businessName.toLowerCase()}/${businessID}`);
   }
   return (
-    <Card className="w-[40vw] h-[20vh] flex flex-row p-4 gap-4 items-center shadow-lg hover:shadow-2xl hover:scale-105">
+    <Card className="w-[40vw] h-[20vh] flex flex-row p-4 gap-4 shadow-lg hover:shadow-2xl hover:scale-105">
       <div className='cursor-pointer' onClick={() => routePush()}>
         <Image src={epicimg} height={120} width={120} alt="epicuria image" className="rounded-md" />
       </div>
