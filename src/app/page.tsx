@@ -136,7 +136,7 @@ export default function HomePage() {
           {topFiveBusinesses?.map((data: any, index: number) => (
             <CarouselItem key={index}>
               <div className="p-1">
-                <Card className=''>
+                <Card>
                   <CardContent className="flex aspect-square items-center justify-center p-6">
                     <BusinessCard key={index} businessName={data.businessName} category={data.category} address={data.address} rating={data.rating} description={data.description} businessID={data.id} reviewCount={data.reviewCount}/>
                   </CardContent>

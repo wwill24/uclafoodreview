@@ -10,6 +10,16 @@ const config: Config = {
     "./frontend/pages/**/*.{js,ts,jsx,tsx,mdx}"
   ],
   theme: {
+		borderWidth: {
+			DEFAULT: '1px',
+      '0': '0',
+			'1.5': '1.5px',
+      '2': '2px',
+      '3': '3px',
+      '4': '4px',
+      '6': '6px',
+      '8': '8px',
+		},
   	extend: {
 			scale: {
 				'110': '1.10',
