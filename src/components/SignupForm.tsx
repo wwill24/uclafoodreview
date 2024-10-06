@@ -157,7 +157,7 @@ export default function SignupForm({ setFormData }: { setFormData: Function }) {
                     </Form>
                     <span className="inline-flex gap-1 mt-2">
                         <p>Already have an account?</p>
-                        <Link href="/auth/signin">Login here.</Link>
+                        <Link className="hover:underline" href="/auth/signin">Login here.</Link>
                     </span>
                 </CardContent>
             </Card>

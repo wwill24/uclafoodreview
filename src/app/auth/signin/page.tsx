@@ -108,12 +108,17 @@ export default function SignIn() {
               />
 
               {/* Submit Button */}
-              <Button className='w-full h-1/2 bg-[#007ec4] hover:bg-[#00a6ff] text-[#fff] hover:text-[#fff]' variant="ghost" type="submit">Sign In</Button>
+              <Button className='text-sm w-full h-1/2 bg-[#007ec4] hover:bg-[#00a6ff] text-[#fff] hover:text-[#fff]' variant="ghost" type="submit">Sign In</Button>
             </form>
           </Form>
-          <span className="inline-flex gap-1 mt-2">
-            <Link href="/auth/forgotpassword">Forgot Password?</Link>
-          </span>
+          <div className='flex flex-row justify-between'>
+            <span className="inline-flex gap-1 mt-2 justify-start hover:underline text-sm">
+              <Link href="/auth/forgotpassword">Forgot Password?</Link>
+            </span>
+            <span className="inline-flex gap-1 mt-2 justify-end hover:underline text-sm">
+              <Link href="/auth/signup">Don't Have An Account?</Link>
+            </span>
+          </div>
         </CardContent>
       </Card>
       <Toaster position='bottom-right'/>
