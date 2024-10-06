@@ -40,7 +40,7 @@ export default function BusinessReviews({  } : {  }) {
         toast.error("Could not retrieve business reviews");
       }
     }
-    
+    console.log(reviewData)
     return (
         <div className="flex flex-col gap-4 items-center mt-8">
           {reviewData ? reviewData.map((data: any, index: number) => (

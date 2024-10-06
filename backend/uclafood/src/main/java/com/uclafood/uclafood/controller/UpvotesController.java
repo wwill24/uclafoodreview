@@ -15,14 +15,14 @@ import jakarta.transaction.Transactional;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/upvote")
+@RequestMapping("/upvotes")
 public class UpvotesController {
   
   @Autowired
   private UpvotesService upvotesService;
   
   @PostMapping("/{userid}/{reviewid}")
-  public void addUpvote(@PathVariable Long userid, @PathVariable Long reviewid) throws Exception{
+  public void createUpvote(@PathVariable Long userid, @PathVariable Long reviewid) throws Exception{
     upvotesService.createUpvote(userid, reviewid);
   }
 

@@ -45,43 +45,195 @@ export default function ReviewCard( props: Props ) {
 
     useEffect(() => { setUpvotes(props.upvotes) }, []);
 
+    useEffect(() => { checkIfUserUpvoted(); checkIfUserDownvoted() }, []);
+
     useEffect(() => {
-        if (highlightedArrow === 'up' && previousArrow === 'down') {
-          RemoveDownvote();
-          Upvote();      
-        } else if (highlightedArrow === 'up') {
-          Upvote(); 
-        } else if (highlightedArrow === 'down' && previousArrow === 'up') {
-          RemoveUpvote();  
-          Downvote();    
-        } else if (highlightedArrow === 'down') {
-          Downvote(); 
-        } else if (highlightedArrow === null) {
-          if (previousArrow === 'up') {
-            RemoveUpvote(); 
-          } else if (previousArrow === 'down') {
-            RemoveDownvote(); 
-          }
-        }
-    
-        setPreviousArrow(highlightedArrow);
-      }, [highlightedArrow]);
+      if (highlightedArrow === 'up' && previousArrow === 'down') {
+        RemoveDownvote();
+        deleteDownvote();
+        Upvote();      
+        createUpvote();
+      } else if (highlightedArrow === 'up') {
+        createUpvote();
+        Upvote(); 
+      } else if (highlightedArrow === 'down' && previousArrow === 'up') {
+        RemoveUpvote();  
+        deleteUpvote();
+        Downvote();    
+        createDownvote();
+      } else if (highlightedArrow === 'down') {
+        Downvote(); 
+        createDownvote();
+      } else if (previousArrow === 'up' && highlightedArrow === null) {
+        deleteUpvote();
+        RemoveUpvote();
+      } else if (highlightedArrow === null && previousArrow === 'down') {
+        RemoveDownvote(); 
+        deleteDownvote();
+      }
+  
+      setPreviousArrow(highlightedArrow);
+    }, [highlightedArrow]);
 
     useEffect(() => {
         (async() => await getUsername())()
     }, []);
     async function getUsername() {
-        try {
-            const usernameReq = await fetch(`http://localhost:8080/user/username/${props.userid}`);
+      try {
+          const usernameReq = await fetch(`http://localhost:8080/user/username/${props.userid}`);
 
-            if (usernameReq.ok) {
-                const username: String = await usernameReq.text();
-                setUsername(username);
-            }
+          if (usernameReq.ok) {
+              const username: String = await usernameReq.text();
+              setUsername(username);
+          }
+      }
+      catch (e) {
+          console.error(e);
+      }
+    }
+
+    async function checkIfUserUpvoted() {
+      try {
+        const userIdReq = await fetch("http://localhost:8080/user/id", {
+          method: "GET",
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          credentials: 'include'
+        });
+        const userid: number = await userIdReq.json();
+
+        const checkIfUserLikedReq = await fetch(`http://localhost:8080/upvotes/${userid}/${props.id}`);
+        const didUserUpvote: Boolean = await checkIfUserLikedReq.json();
+
+        if (didUserUpvote == true) {
+          setHighlightedArrow('up');
+          setPreviousArrow('up');
         }
-        catch (e) {
-            console.error(e);
+      }
+      catch (e) {
+        console.error(e);
+      }
+    }
+
+    async function checkIfUserDownvoted() {
+      try {
+        const userIdReq = await fetch("http://localhost:8080/user/id", {
+          method: "GET",
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          credentials: 'include'
+        });
+        const userid: number = await userIdReq.json();
+
+        const checkIfUserLikedReq = await fetch(`http://localhost:8080/downvotes/${userid}/${props.id}`);
+        const didUserUpvote: Boolean = await checkIfUserLikedReq.json();
+
+        if (didUserUpvote == true) {
+          setHighlightedArrow('down');
+          setPreviousArrow('down');
         }
+      }
+      catch (e) {
+        console.error(e);
+      }
+    }
+
+    async function createDownvote() {
+      try {
+        const userIdReq = await fetch("http://localhost:8080/user/id", {
+          method: "GET",
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          credentials: 'include'
+        });
+        const userid: number = await userIdReq.json();
+
+        const createDownvoteReq = await fetch(`http://localhost:8080/downvotes/${userid}/${props.id}`, {
+          method: "POST",
+          headers: {
+              'Content-Type': 'application/json'
+          },
+        });
+
+        if (createDownvoteReq.ok) {
+          console.log("Created downvote in table");
+        }
+        else{
+          console.log("Unable to create downvote in table");
+        }
+      }
+      catch (e) {
+          console.error(e);
+      }
+    }
+
+    async function deleteDownvote() {
+      try {
+        const createDownvoteReq = await fetch(`http://localhost:8080/downvotes/${props.id}`, {
+          method: "DELETE",
+        });
+
+        if (createDownvoteReq.ok) {
+          console.log("Deleted downvote in table");
+        }
+        else{
+          console.log("Unable to delete downvote in table");
+        }
+      }
+      catch (e) {
+          console.error(e);
+      }
+    }
+
+    async function createUpvote() {
+      try {
+        const userIdReq = await fetch("http://localhost:8080/user/id", {
+          method: "GET",
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          credentials: 'include'
+        });
+        const userid: number = await userIdReq.json();
+
+        const createUpvoteReq = await fetch(`http://localhost:8080/upvotes/${userid}/${props.id}`, {
+          method: "POST",
+          headers: {
+              'Content-Type': 'application/json'
+          },
+        });
+
+        if (createUpvoteReq.ok) {
+          console.log("Created upvote in table");
+        }
+        else{
+          console.log("Unable to create upvote in table");
+        }
+      }
+      catch (e) {
+          console.error(e);
+      }
+    }
+
+    async function deleteUpvote() {
+      try {
+        const createUpvoteReq = await fetch(`http://localhost:8080/upvotes/${props.id}`, {
+          method: "DELETE",
+        });
+
+        if (createUpvoteReq.ok) {
+          console.log("Deleted upvote in table");
+        }
+        else{
+          console.log("Unable to delete upvote in table");
+        }
+      }
+      catch (e) {
+          console.error(e);
+      }
     }
 
     async function Upvote() {
@@ -205,34 +357,43 @@ export default function ReviewCard( props: Props ) {
                           isHighlighted={highlightedArrow === 'up'}
                           isHovered={isArrowUpHovered}
                           onClick={() => {
-                              setHighlightedArrow('up'); 
-                              if (previousArrow === 'down'){
-                                setUpvotes(upvotes + 2);
+                              if (highlightedArrow === 'up') {
+                                  setHighlightedArrow(null);
+                                  setUpvotes(upvotes-1);
                               } else {
-                                setUpvotes(upvotes + 1);
+                                  setHighlightedArrow('up'); 
+                                  if (previousArrow === 'down') {
+                                      setUpvotes(upvotes + 2);
+                                  } else {
+                                      setUpvotes(upvotes + 1);
+                                  }
                               }
-                            }
-                          }
+                          }}
                           onMouseEnter={() => setIsArrowUpHovered(true)}
                           onMouseLeave={() => setIsArrowUpHovered(false)}
                         />
+
                         <ArrowDown 
                           isHighlighted={highlightedArrow === 'down'}
                           isHovered={isArrowDownHovered}
                           onClick={() => {
-                            setHighlightedArrow('down'); 
-                            if (previousArrow === 'up'){
-                              setUpvotes(upvotes - 2);
-                            } else {
-                              setUpvotes(upvotes - 1);
-                            }
+                              if (highlightedArrow === 'down') {
+                                  setHighlightedArrow(null);
+                                  setUpvotes(upvotes + 1); 
+                              } else {
+                                  setHighlightedArrow('down'); 
+                                  if (previousArrow === 'up') {
+                                      setUpvotes(upvotes - 2);
+                                  } else {
+                                      setUpvotes(upvotes - 1);
+                                  }
+                              }
                           }}
                           onMouseEnter={() => setIsArrowDownHovered(true)}
                           onMouseLeave={() => setIsArrowDownHovered(false)}
                         />
                       </div>
                     </div>
-
                 </CardHeader>
             </Card>
         </div>
